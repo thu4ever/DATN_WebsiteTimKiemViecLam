@@ -1,0 +1,102 @@
+﻿body {
+    background-color: #F5FAFF; /* Màu nền */
+    font-family:'Times New Roman', Times, serif;
+    color:black;
+}
+/*.item-search {
+    font-size: 15px;
+    height: 40px;
+    width: 150px;
+    border-radius: 5px;
+}
+.btntimkiem {
+    background: #3D3BB2;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    color:#ffff;
+    text-decoration:solid;
+}
+.job-item {
+    display: grid;
+    width: 22%;*/ /* Chia mỗi item thành 25% chiều rộng để hiển thị thành 4 cột */
+    /*float: left;*/ /* Hiển thị các mục theo chiều ngang */
+    /*margin-right: 10px;
+    padding: 10px;*/ /* Khoảng cách giữa các mục */
+    /*background: #ffffff;
+    box-sizing: border-box;*/ /* Box-sizing để tính toán kích thước chính xác */
+    /*border: 1px solid #B09E9E;*/ /* Màu nền */
+    /*height: 200px;
+    border-radius: 5px;
+    margin-bottom: 20px;*/ /* Khoảng cách dưới của mỗi mục */
+/*}
+
+    .job-item img {
+        width: 80%;*/ /* Kích thước hình ảnh */
+        /*height: 90px;*/ /* Kích thước hình ảnh */
+    /*}
+
+    .job-item b {
+      font-size:11px;
+    }
+    .content-item {
+        font-size: 8px;
+    }
+
+
+
+
+
+ul {
+    display: flex;
+    list-style-type: none;
+}
+
+
+.container {
+    color: black;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+}*/
+.product__pagination,
+.blog__pagination {
+    padding-top: 10px;
+}
+
+    .product__pagination a,
+    .blog__pagination a {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border: 1px solid #b2b2b2;
+        font-size: 14px;
+        color: #b2b2b2;
+        font-weight: 700;
+        line-height: 28px;
+        text-align: center;
+        margin-right: 16px;
+        -webkit-transition: all, 0.3s;
+        -moz-transition: all, 0.3s;
+        -ms-transition: all, 0.3s;
+        -o-transition: all, 0.3s;
+        transition: all, 0.3s;
+        text-decoration: none;
+    }
+
+        .product__pagination a:hover,
+        .blog__pagination a:hover {
+            background: #bd945f;
+            border-color: #bd945f;
+            color: #ffffff;
+        }
+
+        .product__pagination a:last-child,
+        .blog__pagination a:last-child {
+            margin-right: 0;
+        }
+.card-img-top
+{
+    height:120px;
+}

@@ -1,0 +1,88 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@* <link href="~/css/style.css" rel="stylesheet" /> *@
+@model DATN_WebsiteTimKiemViecLam.Models.TblBaituyendung
+
+<link href="~/css/font-awesome.css" rel="stylesheet" />
+<link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+@if (Model != null)
+{
+    <div id="btn_container">
+        <input type="button" id="btn_xemcvungtuyen" value="Xem CV đã ứng tuyển" />
+        <a href="@Url.Action("btnKetthucBaiDang", "Doanhnghiep", new { id = Model.PkSMaBai })">Kết thúc bài đăng</a>
+        <input type="button" id="btn_kethucbaidang" value="Xóa bài đăng" />
+    </div>
+}
+<form class="text-black" id="content_container" action="@Url.Action("btnThembaidang", "Doanhnghiep")" method="post">
+    <div class="item">
+        <span>Tên bài đăng</span>
+        @Html.TextBoxFor(model=>model.STenBai)
+        @* <input class="item_content" name="Tenbaidang" /> *@
+    </div>
+    <div class="item">
+        <span>Mô tả</span>
+        @Html.TextBoxFor(model=>model.SMoTa)
+
+        @* <textarea class="item_content" name="mota"></textarea> *@
+    </div>
+    <div class="item">
+        <span>Yêu cầu</span>
+        @Html.TextBoxFor(model=>model.SYeuCau)
+        @* <textarea class="item_content" name="yeucau"></textarea> *@
+    </div>
+    <div class="item">
+        <span>Quyền Lợi</span>
+        @Html.TextBoxFor(model=>model.SQuyenLoi)
+        @* <textarea class="item_content" name="quyenloi"></textarea> *@
+    </div>
+    <div class="item">
+        <span>Số lượng</span>
+        <input onclick="Tang()" type="button" value="+" />
+        @* <input name="soluong" value="1" /> *@
+        @Html.TextBoxFor(model=>model.ISoLuong)
+        <input onclick="Giam()" type="button" value="-" />
+    </div>
+    <div class="mucluong">
+        <span>Mức lương</span>
+        @Html.TextBoxFor(model=>model.FMucLuongtoithieu)
+        @* <input name="mucluong" /> *@
+    </div>
+    <div class="item">
+        <span>Kinh nghiệm</span>
+        <input onclick="Tang()" type="button" value="+" />
+        @Html.TextBoxFor(model=>model.FNamKinhNghiem)
+        <input onclick="Giam()" type="button" value="-" />
+    </div>
+    <div class="item">
+        <span>Ngày bắt đầu</span>
+        @Html.TextBoxFor(model=>model.DTgDangBai, new { @type = "date" })
+    </div>
+    <div class="item">
+        <span>Thời gian đăng bài </span>
+        <input onclick="Tang()" type="button" value="+" />
+        @Html.TextBoxFor(model=>model.DTgTuyenDung, new { @type = "date" })
+        <input onclick="Giam()" type="button" value="-" />
+    </div>
+    <input type="submit" value="LƯU" />
+</form>
+<script>
+    function Tang() {
+        var countElement = document.getElementsByName("soluong")[0]; // Lấy phần tử đầu tiên với name="soluong"
+        var number = parseInt(countElement.value); // Lấy giá trị từ phần tử
+        number++;
+        countElement.value = number; // Gán giá trị mới vào phần tử
+    }
+
+    function Giam() {
+        var countElement = document.getElementsByName("soluong")[0]; // Lấy phần tử đầu tiên với name="soluong"
+        var number = parseInt(countElement.value); // Lấy giá trị từ phần tử
+        number--;
+        countElement.value = number; // Gán giá trị mới vào phần tử
+    }
+</script>

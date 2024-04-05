@@ -1,0 +1,47 @@
+﻿@{
+    @model DATN_WebsiteTimKiemViecLam.Models.TblDoanhnghiep
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hiển thị Vị trí trên Bản đồ</title>
+    <style>
+        /* Thiết lập kích thước của phần tử bản đồ */
+        #map {
+            height: 400px;
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Phần tử để chứa bản đồ -->
+    <div id="map"></div>
+    @Model.SDiachi
+    <script>
+        // Hàm để hiển thị bản đồ với tọa độ của một địa chỉ cụ thể
+        function initMap() {
+            var geocoder = new google.maps.Geocoder();
+            var address ="@Model.SDiachi"; // Địa chỉ bạn muốn hiển thị
+
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === 'OK') {
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 15,
+                        center: results[0].geometry.location
+                    });
+
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+    </script>
+    <!-- Nhúng API Google Maps -->
+    @* <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh3u-DGwJljqBzhZkx44Is-Hm-FIMiEtk&callback=initMap" async defer></script> *@
+</body>
+</html>

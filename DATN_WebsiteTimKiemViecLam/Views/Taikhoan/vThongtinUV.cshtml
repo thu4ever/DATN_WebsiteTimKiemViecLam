@@ -1,0 +1,82 @@
+﻿@*
+Name:Nguyễn Thị Thu Hoài
+Date:07/03/2024
+Des: Created
+*@
+@{
+    Layout = null;
+}
+@model DATN_WebsiteTimKiemViecLam.Models.TblUngVien
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Freework</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Elegant Login Form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+    </script>
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.css" rel="stylesheet" />
+    @* <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"> *@
+    <style>
+        .login-container {
+            text-align: left;
+        }
+
+            .login-container input[type="text"],
+            .login-container select {
+               
+                width: 100%;
+                margin-bottom: 20px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+                font-size: 16px;
+            }
+
+            .login-container input[type="submit"] {
+                    margin-left: 200px;
+                background-color: #3D3BB2;
+                color: white;
+                height: 50px;
+                width: 200px;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 29px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+    </style>
+</head>
+<body>
+    <div class="login-form w3_form">
+        <div class="login-title w3_title">
+            <img src="~/images/logo.jpg" />
+        </div>
+        <div class="">
+            <div style="text-align:left;width: 600px;margin:0 auto" class="w3l_grid">
+                <div style="margin:0 auto">
+                    <span style="color:red; margin-bottom:20px">(*)</span> <span class="text-black">Các thông tin bắt buộc</span> </div>
+                <form enctype="multipart/form-data"  class="login-container " action="btnChinhsuathongtinUV_Click" method="POST">
+                    <span class="text-black">Họ và tên: </span>
+                    <input name="txtHoten" style="margin-bottom:20px" placeholder="Nguyễn Thị Thu Hoài" /><br />
+                    <span class="item text-black">Avatar:</span>
+                    <input type="file" name="file" style="margin-bottom:20px" /><br />
+                    <span class=" text-black">Số điện thoại: </span>
+                    <input name="txtSodienthoai" style="margin-bottom:20px" placeholder="0347389920" /><br />
+                    <span class="text-black">Giới tính:</span>
+                    <select name="txtGioitinh" style="margin-bottom:20px" id="gioitinh" >
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>  <br />
+                    <input type="submit" value="LƯU THÔNG TIN">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

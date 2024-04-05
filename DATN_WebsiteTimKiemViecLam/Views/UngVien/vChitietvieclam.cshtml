@@ -1,0 +1,142 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model DATN_WebsiteTimKiemViecLam.Models.vChitietvieclam
+
+}
+@{
+    TimeSpan difference = Model.DTgTuyenDung.Subtract(DateTime.Now);
+    int numberOfDays = difference.Days;
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <title>Document</title>
+</head>
+<body >
+    <div style="color:black; Background:#F5FAFF" class="container">
+        <div class="row">
+            <div style="color:#3D3BB2" class="col-12 col-sm-12 col-lg-12 fs-2">
+                <h3>@Model.STenBai</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-lg-8">
+                <div class="row">
+                    <div class="col-4 col-sm-4 col-lg-4">
+                        <div class="salary">
+                            <div class="row">
+                                <div class="col-3 col-sm-3 col-lg-3">
+                                    <i class="fa-solid fa-wallet"></i>
+                                </div>
+                                <div class="col-9 col-sm-9 col-lg-9 fs-5" style=" margin: inherit;  text-align: left;   line-height: 20px;">
+                                    <b>Mức lương</b>
+                                    <p>@Model.FMucluongtoida</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-4 col-lg-4">
+                        <div class="local">
+                            <div class="row">
+                                <div class="col-3 col-sm-3 col-lg-3">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="col-9 col-sm-9 col-lg-9 fs-5" style=" margin: inherit;  text-align: left;   line-height: 20px;">
+                                    <b>Địa chỉ</b>
+                                    <p>@Model.SDiachicuthe</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-4 col-lg-4">
+                        <div class="experience">
+                            <div class="row">
+                                <div class="col-3 col-sm-3 col-lg-3">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+                                <div class="col-9 col-sm-9 col-lg-9 fs-5" style=" margin: inherit;  text-align: left;   line-height: 20px;">
+                                    <b>Kinh nghiệm</b>
+                                    <p>@Model.FNamKinhNghiem  Năm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-lg-12">
+                        <p class="text-lg-start">
+                            <label class="fw-bold text-lg-start fs-5" for="">Số lượng: </label>
+                            @Model.ISoLuong <span>ứng viên</span>
+                        </p>
+                        <p class="text-lg-start">
+                            <label class="fw-bold" for="">Yêu cầu ứng viên: </label>
+                            <ul class="text-lg-start text-break">
+                             @Model.SYeuCau
+                            </ul>
+                        </p>
+                        <p class="text-lg-start">
+                            <label class="fw-bold text-lg-start" for="">Quyền lợi: </label>
+                            <ul class="text-lg-start text-break">
+                               @Model.SQuyenLoi
+                            </ul>
+                        </p>
+                        <p class="text-lg-start">
+                            <label class="fw-bold text-lg-start" for="">Thời gian đăng tải: </label>
+                           @Model.DTgDangBai
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-lg-4">
+                <button class="btn btn-primary btn-lg" style="background: #3D3BB2; width: 400px;">
+                   ỨNG TUYỂN NGAY
+                </button>
+                <p style=" margin-top: 20px; text-align: left;">
+                    <i class="fa-solid fa-clock"></i>
+                    Thời gian ứng tuyển còn @numberOfDays ngày
+                </p>
+                <div class="infor-company">
+                    <div class="card " style="width: 18rem;">
+                        <img src="data:image/png;base64,@Model.SLogo" alt="Hình ảnh" class="item-image card-img-top p-2">
+                        <div class="card-body">
+                            <h5  class="card-title fs-6 ">@Model.STenDn</h5>
+                            <p  class="card-text text-truncate">@Model.SMota</p>
+                        </div>
+                        <div class="card-body">
+                            <a href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=Model.FkSMaDn})" class="card-link">xem thêm chi tiết...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#btnUngTuyen').click(function () {
+                $.ajax({
+                    url: '@Url.Action("btnGuithongtinUngTuyen")',
+                    method: 'POST',
+                    success: function (data) {
+                        // Xử lý phản hồi thành công nếu cần
+                        console.log(data);
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi nếu cần
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

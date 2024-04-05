@@ -1,0 +1,74 @@
+﻿@*
+Name:Nguyễn Thị Thu Hoài
+Date:07/03/2024
+Des: Created
+*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Freework</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Elegant Login Form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); }
+                function togglePassword()
+         {
+          var passwordField = document.getElementById("password");
+
+          // Kiểm tra kiểu hiện tại của trường mật khẩu
+          var fieldType = passwordField.type;
+
+          // Nếu đang ở dạng password, chuyển sang text; ngược lại, chuyển về password
+          passwordField.type = (fieldType === "password") ? "text" : "password";
+        }
+    </script>
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.css" rel="stylesheet" />
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <style>
+        .display_pass {
+            position: relative;
+        }
+
+            .display_pass img {
+                position: absolute;
+                right: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+    <div class="login-form w3_form">
+        <div class="login-title w3_title">
+            <img src="~/images/logo.jpg" />
+        </div>
+        <div class="login w3_login">
+            <div class="w3l_grid">
+                <form class="login-container" action="Resgiter" method="post">
+                    <input name="quyendki" type="checkbox" value="1" />Ứng viên
+                    <input name="quyendki" type="checkbox" value="2" />Doanh nghiệp
+                    <input type="email" placeholder="Email..." Name="Email" required="">
+                    <div class="display_pass">
+                        <input id="password" type="password" placeholder="Mật khẩu..." Name="Matkhau" required="">
+                        <input id="password" type="password" placeholder="Nhập lại Mật khẩu..." Name="Mật khẩu Nhập lại: " required="">
+                        <img style="width:20px;" id="dispass" onclick="togglePassword()" src="~/images/iconhienmatkhau.png" />
+                        @* <img style="width:20px;display:none" id="hidepass" src="~/images/hidepass.png" /> *@
+                    </div>
+                    <input type="submit" value="Đăng ký">
+                </form>
+                <div class="bottom-text w3_bottom_text">
+                    <p>Bạn đã có tài khoản chưa?<a href="#">Đăng nhập </a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

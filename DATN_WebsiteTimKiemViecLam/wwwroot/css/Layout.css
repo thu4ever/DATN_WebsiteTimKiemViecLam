@@ -1,0 +1,136 @@
+﻿/* Font cho toàn bộ nội dung */
+body {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Kiểu cho phần header */
+.container {
+    color: aliceblue;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* Kiểu cho logo */
+.logo {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: 15px;
+}
+
+/* Kiểu cho các phần tử chữ có class 'text-bar' */
+.text-bar {
+    font-weight: bold;
+}
+.container-fluid {
+    display: flex;
+    justify-content: flex-start; /* Căn sang trái */
+}
+
+    .container-fluid a {
+        margin-right: 20px; /* Khoảng cách giữa các mục */
+    }
+/* Kiểu cho phần nền của container-fluid */
+.container-fluid {
+    background: #3D3BB2;
+    color: white;
+}
+
+/* Thiết lập cho menu */
+.custom-vertical-menu {
+    width: 200px; /* Điều chỉnh chiều rộng của menu */
+    border-radius: 5px; /* Bo tròn viền menu */
+    display: none; /* Mặc định ẩn menu */
+    position: absolute; /* Hiển thị menu theo vị trí tuyệt đối */
+    top: 90%; /* Vị trí top của menu, phía dưới logo */
+    left: 92%; /* Đưa menu ra giữa trên trục ngang */
+    transform: translateX(-50%); /* Dịch chuyển menu 50% về bên trái */
+    background-color: #ffffff; /* Màu nền của menu */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Hiệu ứng bóng đổ */
+}
+
+    .custom-vertical-menu a {
+        background-color: #f2f2f2; /* Màu nền của mỗi mục menu */
+        color: black; /* Màu chữ */
+        display: block;
+        padding: 12px;
+        text-decoration: none;
+    }
+
+        .custom-vertical-menu a:hover {
+            background-color: #ccc; /* Màu nền khi rê chuột qua */
+        }
+
+        .custom-vertical-menu a i {
+            margin-right: 10px; /* Khoảng cách giữa icon và văn bản */
+        }
+/* Thiết lập cho menu */
+.custom-vertical-menu-dn {
+    width: 250px;
+    border-radius: 5px;
+    /* position: absolute; */
+    /* top: 90%; */
+    /* transform: translateX(-50%); */
+    background-color: #f2f2f2;
+    height: 800px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+    .custom-vertical-menu-dn a {
+        text-align: left;
+        background-color: #f2f2f2; /* Màu nền của mỗi mục menu */
+        color: #3D3BB2; /* Màu chữ */
+        display: block;
+        padding: 12px;
+        text-decoration: none;
+    }
+
+        .custom-vertical-menu-dn a:hover {
+            background-color: #ccc; /* Màu nền khi rê chuột qua */
+        }
+
+        .custom-vertical-menu-dn a i {
+            margin-right: 20px; /* Khoảng cách giữa icon và văn bản */
+        }
+/* Đảm bảo footer nằm ở cuối trang */
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa; /* Màu nền của footer */
+    padding: 20px; /* Khoảng cách nội dung trong footer */
+    text-align: center; /* Căn giữa nội dung trong footer */
+}
+
+/* Căn giữa các phần tử trong container-footer */
+.container-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+    .container-footer > div {
+        margin-right: 15px;
+    }
+
+.logo {
+    margin-right: 15px;
+    height: 50px; /* Điều chỉnh kích thước logo */
+}
+
+.navbar-brand {
+    margin-top: 20px;
+    text-decoration: none;
+    color: black; /* Màu chữ */
+}
+
+/* Các phần tử Cộng đồng FreeWork */
+.container-footer .fa-youtube,
+.container-footer .fa-facebook,
+.container-footer .fa-instagram {
+    margin-right: 10px;
+    font-size: 24px; /* Điều chỉnh kích thước biểu tượng */
+}

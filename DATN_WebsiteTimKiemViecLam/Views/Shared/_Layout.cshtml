@@ -1,0 +1,146 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    int? fkSMaQuyen = HttpContextAccessor.HttpContext.Session.GetInt32("FkSMaQuyen");
+    string? avatar = HttpContextAccessor.HttpContext.Session.GetString("Avatar");
+    string? PK_sEmail = HttpContextAccessor.HttpContext.Session.GetString("PK_sEmail");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Chủ</title>
+    <link href="~/css/layout.css" rel="stylesheet" />
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+<link href="~/lib/bootstrap/dist/css/bootstrap.rtl.css" rel="stylesheet" />
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DATN_WebsiteTimKiemViecLam.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Thêm Font Awesome -->
+</head>
+
+<body>
+    
+    @if (fkSMaQuyen == 1)
+    {
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm text-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
+                    <a class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">VIỆC LÀM</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <div class="navbar-nav flex-grow-1">
+                            <a class="navbar-brand text-white text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachDN">DOANH NGHIỆP</a>
+                        </div>
+                        <div class=" navbar-brand text-white text-bar ">@PK_sEmail</div>
+                        <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" onmousemove="hienthimenu()" onmousewheel="anmenu()" src="data:image/png;base64,@avatar" />
+                    </div>
+                </div>
+                <div id="hienthimenu" class="custom-vertical-menu">
+                    <a asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click">
+                        <i class="fas fa-user"></i> Sửa thông tin cá nhân
+                    </a>
+                    <a asp-controller="Taikhoan" asp-action="btnHienthidanhsachCV">
+                        <i class="fas fa-file-alt"></i> Xem CV đã ứng tuyển
+                    </a>
+                    <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click">
+                        <i class="fas fa-key"></i> Đổi mật khẩu
+                    </a>
+                    <a asp-controller="Taikhoan" asp-action="btnDangxuat">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </a>
+                </div>
+
+            </nav>
+        </header>
+
+    }
+    else if (fkSMaQuyen == 2)
+    {
+        <div class="container-fluid">
+            <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
+            <a style="margin-top: 20px;" class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div style="margin-left: 550px;" class=" navbar-brand text-white text-bar ">@PK_sEmail</div>
+                <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" src="data:image/png;base64,@avatar" />
+            </div>
+        </div>
+
+        <div class="custom-vertical-menu-dn">
+            <a style="color:#3D3BB2" href="#" class="active"><i class="fas fa-home"></i> Quản lý bài đăng </a>
+            <a style="color:#3D3BB2" href="#"><i class="fas fa-user"></i> Chỉnh sửa thông tin</a>
+            <a style="color:#3D3BB2" href="#"><i class="fas fa-cog chnh-sa-thng2"></i> Xác thực thông tin</a>
+            <a style="color:#3D3BB2" href="#"><i class="fas fa-pencil i-mt-khu2"></i>Đổi mật khẩu </a>
+            <a style="color:#3D3BB2" href="#"><i class="fas fa-location-arrow ng-xut2"></i> Đăng xuất</a>
+            </div>
+    }
+    else
+    {
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm text-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
+                    <a class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">VIỆC LÀM</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <div class="navbar-nav flex-grow-1">
+                            <a class="navbar-brand text-white text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachDN">DOANH NGHIỆP</a>
+                        </div>
+                        <a class="navbar-brand text-white text-bar" asp-controller="Taikhoan" asp-action="Login">ĐĂNG NHẬP</a>
+                        <a class="navbar-brand text-white text-bar" asp-controller="Taikhoan" asp-action="Resgiter">ĐĂNG KÝ</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    }
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+ @*    <footer class=" footer text-muted">
+        <div class="container-footer">
+            <div>
+                <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
+                <a style="margin-top: 20px;color:#3D3BB2" class="navbar-brand  text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
+            </div>
+            <div>
+                <b>Liên hệ</b>
+                <div> Hotline:<b>(024) 6680 5588</b> (Giờ hành chính)</div>
+                <div> Email:<b>hotro@freework.vn</b></div>
+            </div>
+           <div>
+                <b>Cộng đồng FreeWork</b>
+                </br>
+                <i class="fa-youtube"></i>
+                <i class="fa-facebook"></i>
+                <i class="fa-instagram"></i>
+           </div>
+        </div>
+    </footer> *@
+    <script>
+        function hienthimenu() { 
+            var menu = document.getElementById("hienthimenu");
+            menu.style.display = "block";
+        }
+        function anmenu() {
+            var menu = document.getElementById("hienthimenu");
+            menu.style.display = "none";
+        }
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
