@@ -14,7 +14,8 @@
                     <img style="height:120px" src="data:image/png;base64,@item.SLogo" alt="Hình ảnh" data-id="@item.SLogo" class="card-img-top p-2">
                     <div class="card-body">
                         <div>
-                            <h5 class="card-title fw-bold fs-6">@item.STenDn</h5>
+                                <a style="text-decoration:none" href="@Url.Action("btnHienthichitietDN","UngVien", new {FkSMaDn=item.PkSMaDn})" class="card-title fs-6 text-black ">@item.STenDn</a>
+                                @* <a style="text-decoration: none" @Url.Action("UngVien","btnHienthichitietDN",item.PkSMaDn) class="card-title fw-bold text-black fs-6">@item.STenDn</a> *@
                         </div>
                     </div>
                 </div>

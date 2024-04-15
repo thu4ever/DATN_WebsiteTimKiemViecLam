@@ -38,15 +38,15 @@
                         <div class="navbar-nav flex-grow-1">
                             <a class="navbar-brand text-white text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachDN">DOANH NGHIỆP</a>
                         </div>
-                        <div class=" navbar-brand text-white text-bar ">@PK_sEmail</div>
+                        @* <div class=" navbar-brand text-white text-bar ">@PK_sEmail</div> *@
                         <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" onmousemove="hienthimenu()" onmousewheel="anmenu()" src="data:image/png;base64,@avatar" />
                     </div>
                 </div>
-                <div id="hienthimenu" class="custom-vertical-menu">
-                    <a asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click">
+                <div style=" z-index: 2;" id="hienthimenu" class="custom-vertical-menu">
+                    <a  asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click">
                         <i class="fas fa-user"></i> Sửa thông tin cá nhân
                     </a>
-                    <a asp-controller="Taikhoan" asp-action="btnHienthidanhsachCV">
+                    <a asp-controller="UngVien" asp-action="btnHienthidanhsachcv">
                         <i class="fas fa-file-alt"></i> Xem CV đã ứng tuyển
                     </a>
                     <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click">
@@ -67,17 +67,17 @@
             <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
             <a style="margin-top: 20px;" class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <div style="margin-left: 550px;" class=" navbar-brand text-white text-bar ">@PK_sEmail</div>
+               @* <div style="margin-left: 550px;" class=" navbar-brand text-white text-bar ">@PK_sEmail</div>*@
                 <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" src="data:image/png;base64,@avatar" />
             </div>
         </div>
 
-        <div class="custom-vertical-menu-dn">
-            <a style="color:#3D3BB2" href="#" class="active"><i class="fas fa-home"></i> Quản lý bài đăng </a>
-            <a style="color:#3D3BB2" href="#"><i class="fas fa-user"></i> Chỉnh sửa thông tin</a>
-            <a style="color:#3D3BB2" href="#"><i class="fas fa-cog chnh-sa-thng2"></i> Xác thực thông tin</a>
-            <a style="color:#3D3BB2" href="#"><i class="fas fa-pencil i-mt-khu2"></i>Đổi mật khẩu </a>
-            <a style="color:#3D3BB2" href="#"><i class="fas fa-location-arrow ng-xut2"></i> Đăng xuất</a>
+        <div style="position: absolute" class="custom-vertical-menu-dn">
+            <a asp-controller="Doanhnghiep" asp-action="hienthidanhsachbaidang" style="color:#3D3BB2" class="active"><i class="fas fa-home"></i> Quản lý bài đăng </a>
+            <a asp-controller="Taikhoan" asp-action="EditInForCompany" style="color:#3D3BB2" ><i class="fas fa-user"></i> Chỉnh sửa thông tin</a>
+            <a asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click" style="color:#3D3BB2" ><i class="fas fa-cog chnh-sa-thng2"></i> Xác thực thông tin</a>
+            <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click" style="color:#3D3BB2" ><i class="fas fa-pencil i-mt-khu2"></i>Đổi mật khẩu </a>
+            <a asp-controller="Taikhoan" asp-action="btnDangxuat" style="color:#3D3BB2" ><i class="fas fa-location-arrow ng-xut2"></i> Đăng xuất</a>
             </div>
     }
     else
@@ -107,7 +107,27 @@
             @RenderBody()
         </main>
     </div>
-
+@*    <footer class="footer">
+            <div class="row">
+                <div class="col-4 col-sm-4 col-lg-4">
+                    <img width="100px" src="img/anh-doremon-cute-27.jpg" alt="">
+                </div>
+                <div class="col-4 col-sm-4 col-lg-4">
+                    <span class="fw-bold">Liên hệ</span>
+                    <p>Điện thoại</p>
+                    <p>Email</p>
+                </div>
+                <div class="col-4 col-sm-4 col-lg-4">
+                    <span class="fw-bold">Liên hệ</span>
+                    <ul class="list-inline">
+                        <li class="list-inline-item text-uppercase"><i class="fa-brands fa-facebook"></i></li>
+                        <li class="list-inline-item text-uppercase"><i class="fa-brands fa-youtube"></i></li>
+                        <li class="list-inline-item text-uppercase"><i class="fa-brands fa-instagram"></i></li>
+                        <li class="list-inline-item text-uppercase"><i class="fa-brands fa-tiktok"></i></li>
+                    </ul>
+                </div>
+            </div>
+   </footer> *@
  @*    <footer class=" footer text-muted">
         <div class="container-footer">
             <div>
@@ -144,3 +164,26 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+@*     <div class="row header">
+            <div class="col-1 col-sm-1 col-lg-1">
+                <div class="logo">
+                    <img src="img/logo.png" alt="">
+                </div>
+            </div>
+            <div class="col-9 col-sm-9 col-lg-9">
+                <div class="nav">
+                    <ul class="list-inline pt-3">
+                        <li class="list-inline-item text-uppercase">Việc làm</li>
+                        <li class="list-inline-item text-uppercase">Doanh nghiệp</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-2 col-sm-2 col-lg-2">
+                <div class="user d-flex">
+                    <span class="pe-2 pt-3">
+                        Thu Hoài
+                    </span>
+                    <img src="img/pngtree-outline-user-icon-png-image_1727916.jpg" alt="">
+                </div>
+            </div>
+        </div> *@

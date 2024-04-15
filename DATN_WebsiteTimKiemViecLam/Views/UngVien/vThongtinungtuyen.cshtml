@@ -1,12 +1,16 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    @if (ViewBag.MS_028 != null)
+    {
+        <script>
+            // Gọi hàm JavaScript để hiển thị thông báo
+            alert('@ViewBag.MS_028');
+        </script>
+    }
 }
-<form style="color:black; Background:#F5FAFF" class="text-black">
+<form action="btnGuithongtinUngTuyen" enctype="multipart/form-data" method="post" style="color:black; Background:#F5FAFF" class="text-black">
 <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">File CV</label>
-        <input type="file" class="form-control" id="file">
+        <input type="file" name="file" class="form-control">
 </div>
 <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label">Thông tin giới thiệu</label>

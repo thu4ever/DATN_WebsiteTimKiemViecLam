@@ -1,0 +1,37 @@
+﻿
+<script>
+	function doGet(e) {
+  var htmlOutput =  HtmlService.createTemplateFromFile('Upload');
+  htmlOutput.message = '';
+  return htmlOutput.evaluate();
+}
+
+function doPost(e) {
+			Logger.log(JSON.stringify(e));
+			var destination_id = '1aRaSAbli23w8Kt95B5LzfLZM-kJsUBq5';  // ID OF GOOGLE DRIVE DIRECTORY;
+			var destination = DriveApp.getFolderById(destination_id);
+			var data = Utilities.base64Decode(e.parameter.fileData);
+			var blob = Utilities.newBlob(data, e.parameter.mimeType, e.parameter.fileName);
+			destination.createFile(blob);
+
+			listRecord(e.parameter.username, e.parameter.company, e.parameter.branch, e.parameter.fileName);
+
+			var htmlOutput =  HtmlService.createTemplateFromFile('Upload');
+				htmlOutput.message = 'Bạn đã gửi mẫu thành công!';
+				return htmlOutput.evaluate();
+}
+
+function listRecord(username,company,branch,filename){
+
+			var url = 'https://docs.google.com/spreadsheets/d/1pHFrWp1Rhem1hf2z9VhZwhJnTwGDXRmTuPeldaLSW-E/edit#gid=0';  //URL OF GOOGLE SHEET;
+			var ss= SpreadsheetApp.openByUrl(url);
+			var recordsSheet = ss.getSheetByName("DataFile");
+				recordsSheet.appendRow([username, company, branch, filename, new Date()]);
+}
+
+function getUrl() {
+			var url = ScriptApp.getService().getUrl();
+			return url;
+}
+	</script>
+

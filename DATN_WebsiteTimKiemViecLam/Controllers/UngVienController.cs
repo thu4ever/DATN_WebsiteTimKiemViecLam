@@ -4,6 +4,12 @@ using System.Data.Entity;
 using System.Linq;
 using X.PagedList;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Google.Apis.Drive.v3;
+using Google.Apis.Auth.OAuth2;
+using System.Text;
+using static NuGet.Packaging.PackagingConstants;
+using Google.Apis.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace DATN_WebsiteTimKiemViecLam.Controllers
 {
@@ -16,7 +22,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         }
         public IActionResult btnHienthidanhsachVL(int? page)
         {
-            int pageSize = 8; // Số lượng mục trên mỗi trang
+            int pageSize = 9; // Số lượng mục trên mỗi trang
             int pageNumber = (page ?? 1);
 
             var danhSachBaiTuyenDung = _context.TblBaituyendungs
@@ -28,55 +34,71 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                   SLogo = baiTuyenDung.FkSMaDnNavigation.SLogo,
                   sTendoanhnghiep = baiTuyenDung.FkSMaDnNavigation.STenDn,
                   sDiachi = baiTuyenDung.SDiachicuthe,
-                  FMucLuong = baiTuyenDung.FMucLuongtoithieu
+                  FMucLuong = baiTuyenDung.FMucLuongtoithieu,
+                  FMucLuongTD=baiTuyenDung.FMucluongtoida,
+                  FkSMaDn=baiTuyenDung.FkSMaDn
               })
               .ToList();
             ViewBag.TotalPages = Math.Ceiling((double)danhSachBaiTuyenDung.Count / pageSize);
             ViewBag.CurrentPage = pageNumber;
-            List<TblDoanhnghiep> model1Data =  _context.TblDoanhnghieps.ToList();
+            List<TblDoanhnghiep> model1Data = _context.TblDoanhnghieps.ToList();
             ViewBag.model1Data = model1Data;
 
-
+            //return View("vdanhsachcvungtuyen");
             return View("vDanhsachvieclam", danhSachBaiTuyenDung.ToPagedList(pageNumber, pageSize));
         }
         public IActionResult btnHienthidanhsachDN()
         {
             List<TblDoanhnghiep> model1Data = _context.TblDoanhnghieps.ToList();
             ViewBag.model1Data = model1Data;
-            return View("vDanhsachdoanhnghiep",model1Data);
+            return View("vDanhsachdoanhnghiep", model1Data);
         }
         public IActionResult btnHienthichitietvieclam(long PkSMaBai)
         {
-             vChitietvieclam result= _context.TblBaituyendungs
-              .Include(baiTuyenDung => baiTuyenDung.FkSMaDnNavigation)
-              .Where(p=>p.PkSMaBai== PkSMaBai)
-              .Select(baiTuyenDung => new vChitietvieclam
-              {
-                  PkSMaBai = baiTuyenDung.PkSMaBai,
-                  STenBai = baiTuyenDung.STenBai,
-                  SLogo = baiTuyenDung.FkSMaDnNavigation.SLogo,
-                  STenDn = baiTuyenDung.FkSMaDnNavigation.STenDn,
-                  SDiachicuthe = baiTuyenDung.SDiachicuthe,
-                  FMucLuongtoithieu = baiTuyenDung.FMucLuongtoithieu,
-                  SYeuCau=baiTuyenDung.SYeuCau,
-                  SQuyenLoi=baiTuyenDung.SQuyenLoi,
-                  SMota=baiTuyenDung.FkSMaDnNavigation.SMota,
-                  ISoLuong=baiTuyenDung.ISoLuong,
-                  ITrangthai=baiTuyenDung.ITrangthai,
-                  DTgTuyenDung=baiTuyenDung.DTgTuyenDung,
-                  FkSMaDn=baiTuyenDung.FkSMaDn,
-                  FNamKinhNghiem=baiTuyenDung.FNamKinhNghiem,
-                  FMucluongtoida=baiTuyenDung.FMucluongtoida,
-                  DTgDangBai= baiTuyenDung.DTgDangBai
-              })
-              .FirstOrDefault();
-            return View("vChitietvieclam",result);
+            vChitietvieclam result = _context.TblBaituyendungs
+             .Include(baiTuyenDung => baiTuyenDung.FkSMaDnNavigation)
+             .Where(p => p.PkSMaBai == PkSMaBai)
+             .Select(baiTuyenDung => new vChitietvieclam
+             {
+                 PkSMaBai = baiTuyenDung.PkSMaBai,
+                 STenBai = baiTuyenDung.STenBai,
+                 SLogo = baiTuyenDung.FkSMaDnNavigation.SLogo,
+                 STenDn = baiTuyenDung.FkSMaDnNavigation.STenDn,
+                 SDiachicuthe = baiTuyenDung.SDiachicuthe,
+                 FMucLuongtoithieu = baiTuyenDung.FMucLuongtoithieu,
+                 SYeuCau = baiTuyenDung.SYeuCau,
+                 SQuyenLoi = baiTuyenDung.SQuyenLoi,
+                 SMota = baiTuyenDung.FkSMaDnNavigation.SMota,
+                 ISoLuong = baiTuyenDung.ISoLuong,
+                 ITrangthai = baiTuyenDung.ITrangthai,
+                 DTgTuyenDung = baiTuyenDung.DTgTuyenDung,
+                 FkSMaDn = baiTuyenDung.FkSMaDn,
+                 FNamKinhNghiem = baiTuyenDung.FNamKinhNghiem,
+                 FMucluongtoida = baiTuyenDung.FMucluongtoida,
+                 DTgDangBai = baiTuyenDung.DTgDangBai
+             })
+             .FirstOrDefault();
+            return View("vChitietvieclam", result);
         }
-            public IActionResult btnHienthichitietDN(long FkSMaDn)
+        public IActionResult btnHienthichitietDN(long FkSMaDn)
         {
-            TblDoanhnghiep tblDoanhnghiep=_context.TblDoanhnghieps.Where(p=>p.PkSMaDn== FkSMaDn).FirstOrDefault();
+            TblDoanhnghiep tblDoanhnghiep = _context.TblDoanhnghieps.Where(p => p.PkSMaDn == FkSMaDn).FirstOrDefault();
+            var danhSachBaiTuyenDung = _context.TblBaituyendungs
+               .Include(baiTuyenDung => baiTuyenDung.FkSMaDnNavigation)
+               .Where(p => p.FkSMaDn == FkSMaDn)
+               .Select(baiTuyenDung => new vDanhsachvieclam
+               {
+                   PkSMaBai = baiTuyenDung.PkSMaBai,
+                   STenBai = baiTuyenDung.STenBai,
+                   SLogo = baiTuyenDung.FkSMaDnNavigation.SLogo,
+                   sTendoanhnghiep = baiTuyenDung.FkSMaDnNavigation.STenDn,
+                   sDiachi = baiTuyenDung.SDiachicuthe,
+                   FMucLuong = baiTuyenDung.FMucLuongtoithieu
+               })
+               .ToList();
+            ViewBag.tblBaituyendung = danhSachBaiTuyenDung;
             return View("vChitietdoanhnghiep", tblDoanhnghiep);
-        } 
+        }
         public IActionResult btnTimkiemViecLam()
         {
             return View("vDanhsachtatcavieclam");
@@ -84,19 +106,19 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         [HttpPost]
         public IActionResult btnTimkiemViecLam(int? page, String dThoigiandangtuyen, String txtkinhnghiem, String txtDiachi, String txtMucluong, String txtTencongviec)
         {
-            if(txtTencongviec==null)
+            if (txtTencongviec == null)
             {
                 txtTencongviec = " ";
-            }    
-            if(txtDiachi==null)
+            }
+            if (txtDiachi == null)
             {
                 txtDiachi = " ";
-            }    
-            if(txtkinhnghiem==null)
+            }
+            if (txtkinhnghiem == null)
             {
                 txtkinhnghiem = "100";
-            }    
-            DateTime now = DateTime.Now;        
+            }
+            DateTime now = DateTime.Now;
             int pageSize = 8; // Số lượng mục trên mỗi trang
             int pageNumber = (page ?? 1);
             TimeSpan time = TimeSpan.FromDays(int.Parse(dThoigiandangtuyen));
@@ -107,7 +129,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
            .ToList(); // Chuyển kết quả của truy vấn thành danh sách
 
             var result = query.AsEnumerable() // Chuyển sang việc thực hiện trên máy khách
-                .Where(u => u.FMucLuongtoithieu > float.Parse(txtMucluong))
+                .Where(u => u.FMucluongtoida > float.Parse(txtMucluong))
                 .Where(u => now - u.DTgDangBai < TimeSpan.FromDays(int.Parse(dThoigiandangtuyen)))
                 .Join(_context.TblDoanhnghieps,
                       baiTuyenDung => baiTuyenDung.FkSMaDn,
@@ -128,18 +150,64 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
 
             return View("vDanhsachvieclam", result.ToPagedList(pageNumber, pageSize));
         }
-        public IActionResult btnGuithongtinUngTuyen()
+
+        public IActionResult btnGuithongtinUngTuyen(int PKsMabai)
         {
+            HttpContext.Session.SetInt32("Ungtuyen", 0);
+            if (PKsMabai != 0)
+            {
+                HttpContext.Session.SetInt32("Mabaituyendung", PKsMabai);
+            }
+            if (HttpContext.Session.GetInt32("FkSMaQuyen") == null && HttpContext.Session.GetString("PK_sEmail") == null)
+            {
+                return RedirectToAction("Login", "Taikhoan");
+            }
             return View("vThongtinungtuyen");
         }
         [HttpPost]
-        public IActionResult btnGuithongtinUngTuyen(long PkSMaBai, String txtGioithieu, String slink)
+        public IActionResult btnGuithongtinUngTuyen(IFormFile file, String txtGioithieu)
         {
+
+            UploadFileModel up = new UploadFileModel();
+            String slink = up.OnPostAsync(file, txtGioithieu);
+            TblThongTinUngTuyen tblThongTinUngTuyen = new TblThongTinUngTuyen();
+            tblThongTinUngTuyen.SCv = slink;
+            tblThongTinUngTuyen.PkFkSMaUngVien = (long)HttpContext.Session.GetInt32("PKsMaUngVien");
+            tblThongTinUngTuyen.PkFkSMaBai = (long)HttpContext.Session.GetInt32("Mabaituyendung");
+            tblThongTinUngTuyen.SGioithieu = txtGioithieu;
+            tblThongTinUngTuyen.DNgayGui = DateTime.Now;
+            var check = _context.TblThongTinUngTuyens.Add(tblThongTinUngTuyen);
+            _context.SaveChanges();
+            if (check != null)
+            {
+                ViewBag.MS_028 = "Gui CV thanh cong";
+            }
             return View("vThongtinungtuyen");
         }
-        public IActionResult btnHienthidanhsachCV()
+
+        public IActionResult btnHienthidanhsachcv(bool? bTrangthai)
         {
-            return View();
+            List<vdanhsachcvdaungtuyen> danhsachcv= _context.TblThongTinUngTuyens
+                .Include(p=>p.PkFkSMaBaiNavigation)
+                .Where(p=>p.PkFkSMaUngVien== (long)HttpContext.Session.GetInt32("PKsMaUngVien") && p.BTrangthai==bTrangthai)
+                .Join(_context.TblDoanhnghieps,
+                ungtuyen => ungtuyen.PkFkSMaBaiNavigation.FkSMaDn,
+                doanhnghiep => doanhnghiep.PkSMaDn,
+                (ungtuyen, doanhnghiep) => new { ungtuyen, doanhnghiep })
+                .Join(_context.TblBaituyendungs,
+                ungtuyen1 => ungtuyen1.ungtuyen.PkFkSMaBai,
+                Baituyendung => Baituyendung.PkSMaBai,
+                (ungtuyen1, Baituyendung) => new vdanhsachcvdaungtuyen
+                {
+                    PkFkSMaUngVien=ungtuyen1.ungtuyen.PkFkSMaUngVien,
+                    PkFkSMaBai = ungtuyen1.ungtuyen.PkFkSMaBai,
+                    sTenDN=ungtuyen1.doanhnghiep.STenDn,
+                    SCv=ungtuyen1.ungtuyen.SCv,
+                    DNgayGui=ungtuyen1.ungtuyen.DNgayGui,
+                    sTenBai=Baituyendung.STenBai,
+                    BTrangthai=ungtuyen1.ungtuyen.BTrangthai
+                }).ToList();
+            return View("vDanhsachcvungvien",danhsachcv);
         }
     }
 }

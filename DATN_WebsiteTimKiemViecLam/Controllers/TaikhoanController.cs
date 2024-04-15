@@ -41,6 +41,12 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             {
                 TblUngVien tblUngVien = _context.TblUngViens.FirstOrDefault(p => p.FkSEmail == Email);
                 HttpContext.Session.SetString("Avatar", tblUngVien.SAnh);
+                HttpContext.Session.SetInt32("PKsMaUngVien", Int32.Parse(tblUngVien.PkSMaUngVien.ToString()));
+                
+                if(HttpContext.Session.GetInt32("Mabaituyendung")!=null)
+                {
+                    return RedirectToAction("btnGuithongtinUngTuyen","Ungvien");
+                }    
                 return RedirectToAction("btnHienthidanhsachVL", "Ungvien");
             }
             else if(result.FkSMaQuyen==2)
@@ -49,6 +55,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 if(tblDoanhnghiep!=null)
                 {
                     HttpContext.Session.SetString("Avatar", tblDoanhnghiep.SLogo);
+                    HttpContext.Session.SetInt32("PkSMaDn", Int32.Parse(tblDoanhnghiep.PkSMaDn.ToString()));
 
                 }
                 return RedirectToAction("hienthidanhsachbaidang", "Doanhnghiep");
@@ -240,5 +247,6 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             HttpContext.Session.Clear();
             return View("Login"); 
         }
+
     }
 }

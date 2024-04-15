@@ -7,15 +7,28 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @* <link href="~/css/style.css" rel="stylesheet" /> *@
+@{
+    // Perform the formatting here
+    string formattedDate = Model.DTgDangBai.ToString("yyyy/mm/dd");
+}
+@{
+    @if (ViewBag.MS_039 != null)
+    {
+        <script>
+            // Gọi hàm JavaScript để hiển thị thông báo
+            alert('@ViewBag.MS_039');
+        </script>
+    }
+}
 @model DATN_WebsiteTimKiemViecLam.Models.TblBaituyendung
 
 <link href="~/css/font-awesome.css" rel="stylesheet" />
 <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-@if (Model != null)
+@if (Model.ISoLuong != 0)
 {
     <div id="btn_container">
-        <input type="button" id="btn_xemcvungtuyen" value="Xem CV đã ứng tuyển" />
-        <a href="@Url.Action("btnKetthucBaiDang", "Doanhnghiep", new { id = Model.PkSMaBai })">Kết thúc bài đăng</a>
+        <a href="@Url.Action("btnTimkiemCVtheobaidang", "Doanhnghiep", new { PkSMaBai = Model.PkSMaBai })" type="button"> Xem CV đã ứng tuyển</a>
+        <a type="button" href="@Url.Action("btnKetthucBaiDang", "Doanhnghiep", new { PkSMaBai = Model.PkSMaBai })">Kết thúc bài đăng</a>
         <input type="button" id="btn_kethucbaidang" value="Xóa bài đăng" />
     </div>
 }
@@ -23,66 +36,70 @@
     <div class="item">
         <span>Tên bài đăng</span>
         @Html.TextBoxFor(model=>model.STenBai)
-        @* <input class="item_content" name="Tenbaidang" /> *@
-    </div>
+     </div>
     <div class="item">
         <span>Mô tả</span>
-        @Html.TextBoxFor(model=>model.SMoTa)
+        @Html.TextAreaFor(model=>model.SMoTa)
 
-        @* <textarea class="item_content" name="mota"></textarea> *@
     </div>
     <div class="item">
         <span>Yêu cầu</span>
-        @Html.TextBoxFor(model=>model.SYeuCau)
-        @* <textarea class="item_content" name="yeucau"></textarea> *@
+        @Html.TextAreaFor(model=>model.SYeuCau)
     </div>
     <div class="item">
         <span>Quyền Lợi</span>
-        @Html.TextBoxFor(model=>model.SQuyenLoi)
-        @* <textarea class="item_content" name="quyenloi"></textarea> *@
+        @Html.TextAreaFor(model=>model.SQuyenLoi)
     </div>
     <div class="item">
         <span>Số lượng</span>
-        <input onclick="Tang()" type="button" value="+" />
-        @* <input name="soluong" value="1" /> *@
-        @Html.TextBoxFor(model=>model.ISoLuong)
-        <input onclick="Giam()" type="button" value="-" />
+        <input onclick="Tang('soluong')" type="button" value="+" />
+        @Html.TextBoxFor(model=>model.ISoLuong,Model.ISoLuong.ToString(), new { @class = "soluong" })
+        <input onclick="Giam('soluong')" type="button" value="-" />
     </div>
     <div class="mucluong">
-        <span>Mức lương</span>
-        @Html.TextBoxFor(model=>model.FMucLuongtoithieu)
-        @* <input name="mucluong" /> *@
+        <span>Mức lương Tối Thiểu</span>
+        <input onclick="Tang('sMucluongtoithieu')" type="button" value="+" />
+        @Html.TextBoxFor(model=>model.FMucLuongtoithieu, new { @class = "sMucluongtoithieu" })
+        <input onclick="Giam('sMucluongtoithieu')" type="button" value="-" />
+
+    </div>
+    <div class="mucluong">
+        <span>Mức lương Tối Đa</span>
+        <input onclick="Tang('sMucluongtoida')" type="button" value="+" />
+
+        @Html.TextBoxFor(model=>model.FMucluongtoida, new { @class = "sMucluongtoida" })
+
+        <input onclick="Giam('sMucluongtoida')" type="button" value="-" />
+
     </div>
     <div class="item">
         <span>Kinh nghiệm</span>
-        <input onclick="Tang()" type="button" value="+" />
-        @Html.TextBoxFor(model=>model.FNamKinhNghiem)
-        <input onclick="Giam()" type="button" value="-" />
+        <input onclick="Tang('FNamKinhNghiem')" type="button" value="+" />
+        @Html.TextBoxFor(model=>model.FNamKinhNghiem, new { @class = "FNamKinhNghiem" })
+        <input onclick="Giam('FNamKinhNghiem')" type="button" value="-" />
     </div>
     <div class="item">
         <span>Ngày bắt đầu</span>
-        @Html.TextBoxFor(model=>model.DTgDangBai, new { @type = "date" })
+        @Html.TextBoxFor(model => model.DTgDangBai, new { @type = "datetime" })
     </div>
     <div class="item">
         <span>Thời gian đăng bài </span>
-        <input onclick="Tang()" type="button" value="+" />
-        @Html.TextBoxFor(model=>model.DTgTuyenDung, new { @type = "date" })
-        <input onclick="Giam()" type="button" value="-" />
+        @Html.TextBoxFor(model=>model.DTgTuyenDung, new { @type = "datetime" })
     </div>
     <input type="submit" value="LƯU" />
 </form>
 <script>
-    function Tang() {
-        var countElement = document.getElementsByName("soluong")[0]; // Lấy phần tử đầu tiên với name="soluong"
-        var number = parseInt(countElement.value); // Lấy giá trị từ phần tử
+    function Tang(massger) {
+        var countElement = document.getElementsByClassName(massger)[0]; // Lấy phần tử đầu tiên với lớp là "soluong"
+        var number = parseInt(countElement.value); // Lấy giá trị từ phần tử và chuyển đổi thành số nguyên
         number++;
-        countElement.value = number; // Gán giá trị mới vào phần tử
+        countElement.value = number;
     }
 
-    function Giam() {
-        var countElement = document.getElementsByName("soluong")[0]; // Lấy phần tử đầu tiên với name="soluong"
-        var number = parseInt(countElement.value); // Lấy giá trị từ phần tử
+    function Giam(massger) {
+        var countElement = document.getElementsByClassName(massger)[0]; // Lấy phần tử đầu tiên với lớp là "soluong"
+        var number = parseInt(countElement.value); // Lấy giá trị từ phần tử và chuyển đổi thành số nguyên
         number--;
-        countElement.value = number; // Gán giá trị mới vào phần tử
+        countElement.value = number;// Gán giá trị mới vào phần tử
     }
 </script>

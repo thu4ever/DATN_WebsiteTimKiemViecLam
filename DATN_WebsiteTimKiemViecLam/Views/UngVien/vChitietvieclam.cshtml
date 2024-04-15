@@ -5,6 +5,7 @@
     @model DATN_WebsiteTimKiemViecLam.Models.vChitietvieclam
 
 }
+
 @{
     TimeSpan difference = Model.DTgTuyenDung.Subtract(DateTime.Now);
     int numberOfDays = difference.Days;
@@ -22,14 +23,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <title>Document</title>
 </head>
-<body >
-    <div style="color:black; Background:#F5FAFF" class="container">
+<body style="font-family: Inter, sans-serif; font-style: normal;background:#F5FAFF">
+    <div style="color:black;  " class="container rounded">
         <div class="row">
             <div style="color:#3D3BB2" class="col-12 col-sm-12 col-lg-12 fs-2">
-                <h3>@Model.STenBai</h3>
+                <h3 style="text-transform:uppercase">@Model.STenBai</h3>
             </div>
         </div>
-        <div class="row">
+        <div style="Background:#ffff;border-radius:5px; padding-top:10px" class="row">
             <div class="col-12 col-sm-12 col-lg-8">
                 <div class="row">
                     <div class="col-4 col-sm-4 col-lg-4">
@@ -80,42 +81,51 @@
                         </p>
                         <p class="text-lg-start">
                             <label class="fw-bold" for="">Yêu cầu ứng viên: </label>
-                            <ul class="text-lg-start text-break">
+                          @*   <div id="text"></div>
+                            <ul id="list"></ul> *@
+                            <ul style="text-align: justify">
                              @Model.SYeuCau
                             </ul>
                         </p>
                         <p class="text-lg-start">
-                            <label class="fw-bold text-lg-start" for="">Quyền lợi: </label>
-                            <ul class="text-lg-start text-break">
+                            <label class="fw-bold " for="">Quyền lợi: </label>
+                            <ul style="text-align: justify">
                                @Model.SQuyenLoi
                             </ul>
                         </p>
                         <p class="text-lg-start">
                             <label class="fw-bold text-lg-start" for="">Thời gian đăng tải: </label>
-                           @Model.DTgDangBai
+                            @Model.DTgDangBai.Value.Date
                         </p>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-lg-4">
-                <button class="btn btn-primary btn-lg" style="background: #3D3BB2; width: 400px;">
-                   ỨNG TUYỂN NGAY
-                </button>
+                <a href="@Url.Action("btnGuithongtinUngTuyen","UngVien", new {PKsMabai=Model.PkSMaBai})" class="btn btn-primary btn-lg" style="background: #3D3BB2; width: 400px;">ỨNG TUYỂN NGAY</a>
                 <p style=" margin-top: 20px; text-align: left;">
                     <i class="fa-solid fa-clock"></i>
                     Thời gian ứng tuyển còn @numberOfDays ngày
                 </p>
                 <div class="infor-company">
-                    <div class="card " style="width: 18rem;">
-                        <img src="data:image/png;base64,@Model.SLogo" alt="Hình ảnh" class="item-image card-img-top p-2">
-                        <div class="card-body">
-                            <h5  class="card-title fs-6 ">@Model.STenDn</h5>
-                            <p  class="card-text text-truncate">@Model.SMota</p>
+                    <div class="card " style="width: 21rem;">
+                        <div class="card" style="width: 21rem; height:250px; padding-left:20px; margin-bottom:20px;border:none">
+                            <img src="~/images/2-100x0.jpg" alt="Hình ảnh" class="card-img-top p-2">
+                            <a style="text-decoration:none;font-size: 12px;font-weight: 500;line-height: 16px;margin-top: 12px;width: 100%;" href="@Url.Action("btnHienthichitietDN","UngVien", new {FkSMaDn=Model.FkSMaDn})" class="card-title ">@Model.STenDn</a>
                         </div>
-                        <div class="card-body">
-                            <a href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=Model.FkSMaDn})" class="card-link">xem thêm chi tiết...</a>
+                        <div class="card-body text-lg-start">
+                            <a style="    color: #3D3BB2;  font-size: 14px;   font-style: normal;   font-weight: 600;  letter-spacing: .175px;  line-height: 22px;" href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=Model.FkSMaDn})" class="card-link fs-6">xem thêm chi tiết...</a>
                         </div>
                     </div>
+                  @*   <div class="card " style="width: 18rem;">
+                        <img src="data:image/png;base64,@Model.SLogo" alt="Hình ảnh" class="item-image card-img-top p-2">
+                        <div class="card-body">
+                            <a style="text-decoration:none" href="@Url.Action("btnHienthichitietDN","UngVien", new {FkSMaDn=Model.FkSMaDn})" class="card-title fs-6 ">@Model.STenDn</a>
+                            <p  class="card-text text-truncate">@Model.SMota</p>
+                        </div>
+                        <div class="card-body text-lg-start">
+                            <a href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=Model.FkSMaDn})" class="card-link fs-6">xem thêm chi tiết...</a>
+                        </div>
+                    </div> *@
                 </div>
             </div>
         </div>
@@ -137,6 +147,27 @@
                 });
             });
         });
+        // $(document).ready(function () {
+        //     // Chuyển đổi chuỗi JSON thành đối tượng JavaScript
+        //     var inputText = @Html.Raw(Json.Serialize(Model.SYeuCau));
+
+        //     // Chuyển đổi văn bản thành danh sách HTML
+        //     function textToList(text) {
+        //         var lines = text.split('\n');
+        //         var listItems = lines.map(function (line) {
+        //             if (line.trim().length > 0) {
+        //                 var marker = line.trim().charAt(0);
+        //                 var listItem = line.trim().substring(1).trim();
+        //                 return '<li class="marker-' + marker + '">' + listItem + '</li>';
+        //             }
+        //         });
+        //         return listItems.join('');
+        //     }
+
+        //     // Hiển thị danh sách trong thẻ ul
+        //     $('#text').text(inputText);
+        //     $('#list').html(textToList(inputText));
+        // });
     </script>
 </body>
 </html>

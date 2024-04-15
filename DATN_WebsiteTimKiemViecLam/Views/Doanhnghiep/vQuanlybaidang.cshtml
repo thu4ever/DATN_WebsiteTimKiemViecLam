@@ -3,3 +3,65 @@
 *@
 @{
 }
+<div>
+<form asp-controller="Doanhnghiep" asp-action="btnTimkiembaidang">
+    <div style=" margin-left:250px;" class="row">
+    <div style="padding:5px;  width:500px" class="col-sm-2 col-lg-2">
+        <input class="form-control" name="txtTencongviec" placeholder="Tên bài đăng..." type="text" value="" />
+    </div>
+    <div style="padding:5px;  width:200px" class="col-sm-2 col-lg-2">
+        <button style="padding:5px; width:200px;background:#3D3BB2" type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Tìm kiếm
+        </button>
+    </div>
+    </div>
+</form>
+<div style="padding:5px;  width:80px; margin-left:250px;" class="col-sm-2 col-lg-2">
+    <a href="@Url.Action("btnThembaidang","Doanhnghiep")" style="padding:5px; width:200px;background:#3D3BB2" class="btn btn-primary">
+        Tạo mới
+    </a>
+</div>
+@foreach (TblBaituyendung item in Model)
+{
+    <div class="card mb-3 text-black" style="max-width: 540px; margin-left:250px;margin-top:20px">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img class="img-fluid rounded-start" src="~/images/flat-color-icons_document.png" />
+            </div>
+            <div class="col-md-5">
+                <div class="card-body">
+                    <h5 class="card-title">@item.STenBai</h5>
+
+                    @{
+                        if (item.ITrangthai == 0)
+                        {
+                            <p class="card-text">
+                                Chờ tuyển dụng
+                            </p>
+                        }
+                        else if (item.ITrangthai == 1)
+                        {
+                            <p class="card-text">
+                                Đang tuyển dụng
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="card-text">
+                                Đã kết thúc
+                            </p>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-md-3">
+                <a href="@Url.Action("btnTimkiemCVtheobaidang", new {PKsMabai=item.PkSMaBai})"> <img height="20px" width="20px" src="~/images/mdi_eye.png" /></a>
+                <a href="@Url.Action("btnSuabaidang", new {PKsMabai=item.PkSMaBai})">   <img height="20px" width="20px" src="~/images/mdi_pencil.png" /></a>
+                <div class="row"></div>
+                <h5 style="font-size:15px" class=" text-lg-center">@item.DTgDangBai.ToString("mm/dd/yyyyy")</h5>
+            </div>
+        </div>
+    </div>
+    }
+</div>
