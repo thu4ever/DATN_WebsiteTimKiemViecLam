@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="GhostScript.NetCore" Version="1.0.1" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.67.0.3373" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.20" />

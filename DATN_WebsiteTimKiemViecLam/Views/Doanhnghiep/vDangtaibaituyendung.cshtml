@@ -20,6 +20,51 @@
         </script>
     }
 }
+<script>
+    function confirmDelete(PkSMaBai) {
+        if (confirm("Bạn có chắc chắn muốn xóa bài đăng không?")) {
+            MS_041 = "Xóa bài đăng thành công";
+            MS_042 = "Xóa bài đăng không thành công";
+            // Nếu người dùng chọn OK
+            $.ajax({
+                url: '/DoanhNghiep/btnXoabaidang?PkSMaBai=' + PkSMaBai, // Đường dẫn đến hàm Xoa trong controller
+                type: 'DELETE', // Sử dụng phương thức DELETE
+                success: function (result) {
+                    alert(MS_041); // Hiển thị thông báo khi xóa thành công
+                    window.location.href = '/DoanhNghiep/hienthidanhsachbaidang';
+                },
+                error: function (xhr, status, error) {
+                    alert(MS_042 + error); // Hiển thị thông báo khi xóa không thành công
+                }
+            });
+        } else {
+            // Nếu người dùng chọn Cancel
+            alert("Đã hủy bỏ xóa!");
+        }
+    }
+    function CanclePost(PkSMaBai) {
+        if (confirm("Bạn có chắc chắn muốn kết thúc bài đăng không?")) {
+            MS_045 = "Kết thúc bài đăng thành công  ";
+            MS_046 = "Kết thúc bài đăng không thành công ";
+            // Nếu người dùng chọn OK
+            $.ajax({
+                url: '/DoanhNghiep/btnKetthucBaiDang?PkSMaBai=' + PkSMaBai, // Đường dẫn đến hàm Xoa trong controller
+                type: 'POST', // Sử dụng phương thức DELETE
+                success: function (result) {
+                    alert(MS_045); // Hiển thị thông báo khi xóa thành công
+                    window.location.href = '/DoanhNghiep/hienthidanhsachbaidang';
+                },
+                error: function (xhr, status, error) {
+                    alert(MS_046 + error); // Hiển thị thông báo khi xóa không thành công
+                }
+            });
+        } else {
+            // Nếu người dùng chọn Cancel
+            alert("Đã hủy bỏ kết thúc!");
+        }
+    }
+</script>
+
 @model DATN_WebsiteTimKiemViecLam.Models.TblBaituyendung
 
 <link href="~/css/font-awesome.css" rel="stylesheet" />
@@ -28,8 +73,15 @@
 {
     <div id="btn_container">
         <a href="@Url.Action("btnTimkiemCVtheobaidang", "Doanhnghiep", new { PkSMaBai = Model.PkSMaBai })" type="button"> Xem CV đã ứng tuyển</a>
-        <a type="button" href="@Url.Action("btnKetthucBaiDang", "Doanhnghiep", new { PkSMaBai = Model.PkSMaBai })">Kết thúc bài đăng</a>
-        <input type="button" id="btn_kethucbaidang" value="Xóa bài đăng" />
+        <a onclick="confirmDelete(@Model.PkSMaBai)">Xóa</a>
+        @if(Model.ITrangthai==2)
+        {
+           <a type="button" href="@Url.Action("btnDanglaibaidang", "Doanhnghiep", new { PkSMaBai = Model.PkSMaBai })">Đăng tải lại</a>
+        }
+        @if(Model.ITrangthai==1)
+        {
+            <a onclick="CanclePost(@Model.PkSMaBai)">Kết thúc</a>
+        }
     </div>
 }
 <form class="text-black" id="content_container" action="@Url.Action("btnThembaidang", "Doanhnghiep")" method="post">

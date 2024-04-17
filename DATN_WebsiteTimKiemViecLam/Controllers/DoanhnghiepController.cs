@@ -1,17 +1,23 @@
 ﻿using DATN_WebsiteTimKiemViecLam.Models;
+using DATN_WebsiteTimKiemViecLam.Service;
 using Microsoft.AspNetCore.Http;
+using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
+using Ghostscript.NET.Rasterizer;
+using NuGet.Common;
 
 namespace DATN_WebsiteTimKiemViecLam.Controllers
 {
     public class DoanhnghiepController : Controller
     {
+        private readonly TakePictureFromPdf _pdfProcessor;
         private readonly db_WebsiteTimkiemvieclamContext _context;
         public static long quyen = 0;
         public static long PK_sMabai=0;
-        public DoanhnghiepController(db_WebsiteTimkiemvieclamContext context)
+        public DoanhnghiepController(db_WebsiteTimkiemvieclamContext context, TakePictureFromPdf pdfProcessor)
         {
             _context = context;
+            _pdfProcessor = pdfProcessor;
         }
         public IActionResult btnThembaidang()
         {
@@ -21,12 +27,20 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         [HttpPost]
         public IActionResult btnThembaidang(TblBaituyendung tblBaituyendung)
         {
+            tblBaituyendung.FkSMaDn = 5;
+            tblBaituyendung.PkSMaBai = PK_sMabai;
+            if (tblBaituyendung.DTgDangBai > DateTime.Now.Date)
+            {
+                tblBaituyendung.ITrangthai = 0;
+            }
+            else if (tblBaituyendung.DTgTuyenDung <=DateTime.Now.Date)
+            {
+                tblBaituyendung.ITrangthai = 2;
+            }
+            else 
+                tblBaituyendung.ITrangthai = 1;
             if (PK_sMabai != 0)
             {
-                tblBaituyendung.FkSMaDn = 5;
-                tblBaituyendung.PkSMaBai=PK_sMabai;
-                DateTime dtupdate = tblBaituyendung.DTgDangBai.Date;
-                tblBaituyendung.ITrangthai = dtupdate.Equals(DateTime.Now.Date) ? 1 : 0;
                 var checkrecordupdate = _context.TblBaituyendungs.Update(tblBaituyendung);
                 _context.SaveChanges();
                 if (checkrecordupdate != null)
@@ -35,14 +49,12 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                     return View("vDangtaibaituyendung", tblBaituyendung);
                 }
             }
-            tblBaituyendung.FkSMaDn = 5;
-            DateTime dt= tblBaituyendung.DTgDangBai.Date;
-            tblBaituyendung.ITrangthai =  dt.Equals(DateTime.Now.Date) ? 1 : 0;
             var check=_context.TblBaituyendungs.Add(tblBaituyendung);
             _context.SaveChanges();
             if (check != null)
             {
                 ViewBag.MS_039 = "Them bai dang thanh cong";
+                return RedirectToAction("hienthidanhsachbaidang");
             }
             return View("vDangtaibaituyendung", tblBaituyendung);
         }
@@ -80,14 +92,68 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             }
             return View("vDangtaibaituyendung", tblBaituyendung);
         }
-        public IActionResult btnXoaBaiDang()
+        public IActionResult btnTuchoiCV(long PkFkSMaBai, long PkFkSMaUngVien)
         {
-            return View();
+            TblThongTinUngTuyen ChitietCVungvien = _context.TblThongTinUngTuyens
+                .Where(p => p.PkFkSMaBai == PkFkSMaBai && p.PkFkSMaUngVien == PkFkSMaUngVien)
+                .FirstOrDefault();
+            if( ChitietCVungvien != null )
+            {
+                ChitietCVungvien.BTrangthai = false;
+                _context.TblThongTinUngTuyens.Update(ChitietCVungvien); 
+                _context.SaveChanges();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
         }
-        public IActionResult btnKetthucBaiDang()
+        public IActionResult btnKetthucBaiDang(long PKsMabai)
         {
-            return View();
+            TblBaituyendung tblBaituyendung = _context.TblBaituyendungs.Where(p => p.PkSMaBai == PKsMabai).FirstOrDefault();
+            tblBaituyendung.DTgTuyenDung=DateTime.Now;
+            _context.TblBaituyendungs.Update(tblBaituyendung);
+            _context.SaveChanges();
+            return Json(new { success = true });
 
+        }
+        public IActionResult btnXoabaidang(long PKsMabai)
+        {
+            TblBaituyendung tblBaituyendung = _context.TblBaituyendungs.Where(p=>p.PkSMaBai == PKsMabai).FirstOrDefault();
+            _context.TblBaituyendungs.Remove(tblBaituyendung);
+            _context.SaveChanges();
+            return Json(new { success = true });
+        }
+        public IActionResult LoadStatus()
+        {
+            int check = 0;
+            List<TblBaituyendung> lstBaituyendung = _context.TblBaituyendungs.ToList();
+            foreach(TblBaituyendung item in lstBaituyendung)
+            {
+                if(item.DTgDangBai>DateTime.Now.Date)
+                {
+                    item.ITrangthai = 0;
+                }
+                else if(item.DTgTuyenDung<=DateTime.Now.Date)
+                {
+                    item.ITrangthai = 2;
+                }
+                else
+                item.ITrangthai = 1;
+            }
+            foreach (TblBaituyendung item in lstBaituyendung)
+            {
+                _context.TblBaituyendungs.Update(item);
+                check=_context.SaveChanges();
+            }
+            if(check!=0)
+            return Json(new { success = true });
+           
+            return Json(new { success = false },"Load status bị lỗi");
+
+        }
+        public IActionResult GetItemBaidang()
+        {
+            List<TblBaituyendung> lstBaituyendung = _context.TblBaituyendungs.Where(p=>p.FkSMaDn==5).ToList();
+            return View("vItemBaidang", lstBaituyendung);
         }
         public IActionResult btnDanglaiBaiDang()
         {
@@ -109,20 +175,41 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 Ungvien => Ungvien.PkSMaUngVien,
                 (ttUngtuyen, Ungvien) => new vThongtinCVtheobaidang
                 {
+                    PkFkSMaUngVien=ttUngtuyen.PkFkSMaUngVien,
+                    PkFkSMaBai=ttUngtuyen.PkFkSMaBai,
                     SEmail = Ungvien.FkSEmail,
                     BTrangthai = ttUngtuyen.BTrangthai,
-                    DNgayGui = ttUngtuyen.DNgayGui
+                    DNgayGui = ttUngtuyen.DNgayGui,
+                    sCV=ttUngtuyen.SCv
                 }
-    )
-    .ToList();
-
-            return View();
+             ).ToList();
+            ViewBag.PKsMabai = PkSMaBai;
+           
+            return View("vdanhsachCV", cvdaungtuyen);
 
         }
-        public IActionResult btnGuiEmailchoungvien()
+        public async Task<IActionResult> ChitietCVungvien(long PkFkSMaUngVien, long PkFkSMaBai)
         {
-            return View();
+            TblThongTinUngTuyen ChitietCVungvien = _context.TblThongTinUngTuyens.Where(p => p.PkFkSMaBai == PkFkSMaBai && p.PkFkSMaUngVien == PkFkSMaUngVien).FirstOrDefault();
+           
 
+            // Đưa base64Image vào ViewBag hoặc ViewModel để hiển thị trong view
+           
+            return View("vchinhsuatrangthaiCV");
+
+        }
+        public IActionResult btnGuiEmailchoungvien(long PkFkSMaUngVien, long PkFkSMaBai)
+        {
+            TblThongTinUngTuyen ChitietCVungvien = _context.TblThongTinUngTuyens.Where(p => p.PkFkSMaBai == PkFkSMaBai && p.PkFkSMaUngVien == PkFkSMaUngVien).FirstOrDefault();
+            ChitietCVungvien.BTrangthai = true;
+            _context.SaveChanges();
+            return View("vGuiEmailchoungvien");
+
+        }
+        [HttpPost]
+        public IActionResult btnGuiEmailchoungvien(string txtTieude, String txtNoidung)
+        {
+            return View("vGuiEmailchoungvien");
         }
     }
 }

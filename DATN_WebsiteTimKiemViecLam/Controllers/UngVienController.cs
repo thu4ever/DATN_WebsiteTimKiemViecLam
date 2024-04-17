@@ -43,8 +43,6 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             ViewBag.CurrentPage = pageNumber;
             List<TblDoanhnghiep> model1Data = _context.TblDoanhnghieps.ToList();
             ViewBag.model1Data = model1Data;
-
-            //return View("vdanhsachcvungtuyen");
             return View("vDanhsachvieclam", danhSachBaiTuyenDung.ToPagedList(pageNumber, pageSize));
         }
         public IActionResult btnHienthidanhsachDN()

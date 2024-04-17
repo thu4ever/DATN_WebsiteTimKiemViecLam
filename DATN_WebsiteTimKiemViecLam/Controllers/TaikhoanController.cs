@@ -60,10 +60,16 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 }
                 return RedirectToAction("hienthidanhsachbaidang", "Doanhnghiep");
             }
-            else 
+            else if (result.FkSMaQuyen==4)
             {
-                return View();
-            }     
+                return RedirectToAction("btnHienthidanhsachtaikhoan", "Taikhoan"); 
+            }
+            return View();
+        }
+        public ActionResult btnHienthidanhsachtaikhoan()
+        {
+            List<TblTaikhoan> lstTaikhoan = _context.TblTaikhoans.ToList();
+            return View("vQuanlytaikhoan", lstTaikhoan);
         }
         public ActionResult ComfirmUser(long ungvien, long doanhnghiep)
         {
@@ -100,6 +106,10 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             } 
             return View();
         }
+        //public ActionResult EditInForCompany()
+        //{
+        //    return View();
+        //}
         public ActionResult EditInForCompany()
         {
             return View();
