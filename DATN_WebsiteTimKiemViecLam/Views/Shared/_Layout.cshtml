@@ -78,7 +78,23 @@
             <a asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click" style="color:#3D3BB2" ><i class="fas fa-cog chnh-sa-thng2"></i> Xác thực thông tin</a>
             <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click" style="color:#3D3BB2" ><i class="fas fa-pencil i-mt-khu2"></i>Đổi mật khẩu </a>
             <a asp-controller="Taikhoan" asp-action="btnDangxuat" style="color:#3D3BB2" ><i class="fas fa-location-arrow ng-xut2"></i> Đăng xuất</a>
+        </div>
+    }
+    else if (fkSMaQuyen==4)
+    {
+        <div class="container-fluid">
+            <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
+            <a style="margin-top: 20px;" class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" src="data:image/png;base64,@avatar" />
             </div>
+        </div>
+
+        <div style="position: absolute" class="custom-vertical-menu-dn">
+            <a asp-controller="Doanhnghiep" asp-action="hienthidanhsachbaidang" style="color:#3D3BB2" class="active"><i class="fas fa-home"></i> Quản lý tài khoản </a>
+            <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click" style="color:#3D3BB2"><i class="fas fa-pencil i-mt-khu2"></i>Đổi mật khẩu </a>
+            <a asp-controller="Taikhoan" asp-action="btnDangxuat" style="color:#3D3BB2"><i class="fas fa-location-arrow ng-xut2"></i> Đăng xuất</a>
+        </div>
     }
     else
     {
