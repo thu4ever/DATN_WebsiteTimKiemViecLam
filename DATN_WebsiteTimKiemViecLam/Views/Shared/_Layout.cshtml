@@ -27,35 +27,36 @@
     {
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm text-white border-bottom box-shadow mb-3">
-                <div class="container-fluid">
-                    <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
-                    <a class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">VIỆC LÀM</a>
+                <div class="container-fluid" >
+                    <img style="margin-right: 15px; " class="logo" src="~/images/logo.jpg" />
+                    <a class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL" style="padding-bottom:1.5%; ">VIỆC LÀM</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <div class="navbar-nav flex-grow-1">
-                            <a class="navbar-brand text-white text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachDN">DOANH NGHIỆP</a>
+                            <a class="navbar-brand text-white text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachDN" style="padding-bottom:1.5%; ">DOANH NGHIỆP</a>
                         </div>
                         @* <div class=" navbar-brand text-white text-bar ">@PK_sEmail</div> *@
                         <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" onmousemove="hienthimenu()" onmousewheel="anmenu()" src="data:image/png;base64,@avatar" />
                     </div>
                 </div>
-                <div style=" z-index: 2;" id="hienthimenu" class="custom-vertical-menu">
-                    <a  asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click">
-                        <i class="fas fa-user"></i> Sửa thông tin cá nhân
+                <div style="z-index: 2; border: 1px solid #ccc; border-radius: 5px; padding: 10px;" id="hienthimenu" class="custom-vertical-menu">
+                    <a style="display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click">
+                        <i class="fas fa-user" style="margin-right: 5px;"></i> Sửa thông tin cá nhân
                     </a>
-                    <a asp-controller="UngVien" asp-action="btnHienthidanhsachcv">
-                        <i class="fas fa-file-alt"></i> Xem CV đã ứng tuyển
+                    <a style="display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="UngVien" asp-action="btnHienthidanhsachcv">
+                        <i class="fas fa-file-alt" style="margin-right: 5px;"></i> Xem CV đã ứng tuyển
                     </a>
-                    <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click">
-                        <i class="fas fa-key"></i> Đổi mật khẩu
+                    <a style="display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click">
+                        <i class="fas fa-key" style="margin-right: 5px;"></i> Đổi mật khẩu
                     </a>
-                    <a asp-controller="Taikhoan" asp-action="btnDangxuat">
-                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    <a style="display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="Taikhoan" asp-action="btnDangxuat">
+                        <i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> Đăng xuất
                     </a>
                 </div>
+
 
             </nav>
         </header>
@@ -65,7 +66,7 @@
     {
         <div class="container-fluid">
             <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
-            <a style="margin-top: 20px;" class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
+            <a style="margin-top: 20px; margin-bottom: 2%;" class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                @* <div style="margin-left: 550px;" class=" navbar-brand text-white text-bar ">@PK_sEmail</div>*@
                 <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" src="data:image/png;base64,@avatar" />
@@ -86,68 +87,51 @@
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm text-white border-bottom box-shadow mb-3">
                 <div class="container-fluid">
                     <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
-                    <a class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">VIỆC LÀM</a>
+                    <a style="margin-bottom: 1.1%;" class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">VIỆC LÀM</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <div class="navbar-nav flex-grow-1">
-                            <a class="navbar-brand text-white text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachDN">DOANH NGHIỆP</a>
+                            <a style="margin-bottom: 1.5%;" class="navbar-brand text-white text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachDN">DOANH NGHIỆP</a>
                         </div>
-                        <a class="navbar-brand text-white text-bar" asp-controller="Taikhoan" asp-action="Login">ĐĂNG NHẬP</a>
-                        <a class="navbar-brand text-white text-bar" asp-controller="Taikhoan" asp-action="Resgiter">ĐĂNG KÝ</a>
+                        <a style="margin-bottom: 1.5%;" class="navbar-brand text-white text-bar" asp-controller="Taikhoan" asp-action="Login">ĐĂNG NHẬP</a>
+                        <a style="margin-bottom: 1.5%;" class="navbar-brand text-white text-bar" asp-controller="Taikhoan" asp-action="Resgiter">ĐĂNG KÝ</a>
                     </div>
                 </div>
             </nav>
         </header>
     }
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" style="margin-bottom: 250px;">
             @RenderBody()
         </main>
     </div>
-@*    <footer class="footer">
+
+    <footer class="footer text-muted" style="background-color: #f8f9fa; bottom: 0; width: 100%; height: 200px;">
+        <div class="container">
             <div class="row">
-                <div class="col-4 col-sm-4 col-lg-4">
-                    <img width="100px" src="img/anh-doremon-cute-27.jpg" alt="">
+                <div class="col-md-4">
+                    <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
+                    <a style="margin-top: 10px; color: #3D3BB2;" class="navbar-brand text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
                 </div>
-                <div class="col-4 col-sm-4 col-lg-4">
-                    <span class="fw-bold">Liên hệ</span>
-                    <p>Điện thoại</p>
-                    <p>Email</p>
+                <div class="col-md-4" style="color:#084298; margin-top: 10px;">
+                    <b>Liên hệ</b>
+                    <div>Hotline: <b>(024) 6680 5588</b> (Giờ hành chính)</div>
+                    <div>Email: <b>hotro@freework.vn</b></div>
                 </div>
-                <div class="col-4 col-sm-4 col-lg-4">
-                    <span class="fw-bold">Liên hệ</span>
-                    <ul class="list-inline">
-                        <li class="list-inline-item text-uppercase"><i class="fa-brands fa-facebook"></i></li>
-                        <li class="list-inline-item text-uppercase"><i class="fa-brands fa-youtube"></i></li>
-                        <li class="list-inline-item text-uppercase"><i class="fa-brands fa-instagram"></i></li>
-                        <li class="list-inline-item text-uppercase"><i class="fa-brands fa-tiktok"></i></li>
-                    </ul>
+                <div class="col-md-4" style="color:#084298; margin-top: 10px;">
+                    <b>Cộng đồng FreeWork</b>
+                    <div style="font-size: 20px;">
+                        <i class="fab fa-youtube" style="margin-right: 10px;"></i>
+                        <i class="fab fa-facebook" style="margin-right: 10px;"></i>
+                        <i class="fab fa-instagram"></i>
+                    </div>
                 </div>
             </div>
-   </footer> *@
- @*    <footer class=" footer text-muted">
-        <div class="container-footer">
-            <div>
-                <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
-                <a style="margin-top: 20px;color:#3D3BB2" class="navbar-brand  text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
-            </div>
-            <div>
-                <b>Liên hệ</b>
-                <div> Hotline:<b>(024) 6680 5588</b> (Giờ hành chính)</div>
-                <div> Email:<b>hotro@freework.vn</b></div>
-            </div>
-           <div>
-                <b>Cộng đồng FreeWork</b>
-                </br>
-                <i class="fa-youtube"></i>
-                <i class="fa-facebook"></i>
-                <i class="fa-instagram"></i>
-           </div>
         </div>
-    </footer> *@
+    </footer>
     <script>
         function hienthimenu() { 
             var menu = document.getElementById("hienthimenu");

@@ -17,6 +17,7 @@ Des: Created
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     <script type="application/x-javascript">
     </script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/css/style.css" rel="stylesheet" />
     <link href="~/css/font-awesome.css" rel="stylesheet" />
     @* <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"> *@
@@ -27,18 +28,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
             .login-container input[type="text"],
             .login-container select {
-               
-                width: 100%;
                 margin-bottom: 20px;
                 padding: 10px;
                 border: 1px solid #ccc;
                 border-radius: 5px;
-                box-sizing: border-box;
                 font-size: 16px;
             }
 
             .login-container input[type="submit"] {
-                    margin-left: 200px;
                 background-color: #3D3BB2;
                 color: white;
                 height: 50px;
@@ -52,28 +49,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </style>
 </head>
 <body>
-    <div class="login-form w3_form">
-        <div class="login-title w3_title">
-            <img src="~/images/logo.jpg" />
-        </div>
-        <div class="">
-            <div style="text-align:left;width: 600px;margin:0 auto" class="w3l_grid">
-                <div style="margin:0 auto">
-                    <span style="color:red; margin-bottom:20px">(*)</span> <span class="text-black">Các thông tin bắt buộc</span> </div>
-                <form enctype="multipart/form-data"  class="login-container " action="btnChinhsuathongtinUV_Click" method="POST">
-                    <span class="text-black">Họ và tên: </span>
-                    <input name="txtHoten" style="margin-bottom:20px" placeholder="Nguyễn Thị Thu Hoài" /><br />
-                    <span class="item text-black">Avatar:</span>
-                    <input type="file" name="file" style="margin-bottom:20px" /><br />
-                    <span class=" text-black">Số điện thoại: </span>
-                    <input name="txtSodienthoai" style="margin-bottom:20px" placeholder="0347389920" /><br />
-                    <span class="text-black">Giới tính:</span>
-                    <select name="txtGioitinh" style="margin-bottom:20px" id="gioitinh" >
-                        <option value="Nam">Nam</option>
-                        <option value="Nữ">Nữ</option>
-                    </select>  <br />
-                    <input type="submit" value="LƯU THÔNG TIN">
-                </form>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="login-form w3_form">
+                    <div class="login-title w3_title">
+                        <img style="max-width: 50% !important;" src="~/images/logo.jpg" />
+                    </div>
+                    <div class="">
+                        <div style="text-align:left" class="w3l_grid">
+                            <div>
+                                <span style="color:red; margin-bottom:20px">(*)</span> <span class="text-black">Các thông tin bắt buộc</span>
+                            </div>
+                            <form enctype="multipart/form-data" class="login-container" action="btnChinhsuathongtinUV_Click" method="POST">
+                                <div class="form-group">
+                                    <label for="txtHoten" class="text-black">Họ và tên:</label>
+                                    <input name="txtHoten" class="form-control" placeholder="Nguyễn Thị Thu Hoài" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="fileAvatar" class="text-black">Ảnh đại diện:</label>
+                                    <div class="input-group">
+                                        <input type="file" name="file" class="custom-file-input" id="fileAvatar" accept="image/*" style="display: none;">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" onclick="document.getElementById('fileAvatar').click()">Chọn tệp</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="txtSodienthoai" class="text-black">Số điện thoại:</label>
+                                    <input name="txtSodienthoai" class="form-control" placeholder="0347389920" />
+                                </div>
+                                <div class="form-group" style="width: 15%;">
+                                    <label for="gioitinh" class="text-black">Giới tính:</label>
+                                    <select name="txtGioitinh" class="form-control" id="gioitinh">
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">LƯU THÔNG TIN</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

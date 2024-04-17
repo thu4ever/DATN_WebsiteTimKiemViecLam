@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"> *@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="~/css/vdanhsachvieclam.css" rel="stylesheet" />
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
@@ -38,11 +39,11 @@
         <div class="col-sm-12 col-lg-12">
             <!-- Form tìm kiếm -->
             <form asp-controller="UngVien" asp-action="btnTimkiemViecLam" method="post">
-                <div style="height:70px;" class="row text-center">
-                    <div style="padding:5px;  width:200px" class="col-sm-2 col-lg-2">
+                <div style="height:70px; " class="row text-center">
+                    <div style="padding:5px;  width:210px" class="col-sm-2 col-lg-2">
                         <input class="form-control" name="txtTencongviec" placeholder="Tên công việc..." type="text" value="" />
                     </div>
-                    <div style="padding:5px; width:200px" class="col-sm-2 col-lg-2">
+                    <div style="padding:5px; width:210px" class="col-sm-2 col-lg-2">
                         <div class="input-group flex-nowrap">
                             <select class="form-select item-search" name="txtMucluong">
                                 <option value="0">Mức lương... </option>
@@ -53,10 +54,10 @@
                             </select>
                         </div>
                     </div>
-                    <div style="padding:5px; width:200px" class="col-sm-2 col-lg-2">
+                    <div style="padding:5px; width:210px" class="col-sm-2 col-lg-2">
                         <div class="input-group flex-nowrap">
                             <select class="form-select item-search" name="txtDiachi" aria-label="Default select example">
-                                <option value="">Địa chỉ...</option>
+                                <option value="">Địa chỉ</option>
                                 <option value="Hà Nội">Hà Nội</option>
                                 <option value="Hà Nam">Hà Nam</option>
                                 <option value="TP HCM">TP HCM</option>
@@ -124,10 +125,10 @@
                             </select>
                         </div>
                     </div>
-                    <div style="padding:5px; width:200px" class="col-sm-2 col-lg-2">
+                    <div style="padding:5px; width:210px" class="col-sm-2 col-lg-2">
                         <div class="input-group flex-nowrap">
                             <select class="form-select item-search" name="txtKinhnghiem">
-                                <option value="100">Kinh nghiệm... </option>
+                                <option value="100">Kinh nghiệm</option>
                                 <option value="1">dưới 1 năm </option>
                                 <option value="2">1-2 năm</option>
                                 <option value="3">Trên 3 năm </option>
@@ -135,10 +136,10 @@
                             </select>
                         </div>
                     </div>
-                    <div style="padding:5px; width:200px" class="col-sm-2 col-lg-2">
+                    <div style="padding:5px; width:210px" class="col-sm-2 col-lg-2">
                         <div class="input-group flex-nowrap">
                             <select class="form-select item-search" name="dThoigiandangtuyen">
-                                <option value="100">Ngày đăng tải... </option>
+                                <option value="100">Ngày đăng tải </option>
                                 <option value="1">Mới nhất </option>
                                 <option value="3">3 ngày trước</option>
                                 <option value="7">7 ngày trước </option>
@@ -146,8 +147,8 @@
                             </select>
                         </div>
                     </div>
-                    <div style="padding:5px;  width:200px" class="col-sm-2 col-lg-2">
-                        <button style="padding:5px; width:200px;background:#3D3BB2" type="submit" class="btn btn-primary">
+                    <div style="padding:5px;  width:210px" class="col-sm-2 col-lg-2">
+                        <button style="padding:5px; width:210px;background:#3D3BB2" type="submit" class="btn btn-primary">
                             <i class="fa-solid fa-magnifying-glass"></i>
                             Tìm kiếm
                         </button>
@@ -160,13 +161,13 @@
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div style=" z-index: 1; margin: 0 auto; margin-bottom: 10px; " class="carousel-item active">
-                <img style="width:1250px" src="~/images/t1 1100x220.jpg" />
+                <img style="width:100%" src="~/images/t1 1100x220.jpg" />
             </div>
             <div style="z-index: 1; margin: 0 auto; margin-bottom: 10px; width: 1300px" class="carousel-item">
-                <img style="width:1250px" src="~/images/banner_rtechno2103.jpg" />
+                <img style="width:100%" src="~/images/banner_rtechno2103.jpg" />
             </div>
             <div style="z-index: 1; margin: 0 auto; margin-bottom: 10px; width: 1300px" class="carousel-item">
-                <img style="width:1250px" src="~/images/wulkjy7b7tqwmnmrevqem1voislcfh3j_1710413484____4a70cafd01769805bf2f3939b325bacf.jpg" />
+                <img style="width:100%" src="~/images/wulkjy7b7tqwmnmrevqem1voislcfh3j_1710413484____4a70cafd01769805bf2f3939b325bacf.jpg" />
             </div>
         </div>
     </div>
@@ -182,12 +183,12 @@
         <div class="row text-center">
             @foreach (var item in Model)
             {
-                <a id="item" href="@Url.Action("btnHienthichitietvieclam", new {PkSMaBai=item.PkSMaBai})" class="card mb-3">
+                <a id="item" style="max-width: 430px !important;" href="@Url.Action("btnHienthichitietvieclam", new {PkSMaBai=item.PkSMaBai})" class="card mb-3">
                     <div class="row g-0">
-                        <div class="col-md-4">
+                        <div class="col-md-4" >
                             <img src="data:image/png;base64,@item.SLogo" alt="Hình ảnh" class="item-image card-img-top p-2" @* data-id="@item.PkSMaBai" *@>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8" >
                             <div class="card-body">
                                 <h5 style="color: #212f3f;font-size: 14px;font-weight: 600;line-height: 20px;" class="card-title text-lg-start ">
                                     @item.STenBai
@@ -232,7 +233,7 @@
                 @foreach (TblDoanhnghiep item in ViewBag.model1Data)
                 {
                     <div class="col-sm-3 col-lg-3">
-                        <div class="card" style="width: 18rem; height:250px; padding-left:20px; margin-bottom:20px;border:none">
+                        <div class="card" style="width: 20rem; height:250px; padding-left:20px; margin-bottom:20px;border:none">
                                 <img src="~/images/2-100x0.jpg" alt="Hình ảnh" class="card-img-top p-2">
                                 <a style="text-decoration:none;font-size: 12px;font-weight: 500;line-height: 16px;margin-top: 12px;width: 100%;" href="@Url.Action("btnHienthichitietDN","UngVien", new {FkSMaDn=item.PkSMaDn})" class="card-title ">@item.STenDn</a>
                         </div>
