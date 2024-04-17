@@ -3,6 +3,39 @@
 *@
 @{
 }
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function updateStatus() {
+        $.ajax({
+            url: '/Doanhnghiep/LoadStatus',
+            type: 'GET',
+            success: function (data) {
+                // Xử lý kết quả trả về nếu cần
+                $.ajax({
+                    url: '/Doanhnghiep/GetItemBaidang',
+                    type: 'GET',
+                    success: function (partialHtml) {
+                        $('#content').empty(); // Remove existing content before appending new content
+                        $('#content').append(partialHtml);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Đã xảy ra lỗi khi lấy partial view:", error);
+                    }
+                });
+                // Load lại trạng thái bài đăng sau khi cập nhật thành công
+            },
+            error: function (xhr, status, error) {
+                // Xử lý lỗi nếu có
+                console.error("Đã xảy ra lỗi khi cập nhật tình trạng bài đăng:", error);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        updateStatus();
+    });
+
+</script>
 <div>
 <form asp-controller="Doanhnghiep" asp-action="btnTimkiembaidang">
     <div style=" margin-left:250px;" class="row">
@@ -22,9 +55,10 @@
         Tạo mới
     </a>
 </div>
+<div id="content">
 @foreach (TblBaituyendung item in Model)
 {
-    <div class="card mb-3 text-black" style="max-width: 540px; margin-left:250px;margin-top:20px">
+    <div class=" card mb-3 text-black" style="max-width: 540px; margin-left:250px;margin-top:20px">
         <div class="row g-0">
             <div class="col-md-4">
                 <img class="img-fluid rounded-start" src="~/images/flat-color-icons_document.png" />
@@ -32,25 +66,24 @@
             <div class="col-md-5">
                 <div class="card-body">
                     <h5 class="card-title">@item.STenBai</h5>
-
                     @{
                         if (item.ITrangthai == 0)
                         {
-                            <p class="card-text">
-                                Chờ tuyển dụng
-                            </p>
+                                    <p class="card-text">
+                                        Chờ tuyển dụng
+                                    </p>
                         }
                         else if (item.ITrangthai == 1)
                         {
-                            <p class="card-text">
-                                Đang tuyển dụng
-                            </p>
+                                    <p class="card-text">
+                                        Đang tuyển dụng
+                                    </p>
                         }
-                        else
+                        else if(item.ITrangthai==2)
                         {
-                            <p class="card-text">
-                                Đã kết thúc
-                            </p>
+                                    <p class="card-text">
+                                        Đã kết thúc
+                                    </p>
                         }
                     }
                 </div>
@@ -64,4 +97,5 @@
         </div>
     </div>
     }
+    </div>
 </div>

@@ -1,8 +1,11 @@
 using DATN_WebsiteTimKiemViecLam.Models;
+using DATN_WebsiteTimKiemViecLam.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
+builder.Services.AddHttpClient();
+builder.Services.AddTransient<TakePictureFromPdf>();
 builder.Services.AddDbContext<db_WebsiteTimkiemvieclamContext>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();

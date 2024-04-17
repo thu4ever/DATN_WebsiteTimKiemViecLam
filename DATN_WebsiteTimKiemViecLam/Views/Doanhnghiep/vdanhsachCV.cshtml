@@ -1,0 +1,103 @@
+﻿@using DATN_WebsiteTimKiemViecLam.Service;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int stt = 0;
+    MaskEmail masker = new MaskEmail();
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+        function confirmDelete(PkFkSMaUngVien, PkFkSMaBai) {
+            if (confirm("Bạn có chắc chắn muốn từ chối CV không?")) {
+            MS_051 = "Từ chối CV thành công";
+            MS_052 = "Từ chối CV thất bại";
+                // Nếu người dùng chọn OK
+                $.ajax({
+                     url: '/DoanhNghiep/btnTuchoiCV?PkFkSMaUngVien=' + PkFkSMaUngVien + '&PkFkSMaBai=' + PkFkSMaBai, // Đường dẫn đến hàm Xoa trong controller
+                    type: 'DELETE', // Sử dụng phương thức DELETE
+                    success: function (result) {
+                    alert(MS_051); // Hiển thị thông báo khi xóa thành công
+                    location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                    alert(MS_052 + error); // Hiển thị thông báo khi xóa không thành công
+                    }
+                });
+            } else {
+                // Nếu người dùng chọn Cancel
+                alert("Đã hủy bỏ xóa!");
+            }
+        }
+    function sendEmail(PkFkSMaUngVien, PkFkSMaBai) {
+            $.ajax({
+            url: '/DoanhNghiep/btnGuiEmailchoungvien?PkFkSMaUngVien=' + PkFkSMaUngVien + '&PkFkSMaBai=' + PkFkSMaBai, // Đường dẫn đến hàm Xoa trong controller
+                type: 'GET', // Sử dụng phương thức DELETE
+                success: function (result) {
+                // location.reload();
+                $('#emailInfoModal').modal('show');
+                },
+                error: function (xhr, status, error) {
+                    alert(error); // Hiển thị thông báo khi xóa không thành công
+                }
+            });
+    }
+</script>
+<div style="color:black">
+    <span style="text-transform:uppercase" >DANH SÁCH CV ĐÃ ỨNG TUYỂN </span>
+    @if (ViewBag.PKsMabai!=null)
+    {
+        <span>Mã bài: @ViewBag.PKsMabai</span>
+    }
+    @foreach(vThongtinCVtheobaidang item in Model)
+{
+    <div>
+        @{stt=stt+1;}
+        <span>@stt</span>
+            <span>@masker.MaskaEmail( item.SEmail)</span>
+        <span>@item.DNgayGui.ToString("dd/mm/yyyy")</span>
+       
+            <a href="@item.sCV"> <img height="20px" width="20px" src="~/images/mdi_eye.png" /></a>
+            <a onclick="sendEmail(@item.PkFkSMaUngVien,@item.PkFkSMaBai)"> <img height="20px" width="20px" src="~/images/iconoir_security-pass.png" /></a>
+            <a onclick="confirmDelete(@item.PkFkSMaUngVien,@item.PkFkSMaBai)"> <img height="20px" width="20px" src="~/images/material-symbols-light_cancel-outline.png" /></a>
+                @if (@item.BTrangthai == null)
+                {
+                    <span class="trangthai">Chờ xét duyệt</span>
+                }
+                else if (@item.BTrangthai == false)
+                {
+                    <span class="trangthai"> Thất bại</span>
+                }
+                else
+                {
+                    <span class="trangthai"> Chờ phỏng vấn</span>
+                }
+    </div>
+}
+    <!-- Modal Thông tin email -->
+    <div class="modal fade" id="emailInfoModal" tabindex="-1" aria-labelledby="emailInfoModalLabel" aria-hidden="true" data-bs-delay="200000" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="emailInfoModalLabel">THÔNG TIN EMAIL</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="emailInfoForm" class="text-black">
+                        <div class="mb-3 text-start">
+                            <label for="txtTieude" class="form-label">Tiêu đề</label>
+                            <input name="txtTieude" type="text" class="form-control" id="txtTieude">
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="exampleFormControlTextarea1" class="form-label">Nội dung</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">GỬI</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
