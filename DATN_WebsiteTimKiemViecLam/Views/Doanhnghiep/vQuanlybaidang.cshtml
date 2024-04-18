@@ -38,11 +38,12 @@
 </script>
 <div>
 <form asp-controller="Doanhnghiep" asp-action="btnTimkiembaidang">
-    <div style=" margin-left:250px;" class="row">
-    <div style="padding:5px;  width:500px" class="col-sm-2 col-lg-2">
+    <div style=" margin-left:50px;" class="row">
+            <div class="col-sm-3 col-lg-3" style="padding-top:10px; color:#3D3BB2; font-weight: 700;"> DANH SÁCH BÀI ĐĂNG</div>
+    <div style="padding:5px;  width:500px" class="col-sm-3 col-lg-3">
         <input class="form-control" name="txtTencongviec" placeholder="Tên bài đăng..." type="text" value="" />
     </div>
-    <div style="padding:5px;  width:200px" class="col-sm-2 col-lg-2">
+    <div style="padding:5px;  width:200px" class="col-sm-3 col-lg-3">
         <button style="padding:5px; width:200px;background:#3D3BB2" type="submit" class="btn btn-primary">
             <i class="fa-solid fa-magnifying-glass"></i>
             Tìm kiếm
@@ -50,52 +51,53 @@
     </div>
     </div>
 </form>
-<div style="padding:5px;  width:80px; margin-left:250px;" class="col-sm-2 col-lg-2">
+<div style="padding:5px;  width:80px; margin-left:50px;" class="col-sm-2 col-lg-2">
     <a href="@Url.Action("btnThembaidang","Doanhnghiep")" style="padding:5px; width:200px;background:#3D3BB2" class="btn btn-primary">
         Tạo mới
     </a>
 </div>
-<div id="content">
-@foreach (TblBaituyendung item in Model)
-{
-    <div class=" card mb-3 text-black" style="max-width: 540px; margin-left:250px;margin-top:20px">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img class="img-fluid rounded-start" src="~/images/flat-color-icons_document.png" />
-            </div>
-            <div class="col-md-5">
-                <div class="card-body">
-                    <h5 class="card-title">@item.STenBai</h5>
-                    @{
-                        if (item.ITrangthai == 0)
-                        {
-                                    <p class="card-text">
-                                        Chờ tuyển dụng
-                                    </p>
-                        }
-                        else if (item.ITrangthai == 1)
-                        {
-                                    <p class="card-text">
-                                        Đang tuyển dụng
-                                    </p>
-                        }
-                        else if(item.ITrangthai==2)
-                        {
-                                    <p class="card-text">
-                                        Đã kết thúc
-                                    </p>
-                        }
-                    }
+    <div class="container" style="max-width: 2020px; padding-left: 2%;">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-3 text-black" style="height: 150px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img class="img-fluid rounded-start" src="~/images/flat-color-icons_document.png" />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@item.STenBai</h5>
+                                    @{
+                                        if (item.ITrangthai == 0)
+                                        {
+                                            <p class="card-text">Chờ tuyển dụng</p>
+                                        }
+                                        else if (item.ITrangthai == 1)
+                                        {
+                                            <p class="card-text">Đang tuyển dụng</p>
+                                        }
+                                        else if (item.ITrangthai == 2)
+                                        {
+                                            <p class="card-text">Đã kết thúc</p>
+                                        }
+                                    }
+                                    <div class="d-flex " style="padding-left:30%">
+                                        <a href="@Url.Action("btnTimkiemCVtheobaidang", new { PKsMabai = item.PkSMaBai })" class="me-3">
+                                            <img height="20px" width="20px" src="~/images/mdi_eye.png" />
+                                        </a>
+                                        <a href="@Url.Action("btnSuabaidang", new { PKsMabai = item.PkSMaBai })">
+                                            <img height="20px" width="20px" src="~/images/mdi_pencil.png" />
+                                        </a>
+                                    </div>
+                                    <h5 class="card-subtitle mt-2" style="font-size: 15px;">@item.DTgDangBai.ToString("MM/dd/yyyy")</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <a href="@Url.Action("btnTimkiemCVtheobaidang", new {PKsMabai=item.PkSMaBai})"> <img height="20px" width="20px" src="~/images/mdi_eye.png" /></a>
-                <a href="@Url.Action("btnSuabaidang", new {PKsMabai=item.PkSMaBai})">   <img height="20px" width="20px" src="~/images/mdi_pencil.png" /></a>
-                <div class="row"></div>
-                <h5 style="font-size:15px" class=" text-lg-center">@item.DTgDangBai.ToString("mm/dd/yyyyy")</h5>
-            </div>
+            }
         </div>
-    </div>
-    }
     </div>
 </div>

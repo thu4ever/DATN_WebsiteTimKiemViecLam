@@ -15,49 +15,61 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </script>
     <link href="~/css/style.css" rel="stylesheet" />
     <link href="~/css/font-awesome.css" rel="stylesheet" />
-    @* <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"> *@
-    <style>
-        .display_pass {
-            position: relative;
-        }
-
-            .display_pass img {
-                position: absolute;
-                right: 5px;
-                top: 50%;
-                transform: translateY(-50%);
-                cursor: pointer;
-            }
-    </style>
 </head>
 <body>
-    <div class="login-form w3_form">
-      @*   <div class="w3_title">
-            <img src="~/images/logo.jpg" />
-        </div> *@
-        <div class="">
-            <div style="text-align:left;width: 600px;margin:0 auto" class="w3l_grid">
-                <div style="margin:0 auto">
-                    <span style="color:red; margin-bottom:20px">(*)</span> <span class="text-black">Các thông tin bắt buộc</span>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="login-form">
+                    <div class="text-center mb-4">
+                        <span style="color:red;">(*)</span> <span class="text-black">Các thông tin bắt buộc</span>
+                    </div>
+                    <form class="w3l_grid" enctype="multipart/form-data" action="@Url.Action("EditInForCompany", "Taikhoan")" method="post">
+                        <div class="mb-3 row">
+                            <label for="tendoanhnghiep" class="col-sm-3 col-form-label text-black">Tên doanh nghiệp:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="tendoanhnghiep" name="tendoanhnghiep" placeholder="Ngân hàng TMCP Bảo Việt (BAOVIET Bank)">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="file" class="col-sm-3 col-form-label text-black">Logo:</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" id="file" name="file">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="mota" class="col-sm-3 col-form-label text-black">Mô tả:</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="mota" name="mota" rows="3" placeholder="Được thành lập theo giấy phép hoạt động số 328/GP-NHNN ngày 11/12/2008 của Thống đốc Ngân hàng Nhà ..."></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="diachi" class="col-sm-3 col-form-label text-black">Địa chỉ:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="diachi" name="diachi" placeholder="Nhật Tựu, Kim Bảng, Hà Nam">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="masothue" class="col-sm-3 col-form-label text-black">Mã số thuế:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="masothue" name="masothue" placeholder="034982934">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="sodienthoai" class="col-sm-3 col-form-label text-black">Số điện thoại:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="sodienthoai" name="sodienthoai" placeholder="0347382100">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary" style="background:#3D3BB2;">Lưu thông tin</button>
+                        </div>
+                    </form>
                 </div>
-                <form class="login-container" enctype="multipart/form-data" action="@Url.Action("EditInForCompany", "Taikhoan")" method="post">
-                    <span class="text-black">Tên doanh nghiệp: </span>
-                    <input class="form-control" name="tendoanhnghiep"  placeholder="Ngân hàng TMCP Bảo Việt (BAOVIET Bank)" /><br />
-                    <span class="item text-black">Logo:</span>
-                    <input name="file" type="file"/><br />
-                    <span class=" text-black ">Mô tả: </span>
-                    <textarea class="form-control" name="mota" type="text"  placeholder="Được thành lập theo giấy phép hoạt động số 328/GP-NHNN ngày 11/12/2008 của Thống đốc Ngân hàng Nhà ..."></textarea><br />
-                    <span class="text-black">Địa chỉ:</span>
-                    <input class="form-control" name="diachi"  placeholder="Nhật Tựu, Kim Bảng, Hà Nam" /><br />
-                    <span class="text-black">Mã số thuế:</span>
-                    <input class="form-control" name="masothue" placeholder="034982934" /><br />
-                    <span class="text-black">Số điện thoại:</span>
-                    <input class="form-control" name="sodienthoai" placeholder="0347382100" /><br />
-                    <input style="background:#3D3BB2" type="submit" value="Lưu thông tin">
-                </form>
             </div>
         </div>
     </div>
+
 </body>
 </html>
 
