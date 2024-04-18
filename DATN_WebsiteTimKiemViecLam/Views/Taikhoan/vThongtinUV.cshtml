@@ -3,9 +3,6 @@ Name:Nguyễn Thị Thu Hoài
 Date:07/03/2024
 Des: Created
 *@
-@{
-    Layout = null;
-}
 @model DATN_WebsiteTimKiemViecLam.Models.TblUngVien
 <!DOCTYPE html>
 <html>
@@ -15,12 +12,9 @@ Des: Created
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Elegant Login Form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript">
-    </script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/css/style.css" rel="stylesheet" />
     <link href="~/css/font-awesome.css" rel="stylesheet" />
-    @* <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"> *@
     <style>
         .login-container {
             text-align: left;
@@ -46,25 +40,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 cursor: pointer;
                 font-size: 16px;
             }
+
+        .form-group {
+            margin-bottom:20px;
+        }
+        label
+        {
+            margin-bottom:10px;
+        }
     </style>
 </head>
-<body>
+<body style="background:#F5FAFF">
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div style="background:#ffff" class="col-md-6 rounded-3">
                 <div class="login-form w3_form">
-                    <div class="login-title w3_title">
-                        <img style="max-width: 50% !important;" src="~/images/logo.jpg" />
-                    </div>
                     <div class="">
-                        <div style="text-align:left" class="w3l_grid">
+                        <div style="text-align: center;margin-bottom: 20px;" class="w3l_grid">
                             <div>
-                                <span style="color:red; margin-bottom:20px">(*)</span> <span class="text-black">Các thông tin bắt buộc</span>
+                                <span style="color:red; margin-bottom:20px">(*)</span> <span class="text-black fw-bold">Các thông tin bắt buộc</span>
                             </div>
                             <form enctype="multipart/form-data" class="login-container" action="btnChinhsuathongtinUV_Click" method="POST">
                                 <div class="form-group">
                                     <label for="txtHoten" class="text-black">Họ và tên:</label>
-                                    <input name="txtHoten" class="form-control" placeholder="Nguyễn Thị Thu Hoài" />
+                                    <input name="txtHoten" class="form-control" placeholder="@ViewBag.sHoten" />
                                 </div>
                                 <div class="form-group">
                                     <label for="fileAvatar" class="text-black">Ảnh đại diện:</label>
@@ -78,16 +77,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                                 <div class="form-group">
                                     <label for="txtSodienthoai" class="text-black">Số điện thoại:</label>
-                                    <input name="txtSodienthoai" class="form-control" placeholder="0347389920" />
+                                    <input name="txtSodienthoai" class="form-control" placeholder="@ViewBag.SSdt" />
                                 </div>
-                                <div class="form-group" style="width: 15%;">
+                                <div class="form-group" >
                                     <label for="gioitinh" class="text-black">Giới tính:</label>
-                                    <select name="txtGioitinh" class="form-control" id="gioitinh">
-                                        <option value="Nam">Nam</option>
+                                    <select style="width: 30%;height: 50px;" name="txtGioitinh" class="form-control" id="gioitinh">
+                                        <option value="Nam" >Nam</option>
                                         <option value="Nữ">Nữ</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary">LƯU THÔNG TIN</button>
+                                <button style="    width: 100%;   padding: 10px;   font-size: 18px;   font-family: system-ui;  background: #003493;" type="submit" class="btn btn-primary">
+                                    LƯU THÔNG TIN
+                                </button>
                             </form>
                         </div>
                     </div>

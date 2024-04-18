@@ -1,6 +1,6 @@
 ﻿/* Font cho toàn bộ nội dung */
 body {
-    font-family: 'Times New Roman', Times, serif;
+   font-family: system-ui !important;
 }
 
 /* Kiểu cho phần header */

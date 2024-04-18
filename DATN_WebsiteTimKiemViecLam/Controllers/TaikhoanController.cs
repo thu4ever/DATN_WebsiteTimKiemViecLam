@@ -167,6 +167,8 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         public ActionResult btnChinhsuathongtinUV_Click()
         {
             TblUngVien check = _context.TblUngViens.Where(p => p.FkSEmail == HttpContext.Session.GetString("PK_sEmail")).FirstOrDefault();
+            ViewBag.sHoten = check.SHoTen;
+            ViewBag.SSdt = check.SSdt;
                 return View("vThongtinUV");  
         }
         [HttpPost]

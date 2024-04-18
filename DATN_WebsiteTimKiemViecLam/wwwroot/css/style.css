@@ -33,7 +33,7 @@ img {
 html, body {
     font-size: 100%;
     /*font-family: Inter, sans-serif;*/
-    font-family: Inter, sans-serif;
+    font-family: system-ui;
     /*background:url(../Images/background-xanh-duong-dep.jpg) no-repeat 0px 0px;*/
     background-size: cover;
     background-attachment: fixed;
@@ -255,24 +255,23 @@ body a:hover,body a{
 }
 .login-container input[type="submit"] {
     width: 100%;
-    background-color:#ef4d4d;
+    background-color: #003493;
     color: white;
     padding: 12px 20px;
-   
     border: none;
-	font-size:14px;
-	letter-spacing:1px;
+    font-size: 14px;
+    letter-spacing: 1px;
     cursor: pointer;
-	outline:none;
-	transition: .5s ease-in;
+    outline: none;
+    transition: .5s ease-in;
     -webkit-transition: .5s ease-in;
     -ms-transition: .5s ease-in;
     -o-transition: .5s ease-in;
-    -moz-transition:.5s ease-in;
+    -moz-transition: .5s ease-in;
 }
 
 input[type=submit]:hover {
-    background-color:rgba(51, 181, 229, 0.62);
+    background-color: #ef4d4d;
 }
 
 

@@ -36,15 +36,15 @@
      }
     </style>
 </head>
-<body style="Background:#F5FAFF; font-family: Inter, sans-serif; font-style: normal;background:#F5FAFF">
-    <div style="color:black;  " class="container rounded">
+<body style="background:#F5FAFF; font-family:Tahoma;">
+    <div style="color:black; background:#FFFF; " class="container">
         <div class="row">
             <div style="color:#003493" class="col-12 col-sm-12 col-lg-12 fs-2">
                 <h3 style="padding: 2%;text-transform:uppercase;font-weight:600">@Model.STenBai</h3>
             </div>
         </div>
-        <div style="Background:#ffff;border-radius:5px; padding:3%" class="row">
-            <div class="col-12 col-sm-12 col-lg-8">
+        <div style=" border-radius:15px; padding:3%" class="row">
+            <div style="" class="col-12 col-sm-12 col-lg-8">
                 <div class="row">
                     <div class="col-4 col-sm-4 col-lg-4">
                         <div class="salary">
@@ -52,7 +52,7 @@
                                 <div class="col-3 col-sm-3 col-lg-3">
                                     <i class="fa-solid fa-wallet" style="font-size: 30px; color: #0a58ca; width: 110px;padding-top: 20%; "></i>
                                 </div>
-                                <div class="col-9 col-sm-9 col-lg-9 fs-6" style=" margin: inherit; padding-top: 3%;  text-align: center;   line-height: 20px;">
+                                <div class="col-9 col-sm-9 col-lg-9 " style="  margin: inherit; padding-top: 3%;  text-align: center;   line-height: 20px;">
                                     <b>Mức lương</b>
                                     <p>@Model.FMucluongtoida</p>
                                 </div>
@@ -96,22 +96,22 @@
                 <div class="row">
                     <div class="col-12 col-sm-12 col-lg-12">
                         <p class="text-lg-start">
-                            <label class="fw-bold text-lg-start fs-5" for="">Số lượng: </label>
+                            <label style="font-size:15px;" class="fw-bold text-lg-start fs-5" for="">Số lượng: </label>
                             @Model.ISoLuong <span>ứng viên</span>
                         </p>
                         <p class="text-lg-start">
                             <label class="fw-bold" for="">Yêu cầu: </label>
-                            <ul style="text-align: justify">
+                            <ul style="font-size:16px;text-align: justify">
                                 @Html.Raw(Model.SYeuCau)
                             </ul>
                         </p>
                         <p class="text-lg-start">
                             <label class="fw-bold " for="">Quyền lợi: </label>
-                            <ul style="text-align: justify">
+                            <ul style="font-size:16px;text-align: justify">
                                 @Html.Raw(Model.SQuyenLoi)  
                             </ul>
                         </p>
-                        <p class="text-lg-start">
+                        <p style="font-size:15px;" class="text-lg-start">
                             <label class="fw-bold text-lg-start" for="">Thời gian đăng tải: </label>
                             @Model.DTgDangBai.Value.ToShortDateString()
                         </p>

@@ -24,7 +24,7 @@
     
     @if (fkSMaQuyen == 1)
     {
-        <header>
+        <header style="background:#003493">
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm text-white border-bottom box-shadow mb-3">
                 <div class="container-fluid" >
                     <img style="margin-right: 15px; " class="logo" src="~/images/logo.jpg" />
@@ -63,6 +63,7 @@
     }
     else if (fkSMaQuyen == 2)
     {
+        <div style="background:#003493">
         <div class="container-fluid">
             <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
             <a style="margin-top: 20px; margin-bottom: 2%;" class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
@@ -102,9 +103,11 @@
             </div>
 
         </div>
+        </div>
     }
     else if (fkSMaQuyen==4)
     {
+        <div style="background:#003493">
         <div class="container-fluid">
             <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
             <a style="margin-top: 20px;" class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
@@ -118,10 +121,11 @@
             <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click" style="color:#003493"><i class="fas fa-pencil i-mt-khu2"></i>Đổi mật khẩu </a>
             <a asp-controller="Taikhoan" asp-action="btnDangxuat" style="color:#003493"><i class="fas fa-location-arrow ng-xut2"></i> Đăng xuất</a>
         </div>
+        </div>
     }
     else
     {
-        <header>
+        <header style="background:#003493">
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm text-white border-bottom box-shadow mb-3">
                 <div class="container-fluid">
                     <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
@@ -147,19 +151,19 @@
         </main>
     </div>
 
-    <footer class="footer text-muted" style="background-color: #f8f9fa; bottom: 0; width: 100%; height: 150px;">
+    <footer class="footer text-muted" style="background-color: #003493; bottom: 0; width: 100%; height: 150px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
-                    <a style="margin-top: 10px; color: #003493;" class="navbar-brand text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
+                    <a style="margin-top: 10px; color: #f8f9fa;" class="navbar-brand text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
                 </div>
-                <div class="col-md-4" style="color: #084298;  margin-top: 10px;   text-align: start;   font-size: 15px;    line-height: 20px;">
+                <div class="col-md-4" style="color: #f8f9fa;  margin-top: 10px;   text-align: start;   font-size: 15px;    line-height: 20px;">
                     <b>Liên hệ</b>
                     <div>Hotline: <b>(024) 6680 5588</b> (Giờ hành chính)</div>
                     <div>Email: <b>hotro@freework.vn</b></div>
                 </div>
-                <div class="col-md-4" style="color: #084298;  margin-top: 10px;   text-align: start;   font-size: 15px;    line-height: 20px;">
+                <div class="col-md-4" style="color: #f8f9fa;  margin-top: 10px;   text-align: start;   font-size: 15px;    line-height: 20px;">
                     <b>Cộng đồng FreeWork</b>
                     <div style="font-size: 20px;">
                         <i class="fab fa-youtube" style="margin-right: 10px;"></i>
