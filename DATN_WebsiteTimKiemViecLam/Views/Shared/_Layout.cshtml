@@ -66,18 +66,41 @@
         <div class="container-fluid">
             <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
             <a style="margin-top: 20px; margin-bottom: 2%;" class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-               @* <div style="margin-left: 550px;" class=" navbar-brand text-white text-bar ">@PK_sEmail</div>*@
-                <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" src="data:image/png;base64,@avatar" />
-            </div>
+           
         </div>
 
         <div style="position: absolute" class="custom-vertical-menu-dn">
-            <a asp-controller="Doanhnghiep" asp-action="hienthidanhsachbaidang" style="color:#003493" class="active"><i class="fas fa-home"></i> Quản lý bài đăng </a>
-            <a asp-controller="Taikhoan" asp-action="EditInForCompany" style="color:#003493" ><i class="fas fa-user"></i> Chỉnh sửa thông tin</a>
-            <a asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click" style="color:#003493" ><i class="fas fa-cog chnh-sa-thng2"></i> Xác thực thông tin</a>
-            <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click" style="color:#003493" ><i class="fas fa-pencil i-mt-khu2"></i>Đổi mật khẩu </a>
-            <a asp-controller="Taikhoan" asp-action="btnDangxuat" style="color:#003493" ><i class="fas fa-location-arrow ng-xut2"></i> Đăng xuất</a>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                @* <div style="margin-left: 550px;" class=" navbar-brand text-white text-bar ">@PK_sEmail</div>*@
+                <img style="height: 50px;width: 50px; border: 1px solid #ccc;margin: 10px;border-radius: 90%;" src="data:image/png;base64,@avatar" />
+            </div>
+            <div style="position: absolute" class="custom-vertical-menu-dn">
+                <a asp-controller="Doanhnghiep" asp-action="hienthidanhsachbaidang" style="color:#302F2F; text-decoration: none; display: block;">
+                    <i class="fas fa-home" style="font-size: 20px; margin-right: 5px;"></i>
+                    <span style="font-weight: bold;">Quản lý bài đăng</span>
+                </a>
+                <br>
+                <a asp-controller="Taikhoan" asp-action="EditInForCompany" style="color:#302F2F; text-decoration: none; display: block;">
+                    <i class="fas fa-user" style="font-size: 20px; margin-right: 5px;"></i>
+                    <span style="font-weight: bold;">Chỉnh sửa thông tin</span>
+                </a>
+                <br>
+                <a asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click" style="color:#302F2F; text-decoration: none; display: block;">
+                    <i class="fas fa-cog chnh-sa-thng2" style="font-size: 20px; margin-right: 5px;"></i>
+                    <span style="font-weight: bold;">Xác thực thông tin</span>
+                </a>
+                <br>
+                <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click" style="color:#302F2F; text-decoration: none; display: block;">
+                    <i class="fas fa-pencil i-mt-khu2" style="font-size: 20px; margin-right: 5px;"></i>
+                    <span style="font-weight: bold;">Đổi mật khẩu</span>
+                </a>
+                <br>
+                <a asp-controller="Taikhoan" asp-action="btnDangxuat" style="color:#302F2F; text-decoration: none; display: block;">
+                    <i class="fas fa-location-arrow ng-xut2" style="font-size: 20px; margin-right: 5px;"></i>
+                    <span style="font-weight: bold;">Đăng xuất</span>
+                </a>
+            </div>
+
         </div>
     }
     else if (fkSMaQuyen==4)

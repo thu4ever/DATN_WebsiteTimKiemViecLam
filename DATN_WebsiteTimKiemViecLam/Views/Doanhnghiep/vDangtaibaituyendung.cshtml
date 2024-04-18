@@ -69,40 +69,86 @@
 
 <link href="~/css/font-awesome.css" rel="stylesheet" />
 <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-@if (Model.ISoLuong != 0)
-{
-    <div id="btn_container">
-        <a href="@Url.Action("btnTimkiemCVtheobaidang", "Doanhnghiep", new { PkSMaBai = Model.PkSMaBai })" type="button"> Xem CV đã ứng tuyển</a>
-        <a onclick="confirmDelete(@Model.PkSMaBai)">Xóa</a>
-        @if(Model.ITrangthai==2)
-        {
-           <a type="button" href="@Url.Action("btnDanglaibaidang", "Doanhnghiep", new { PkSMaBai = Model.PkSMaBai })">Đăng tải lại</a>
+<style>
+    #content_container {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .item {
+        margin-bottom: 20px;
+        text-align:left;
+    }
+        .item .yeucau textarea,
+        .item .quyenloi textarea {
+            height: 170px; 
         }
-        @if(Model.ITrangthai==1)
-        {
-            <a onclick="CanclePost(@Model.PkSMaBai)">Kết thúc</a>
-        }
-    </div>
-}
-<form class="text-black" id="content_container" action="@Url.Action("btnThembaidang", "Doanhnghiep")" method="post">
+
+    .item span {
+        display: block;
+        width: 150px;
+        font-weight: bold;
+    }
+
+    .item input[type="button"], .item input[type="submit"] {
+        background-color: #3D3BB2;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 5px;
+    }
+
+    .mucluong span, .item span {
+        vertical-align: top;
+    }
+    .mucluong{
+        text-align:left;
+        margin-bottom:15px;
+    }
+    .mucluong input[type="text"] {
+        width: 100px;
+    }
+
+    .item input[type="datetime-local"], .item textarea, .item input[type="text"] {
+        width: 600px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+    }
+    .btn-primary:hover {
+        background-color: #007bff !important;
+    }
+    .btn-primary{
+        display:block!important;
+    }
+</style>
+
+<div style="display:flex;">
+<form class="text-black" style="margin-top:10px;" id="content_container" action="@Url.Action("btnThembaidang", "Doanhnghiep")" method="post">
     <div class="item">
         <span>Tên bài đăng</span>
         @Html.TextBoxFor(model=>model.STenBai)
      </div>
-    <div class="item">
+    <div class="item" style="height: 100px;">
         <span>Mô tả</span>
         @Html.TextAreaFor(model=>model.SMoTa)
 
     </div>
-    <div class="item">
+    <div class="item yeucau">
         <span>Yêu cầu</span>
         @Html.TextAreaFor(model=>model.SYeuCau)
     </div>
-    <div class="item">
+    <div class="item yeucau" >
         <span>Quyền Lợi</span>
         @Html.TextAreaFor(model=>model.SQuyenLoi)
     </div>
-    <div class="item">
+    <div class="mucluong">
         <span>Số lượng</span>
         <input onclick="Tang('soluong')" type="button" value="+" />
         @Html.TextBoxFor(model=>model.ISoLuong,Model.ISoLuong.ToString(), new { @class = "soluong" })
@@ -124,7 +170,7 @@
         <input onclick="Giam('sMucluongtoida')" type="button" value="-" />
 
     </div>
-    <div class="item">
+    <div class="mucluong">
         <span>Kinh nghiệm</span>
         <input onclick="Tang('FNamKinhNghiem')" type="button" value="+" />
         @Html.TextBoxFor(model=>model.FNamKinhNghiem, new { @class = "FNamKinhNghiem" })
@@ -138,8 +184,32 @@
         <span>Thời gian đăng bài </span>
         @Html.TextBoxFor(model=>model.DTgTuyenDung, new { @type = "datetime" })
     </div>
-    <input type="submit" value="LƯU" />
+    <input type="submit" class="btn btn-primary" value="LƯU" />
 </form>
+@if (Model.ISoLuong != 0)
+{
+    <div id="btn_container">
+            <div class="mb-3">
+                <a href="@Url.Action("btnTimkiemCVtheobaidang", "Doanhnghiep", new { PkSMaBai = Model.PkSMaBai })" type="button" class="btn btn-primary p-3 text-white">Xem CV đã ứng tuyển</a>
+            </div>
+            <div class="mb-3">
+                <a onclick="confirmDelete(@Model.PkSMaBai)" class="btn btn-primary p-3 text-white">Xóa</a>
+            </div>
+            @if (Model.ITrangthai == 2)
+            {
+                <div class="mb-3">
+                    <a type="button" href="@Url.Action("btnDanglaibaidang", "Doanhnghiep", new { PkSMaBai = Model.PkSMaBai })" class="btn btn-primary p-3 text-white">Đăng tải lại</a>
+                </div>
+            }
+            @if (Model.ITrangthai == 1)
+            {
+                <div class="mb-3">
+                    <a onclick="CanclePost(@Model.PkSMaBai)" class="btn btn-primary p-3 text-white">Kết thúc</a>
+                </div>
+            }
+    </div>
+}
+</div>
 <script>
     function Tang(massger) {
         var countElement = document.getElementsByClassName(massger)[0]; // Lấy phần tử đầu tiên với lớp là "soluong"
