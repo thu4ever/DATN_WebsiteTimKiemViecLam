@@ -190,7 +190,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         }
         public async Task<IActionResult> ChitietCVungvien(long PkFkSMaUngVien, long PkFkSMaBai)
         {
-            TblThongTinUngTuyen ChitietCVungvien = _context.TblThongTinUngTuyens.Where(p => p.PkFkSMaBai == PkFkSMaBai && p.PkFkSMaUngVien == PkFkSMaUngVien).FirstOrDefault();
+            TblThongTinUngTuyen ChitietCVungvien =_context.TblThongTinUngTuyens.Where(p => p.PkFkSMaBai == PkFkSMaBai && p.PkFkSMaUngVien == PkFkSMaUngVien).FirstOrDefault();
            
 
             // Đưa base64Image vào ViewBag hoặc ViewModel để hiển thị trong view
