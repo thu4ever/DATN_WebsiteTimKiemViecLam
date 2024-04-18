@@ -19,11 +19,10 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         {
             _context = context;
         }
-
         public ActionResult Login()
         {
            // return RedirectToAction("HomePage", "BaiUngTuyen");
-            return View();
+            return View("Login");
         }
         [HttpPost]
         public ActionResult Login(String Email, String Matkhau)

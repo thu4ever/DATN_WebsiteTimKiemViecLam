@@ -138,7 +138,8 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                           SLogo = doanhNghiep.SLogo,
                           sTendoanhnghiep = doanhNghiep.STenDn,
                           sDiachi = baiTuyenDung.SDiachicuthe,
-                          FMucLuong = baiTuyenDung.FMucLuongtoithieu
+                          FMucLuong = baiTuyenDung.FMucLuongtoithieu,
+                          FMucLuongTD=baiTuyenDung.FMucluongtoida
                       }).ToList();
             ViewBag.TotalPages = Math.Ceiling((double)result.Count / pageSize);
             ViewBag.CurrentPage = pageNumber;

@@ -1,5 +1,8 @@
 ﻿@using X.PagedList.Mvc.Core;
 @model X.PagedList.IPagedList< DATN_WebsiteTimKiemViecLam.Models.vDanhsachvieclam>
+@{
+    int img = 10;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,18 +26,70 @@
             padding: 12px;
             position: relative;
         }
-
-            /* Hiệu ứng hover cho mục */
-            #item:hover {
+        /* Hiệu ứng hover cho mục */
+        #item:hover {
                 background: #eef3ec;
                 border-color: #0d6aa5; /* Màu xanh lam */
             }
+        #link_dn
+        {
+            color: #6f7882;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+        }
+
+        #link_dn:hover
+        {
+            color: #F56444;
+        }
+        #nameDN
+        {
+           text-transform: uppercase; 
+           color: black; 
+           text-decoration: none; 
+           font-size: 12px; 
+           font-weight: 500; 
+           line-height: 16px; 
+           margin-top: 12px;
+        }
+         .itemdn
+         {
+            width: 100% !important;
+            height: 250px;
+            margin-bottom: 20px;
+            border: none;
+         }
+
+        .itemdn:hover {
+                border: 0.5px solid rgba(97,196,220,255);
+                box-shadow: 0 0 5px rgba(97,196,220,255);
+        }
+        #nameDN:hover{
+            color: #F56444;
+        }
     </style>
+    <script>
+        function DetailsPost(PkSMaBai) {
+            $.ajax({
+                url: '/UngVien/btnHienthichitietvieclam?PkSMaBai=' + PkSMaBai, // Đường dẫn đến hàm Xoa trong controller
+                type: 'GET', // Sử dụng phương thức DELETE
+                success: function (result) {
+                    $("body").html(result)
+                    // location.reload();
+                },
+                error: function (xhr, status, error) {
+                    alert(error); // Hiển thị thông báo khi xóa không thành công
+                }
+            });
+        }
+    </script>
 </head>
 <body style="font-family: Inter, sans-serif; font-style: normal;">
-    <h3 style="color: #3D3BB2; font-size: 20px;    font-weight: 700;    line-height: 28px;    margin: 0 auto 6px;   width: 97%;" class="text-center">
+    <h6 style="text-transform:uppercase; color: #003493; font-size: 30px;font-weight: 700;line-height: 28px;margin: 0 auto 20px;width: 97%;" class="text-center">
         Chào mừng bạn đến với trang tìm kiếm việc làm FreeWork
-    </h3>
+    </h6>
     <div style="margin: 0 auto" class="row justify-content-center">
         <div class="col-sm-12 col-lg-12">
             <!-- Form tìm kiếm -->
@@ -46,7 +101,7 @@
                     <div style="padding:5px; width:210px" class="col-sm-2 col-lg-2">
                         <div class="input-group flex-nowrap">
                             <select class="form-select item-search" name="txtMucluong">
-                                <option value="0">Mức lương... </option>
+                                <option value="0">Mức lương </option>
                                 <option value="3000000">trên 3 triệu </option>
                                 <option value="6000000">trên 6 triệu</option>
                                 <option value="10000000">trên 10 triệu</option>
@@ -148,7 +203,7 @@
                         </div>
                     </div>
                     <div style="padding:5px;  width:210px" class="col-sm-2 col-lg-2">
-                        <button style="padding:5px; width:210px;background:#3D3BB2" type="submit" class="btn btn-primary">
+                        <button style="padding:5px; width:210px;background:#003493" type="submit" class="btn btn-primary">
                             <i class="fa-solid fa-magnifying-glass"></i>
                             Tìm kiếm
                         </button>
@@ -159,17 +214,25 @@
     </div>
     <!-- Bootstrap Carousel -->
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" @* aria-hidden="true" *@></span>
+            <span class="sr-only">Next</span>
+        </a>
         <div class="carousel-inner">
             <div style=" z-index: 1; margin: 0 auto; margin-bottom: 10px; " class="carousel-item active">
-                <img style="width:100%" src="~/images/t1 1100x220.jpg" />
+                <img style="width:100%" src="~/images/2.jpg" />
             </div>
             <div style="z-index: 1; margin: 0 auto; margin-bottom: 10px; width: 1300px" class="carousel-item">
-                <img style="width:100%" src="~/images/banner_rtechno2103.jpg" />
+                <img style="width:100%" src="~/images/1.jpg" />
             </div>
             <div style="z-index: 1; margin: 0 auto; margin-bottom: 10px; width: 1300px" class="carousel-item">
-                <img style="width:100%" src="~/images/wulkjy7b7tqwmnmrevqem1voislcfh3j_1710413484____4a70cafd01769805bf2f3939b325bacf.jpg" />
+                <img style="width:100%" src="~/images/3.jpg" />
             </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" @* aria-hidden="true" *@></span>
+            <span class="sr-only">Previous</span>
+        </a>
     </div>
     <!-- Kết thúc Bootstrap Carousel -->
 
@@ -177,23 +240,23 @@
 
     <!-- Danh sách việc làm -->
     <div class="content1" style="color:black;margin: 0 auto">
-        <h5 style="font-weight: 700; margin-bottom: 0; margin-right: auto; margin-top: 0;color:#3D3BB2" class="fs-3 fw-bold d-flex flex-nowrap">
-            Công việc top đầu
+        <h5 style="font-weight: 700; margin-bottom: 10px; margin-right: auto; margin-top: 10px;color:#003493" class="fs-3 fw-bold d-flex flex-nowrap">
+            Công việc tốt nhất
         </h5>
         <div class="row text-center">
             @foreach (var item in Model)
             {
-                <a id="item" style="max-width: 430px !important;" href="@Url.Action("btnHienthichitietvieclam", new {PkSMaBai=item.PkSMaBai})" class="card mb-3">
+                <div onclick="DetailsPost(@item.PkSMaBai)" id="item" style="max-width: 430px !important;" href="@Url.Action("btnHienthichitietvieclam", new {PkSMaBai=item.PkSMaBai})" class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4" >
                             <img src="data:image/png;base64,@item.SLogo" alt="Hình ảnh" class="item-image card-img-top p-2" @* data-id="@item.PkSMaBai" *@>
                         </div>
                         <div class="col-md-8" >
                             <div class="card-body">
-                                <h5 style="color: #212f3f;font-size: 14px;font-weight: 600;line-height: 20px;" class="card-title text-lg-start ">
+                                <h5 style="color: #212f3f;font-size: 20px;font-weight: 600;line-height: 20px;" class="card-title text-lg-start ">
                                     @item.STenBai
                                 </h5>
-                                <p style="color: #6f7882;font-size: 12px;font-weight: 500;line-height: 16px;" class="card-text text-lg-start">@item.sTendoanhnghiep</p>
+                                <a id="link_dn" href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=item.FkSMaDn})"  class="card-text text-lg-start">@item.sTendoanhnghiep</a>
                                 <p class="card-text">
                                     <small style="font-size:13px;margin-right:20px;background:#f4f5f5;padding:10px;color:#212f3f " class=" rounded">@item.FMucLuong-@item.FMucLuongTD Triệu</small>
                                     <small style="font-size:13px; background:#f4f5f5;padding:10px;color:#212f3f" class=" rounded">@item.sDiachi</small>
@@ -201,7 +264,7 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             }
             <!-- Phân trang -->
             <nav aria-label="Page navigation">
@@ -227,25 +290,99 @@
                 </ul>
             </nav>
         </div>
-        <h5 style="font-weight: 700; margin-bottom: 0; margin-right: auto; margin-top: 0;color:#3D3BB2" class="fs-3 fw-bold d-flex flex-nowrap">Doanh nghiệp top đầu</h5>
+    </div>
         <div class="content2">
-            <div class="row text-center">
-                @foreach (TblDoanhnghiep item in ViewBag.model1Data)
-                {
-                    <div class="col-sm-3 col-lg-3">
-                        <div class="card" style="width: 20rem; height:250px; padding-left:20px; margin-bottom:20px;border:none">
-                                <img src="~/images/2-100x0.jpg" alt="Hình ảnh" class="card-img-top p-2">
-                                <a style="text-decoration:none;font-size: 12px;font-weight: 500;line-height: 16px;margin-top: 12px;width: 100%;" href="@Url.Action("btnHienthichitietDN","UngVien", new {FkSMaDn=item.PkSMaDn})" class="card-title ">@item.STenDn</a>
+        <h5 style="font-weight: 700; margin-bottom: 10px; margin-right: auto; margin-top: 10px;color:#003493" class="fs-3 fw-bold d-flex flex-nowrap">Doanh nghiệp top đầu</h5>
+        <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
+            <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" @* aria-hidden="true" *@></span>
+                <span class="sr-only">Next</span>
+            </a>
+            <div class="carousel-inner">
+                    @for (var i = 0; i < ViewBag.model1Data.Count; i += 4)
+                    {
+                    @if (i == 0)
+                    {
+                        <div style="width:100%; z-index: 1; margin: 0 auto; margin-bottom: 10px; " class="carousel-item active">
+                            <div class="row">
+                                @for (var j = i; j < i + 4 && j < ViewBag.model1Data.Count; j++)
+                                {
+                                    String name = img.ToString() + ".jpg";
+                                    TblDoanhnghiep item = ViewBag.model1Data[j];
+                                     <div class="col-sm-3">
+                                        <a style="text-transform: uppercase; color: black; text-decoration: none; font-size: 12px; font-weight: 500; line-height: 16px;" href="@Url.Action("btnHienthichitietDN", "UngVien", new { FkSMaDn = item.PkSMaDn })">
+                                            <div class="itemdn card" >
+                                                <img height=180px src="~/images/@name" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <span id="nameDN"  class="card-title">@item.STenDn</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        @{
+                                            img = img + 1;
+                                        }
+                              </div>
+                                 
+                                }
+                            </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <div style="width:100%; z-index: 1; margin: 0 auto; margin-bottom: 10px; " class="carousel-item">
+                            <div class="row">
+                                @for (var j = i-3; j < i + 1 && j < ViewBag.model1Data.Count; j++)
+                                {
+                                    String name = img.ToString() + ".jpg";
+
+                                    TblDoanhnghiep item = ViewBag.model1Data[j];
+                                    <div class="col-sm-3">
+                                        <a style="text-transform: uppercase; color: black; text-decoration: none; font-size: 12px; font-weight: 500; line-height: 16px;" href="@Url.Action("btnHienthichitietDN", "UngVien", new { FkSMaDn = item.PkSMaDn })">
+                                            <div class="itemdn card">
+                                                <img height=180px src="~/images/@name" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <span id="nameDN" class="card-title">@item.STenDn</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        @{
+                                            img = img + 1;
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
                 }
             </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+           
         </div>
-    </div>
+
+            </div>
+@* 
+                @foreach (TblDoanhnghiep item in ViewBag.model1Data)
+                {
+                    <a style=" text-transform:uppercase; color:black; text-decoration:none;font-size: 12px;font-weight: 500;line-height: 16px;" class="col-sm-3 col-lg-3" href="@Url.Action("btnHienthichitietDN","UngVien", new {FkSMaDn=item.PkSMaDn})">
+                        <div class="card" style="width: 18rem; height:250px; margin-bottom:20px;border:none">
+                            <img src="~/images/2-100x0.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                                <span id="nameDN" style=" text-transform:uppercase; color:black; text-decoration:none;font-size: 12px;font-weight: 500;line-height: 16px;margin-top: 12px;width: 100%;"  class="card-title">@item.STenDn</span>
+                        </div>
+                         </div>
+                    </a>
+                } 
+            </div>
+    </div>*@
+   
     <script>
         // Khởi tạo carousel khi tài liệu đã tải hoàn tất
         $(document).ready(function () {
             $('#carouselExampleIndicators').carousel();
+            $('#carouselExampleIndicators1').carousel();
         });
     </script>
 </body>

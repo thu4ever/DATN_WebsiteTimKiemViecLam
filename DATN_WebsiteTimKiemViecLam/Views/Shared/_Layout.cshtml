@@ -18,9 +18,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DATN_WebsiteTimKiemViecLam.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Thêm Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
-
 <body>
     
     @if (fkSMaQuyen == 1)
@@ -42,17 +41,17 @@
                         <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" onmousemove="hienthimenu()" onmousewheel="anmenu()" src="data:image/png;base64,@avatar" />
                     </div>
                 </div>
-                <div style="z-index: 2; border: 1px solid #ccc; border-radius: 5px; padding: 10px;" id="hienthimenu" class="custom-vertical-menu">
-                    <a style="display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click">
+                <div style="z-index: 2; border: 0.5px solid #ccc; border-radius: 5px;" id="hienthimenu" class="custom-vertical-menu">
+                    <a style="    height: 50px;font-size: 14px;display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click">
                         <i class="fas fa-user" style="margin-right: 5px;"></i> Sửa thông tin cá nhân
                     </a>
-                    <a style="display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="UngVien" asp-action="btnHienthidanhsachcv">
+                    <a style="height: 50px;font-size: 14px;display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="UngVien" asp-action="btnHienthidanhsachcv">
                         <i class="fas fa-file-alt" style="margin-right: 5px;"></i> Xem CV đã ứng tuyển
                     </a>
-                    <a style="display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click">
+                    <a style="height: 50px;font-size: 14px;display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click">
                         <i class="fas fa-key" style="margin-right: 5px;"></i> Đổi mật khẩu
                     </a>
-                    <a style="display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="Taikhoan" asp-action="btnDangxuat">
+                    <a style="height: 50px;font-size: 14px;display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="Taikhoan" asp-action="btnDangxuat">
                         <i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> Đăng xuất
                     </a>
                 </div>
@@ -74,11 +73,11 @@
         </div>
 
         <div style="position: absolute" class="custom-vertical-menu-dn">
-            <a asp-controller="Doanhnghiep" asp-action="hienthidanhsachbaidang" style="color:#3D3BB2" class="active"><i class="fas fa-home"></i> Quản lý bài đăng </a>
-            <a asp-controller="Taikhoan" asp-action="EditInForCompany" style="color:#3D3BB2" ><i class="fas fa-user"></i> Chỉnh sửa thông tin</a>
-            <a asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click" style="color:#3D3BB2" ><i class="fas fa-cog chnh-sa-thng2"></i> Xác thực thông tin</a>
-            <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click" style="color:#3D3BB2" ><i class="fas fa-pencil i-mt-khu2"></i>Đổi mật khẩu </a>
-            <a asp-controller="Taikhoan" asp-action="btnDangxuat" style="color:#3D3BB2" ><i class="fas fa-location-arrow ng-xut2"></i> Đăng xuất</a>
+            <a asp-controller="Doanhnghiep" asp-action="hienthidanhsachbaidang" style="color:#003493" class="active"><i class="fas fa-home"></i> Quản lý bài đăng </a>
+            <a asp-controller="Taikhoan" asp-action="EditInForCompany" style="color:#003493" ><i class="fas fa-user"></i> Chỉnh sửa thông tin</a>
+            <a asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click" style="color:#003493" ><i class="fas fa-cog chnh-sa-thng2"></i> Xác thực thông tin</a>
+            <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click" style="color:#003493" ><i class="fas fa-pencil i-mt-khu2"></i>Đổi mật khẩu </a>
+            <a asp-controller="Taikhoan" asp-action="btnDangxuat" style="color:#003493" ><i class="fas fa-location-arrow ng-xut2"></i> Đăng xuất</a>
         </div>
     }
     else if (fkSMaQuyen==4)
@@ -92,9 +91,9 @@
         </div>
 
         <div style="position: absolute" class="custom-vertical-menu-dn">
-            <a asp-controller="Doanhnghiep" asp-action="hienthidanhsachbaidang" style="color:#3D3BB2" class="active"><i class="fas fa-home"></i> Quản lý tài khoản </a>
-            <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click" style="color:#3D3BB2"><i class="fas fa-pencil i-mt-khu2"></i>Đổi mật khẩu </a>
-            <a asp-controller="Taikhoan" asp-action="btnDangxuat" style="color:#3D3BB2"><i class="fas fa-location-arrow ng-xut2"></i> Đăng xuất</a>
+            <a asp-controller="Doanhnghiep" asp-action="hienthidanhsachbaidang" style="color:#003493" class="active"><i class="fas fa-home"></i> Quản lý tài khoản </a>
+            <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click" style="color:#003493"><i class="fas fa-pencil i-mt-khu2"></i>Đổi mật khẩu </a>
+            <a asp-controller="Taikhoan" asp-action="btnDangxuat" style="color:#003493"><i class="fas fa-location-arrow ng-xut2"></i> Đăng xuất</a>
         </div>
     }
     else
@@ -125,19 +124,19 @@
         </main>
     </div>
 
-    <footer class="footer text-muted" style="background-color: #f8f9fa; bottom: 0; width: 100%; height: 200px;">
+    <footer class="footer text-muted" style="background-color: #f8f9fa; bottom: 0; width: 100%; height: 150px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
-                    <a style="margin-top: 10px; color: #3D3BB2;" class="navbar-brand text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
+                    <a style="margin-top: 10px; color: #003493;" class="navbar-brand text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
                 </div>
-                <div class="col-md-4" style="color:#084298; margin-top: 10px;">
+                <div class="col-md-4" style="color: #084298;  margin-top: 10px;   text-align: start;   font-size: 15px;    line-height: 20px;">
                     <b>Liên hệ</b>
                     <div>Hotline: <b>(024) 6680 5588</b> (Giờ hành chính)</div>
                     <div>Email: <b>hotro@freework.vn</b></div>
                 </div>
-                <div class="col-md-4" style="color:#084298; margin-top: 10px;">
+                <div class="col-md-4" style="color: #084298;  margin-top: 10px;   text-align: start;   font-size: 15px;    line-height: 20px;">
                     <b>Cộng đồng FreeWork</b>
                     <div style="font-size: 20px;">
                         <i class="fab fa-youtube" style="margin-right: 10px;"></i>
@@ -164,26 +163,3 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-@*     <div class="row header">
-            <div class="col-1 col-sm-1 col-lg-1">
-                <div class="logo">
-                    <img src="img/logo.png" alt="">
-                </div>
-            </div>
-            <div class="col-9 col-sm-9 col-lg-9">
-                <div class="nav">
-                    <ul class="list-inline pt-3">
-                        <li class="list-inline-item text-uppercase">Việc làm</li>
-                        <li class="list-inline-item text-uppercase">Doanh nghiệp</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-2 col-sm-2 col-lg-2">
-                <div class="user d-flex">
-                    <span class="pe-2 pt-3">
-                        Thu Hoài
-                    </span>
-                    <img src="img/pngtree-outline-user-icon-png-image_1727916.jpg" alt="">
-                </div>
-            </div>
-        </div> *@

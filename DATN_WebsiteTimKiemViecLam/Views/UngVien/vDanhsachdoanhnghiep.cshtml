@@ -2,24 +2,67 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    int img = 10;
 }
+<style>
+    #nameDN {
+        text-transform: uppercase;
+        color: black;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 16px;
+        margin-top: 12px;
+    }
+
+    .itemdn {
+        width: 100% !important;
+        height: 250px;
+        margin-bottom: 20px;
+        border: none;
+    }
+
+        .itemdn:hover {
+            border: 0.5px solid rgba(97,196,220,255);
+            box-shadow: 0 0 5px rgba(97,196,220,255);
+        }
+
+    #nameDN:hover {
+        color: #F56444;
+    }
+</style>
 <div style="color:black">
 <h5 style="color:#3D3BB2" class="fs-3 fw-bold d-flex flex-nowrap">DANH SÁCH DOANH NGHIỆP</h5>
+    <div style="margin:10px" class="row">
+        <div style="padding:5px;  width:500px" class="col-sm-2 col-lg-2">
+            <input class="form-control" name="txtTencongviec" placeholder="Tên tài khoản..." type="text" value="" />
+        </div>
+        <div style="padding:5px;  width:200px" class="col-sm-2 col-lg-2">
+            <button style="padding:5px; width:200px;background:#003493" type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Tìm kiếm
+            </button>
+        </div>
+    </div>
 <div class="content2">
     <div class="row text-center">
         @foreach (TblDoanhnghiep item in ViewBag.model1Data)
         {
-            <div class="col-sm-3 col-lg-3">
-                <div class="card" style="width: 18rem;height:200px; padding-left:20px; margin-bottom:20px;">
-                    <img style="height:120px" src="data:image/png;base64,@item.SLogo" alt="Hình ảnh" data-id="@item.SLogo" class="card-img-top p-2">
-                    <div class="card-body">
-                        <div>
-                                <a style="text-decoration:none" href="@Url.Action("btnHienthichitietDN","UngVien", new {FkSMaDn=item.PkSMaDn})" class="card-title fs-6 text-black ">@item.STenDn</a>
-                                @* <a style="text-decoration: none" @Url.Action("UngVien","btnHienthichitietDN",item.PkSMaDn) class="card-title fw-bold text-black fs-6">@item.STenDn</a> *@
+                String name = img.ToString() + ".jpg";
+
+                <div class="col-sm-3">
+                    <a style="text-transform: uppercase; color: black; text-decoration: none; font-size: 12px; font-weight: 500; line-height: 16px;" href="@Url.Action("btnHienthichitietDN", "UngVien", new { FkSMaDn = item.PkSMaDn })">
+                        <div class="itemdn card">
+                            <img height=180px src="~/images/@name" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <span id="nameDN" class="card-title">@item.STenDn</span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
+                    @{
+                        img = img + 1;
+                    }
                 </div>
-            </div>
         }
     </div>
 </div>

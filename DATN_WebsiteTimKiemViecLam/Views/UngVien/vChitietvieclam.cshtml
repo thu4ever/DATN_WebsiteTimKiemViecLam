@@ -22,12 +22,25 @@
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <title>Document</title>
+    <style>
+     #job-description__item--content
+     {
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            -webkit-font-smoothing: antialiased !important;
+            font-family: Inter,sans-serif;
+            box-sizing: border-box;
+     }
+    </style>
 </head>
-<body style="font-family: Inter, sans-serif; font-style: normal;background:#F5FAFF">
+<body style="Background:#F5FAFF; font-family: Inter, sans-serif; font-style: normal;background:#F5FAFF">
     <div style="color:black;  " class="container rounded">
         <div class="row">
-            <div style="color:#3D3BB2" class="col-12 col-sm-12 col-lg-12 fs-2">
-                <h3 style="padding: 2%;">@Model.STenBai</h3>
+            <div style="color:#003493" class="col-12 col-sm-12 col-lg-12 fs-2">
+                <h3 style="padding: 2%;text-transform:uppercase;font-weight:600">@Model.STenBai</h3>
             </div>
         </div>
         <div style="Background:#ffff;border-radius:5px; padding:3%" class="row">
@@ -39,7 +52,7 @@
                                 <div class="col-3 col-sm-3 col-lg-3">
                                     <i class="fa-solid fa-wallet" style="font-size: 30px; color: #0a58ca; width: 110px;padding-top: 20%; "></i>
                                 </div>
-                                <div class="col-9 col-sm-9 col-lg-9 fs-5" style=" margin: inherit; padding-top: 3%;  text-align: center;   line-height: 20px;">
+                                <div class="col-9 col-sm-9 col-lg-9 fs-6" style=" margin: inherit; padding-top: 3%;  text-align: center;   line-height: 20px;">
                                     <b>Mức lương</b>
                                     <p>@Model.FMucluongtoida</p>
                                 </div>
@@ -52,7 +65,7 @@
                                 <div class="col-3 col-sm-3 col-lg-3">
                                     <i class="fa-solid fa-location-dot " style="font-size: 30px; color: #0a58ca; width: 110px; padding-top: 20%;"></i>
                                 </div>
-                                <div class="col-9 col-sm-9 col-lg-9 fs-5" style=" margin: inherit; padding-top: 3%;  text-align: center;   line-height: 20px;">
+                                <div class="col-9 col-sm-9 col-lg-9 fs-6" style=" margin: inherit; padding-top: 3%;  text-align: center;   line-height: 20px;">
                                     <b>Địa chỉ</b>
                                     <p>@Model.SDiachicuthe</p>
                                 </div>
@@ -65,9 +78,16 @@
                                 <div class="col-3 col-sm-3 col-lg-3">
                                     <i class="fa-solid fa-clock" style="font-size: 30px; color: #0a58ca; width: 110px; padding-top: 20%;"></i>
                                 </div>
-                                <div class="col-9 col-sm-9 col-lg-9 fs-5" style=" margin: inherit; padding-top: 3%;  text-align: center;  line-height: 20px;">
+                                <div class="col-9 col-sm-9 col-lg-9 fs-6" style=" margin: inherit; padding-top: 3%;  text-align: center;  line-height: 20px;">
                                     <b>Kinh nghiệm</b>
-                                    <p>@Model.FNamKinhNghiem  Năm</p>
+                                    @if(@Model.FNamKinhNghiem>0)
+                                    {
+                                        <p>@Model.FNamKinhNghiem  Năm</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Không yêu cầu kinh nghiệm</p>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -80,52 +100,47 @@
                             @Model.ISoLuong <span>ứng viên</span>
                         </p>
                         <p class="text-lg-start">
-                            <label class="fw-bold" for="">Yêu cầu ứng viên: </label>
-                          @*   <div id="text"></div>
-                            <ul id="list"></ul> *@
+                            <label class="fw-bold" for="">Yêu cầu: </label>
                             <ul style="text-align: justify">
-                             @Model.SYeuCau
+                                @Html.Raw(Model.SYeuCau)
                             </ul>
                         </p>
                         <p class="text-lg-start">
                             <label class="fw-bold " for="">Quyền lợi: </label>
                             <ul style="text-align: justify">
-                               @Model.SQuyenLoi
+                                @Html.Raw(Model.SQuyenLoi)  
                             </ul>
                         </p>
                         <p class="text-lg-start">
                             <label class="fw-bold text-lg-start" for="">Thời gian đăng tải: </label>
-                            @Model.DTgDangBai.Value.Date
+                            @Model.DTgDangBai.Value.ToShortDateString()
                         </p>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-lg-4">
-                <a href="@Url.Action("btnGuithongtinUngTuyen","UngVien", new {PKsMabai=Model.PkSMaBai})" class="btn btn-primary btn-lg" style="background: #3D3BB2; width: 400px;">ỨNG TUYỂN NGAY</a>
+                <a href="@Url.Action("btnGuithongtinUngTuyen","UngVien", new {PKsMabai=Model.PkSMaBai})" class="btn btn-primary btn-lg" style="background: #003493; width: 400px;">ỨNG TUYỂN NGAY</a>
                 <p style=" margin-top: 20px; text-align: left;">
                     <i class="fa-solid fa-clock" style="font-size: 30px; color: #0a58ca; padding-top: 5%;"></i>
-                    Thời gian ứng tuyển còn @numberOfDays ngày
+                    @if(@numberOfDays<0)
+                    {
+                        <span>Đã hết thời gian ứng tuyển</span>
+                    }
+                    else
+                    {
+                        <span>Thời gian ứng tuyển còn @numberOfDays ngày</span>
+                    }
                 </p>
                 <div class="infor-company">
                     <div class="card " style="width: 25rem;">
                         <div class="card" style="width: 21rem; height:250px; padding-left:20px; margin-bottom:20px;border:none">
-                            <img src="~/images/2-100x0.jpg" alt="Hình ảnh" class="card-img-top p-2">
+                            <img src="~/images/11.jpg" alt="Hình ảnh" class="card-img-top p-2">
                             <a style="text-decoration:none;font-size: 12px;font-weight: 500;line-height: 16px;margin-top: 12px;width: 100%;" href="@Url.Action("btnHienthichitietDN","UngVien", new {FkSMaDn=Model.FkSMaDn})" class="card-title ">@Model.STenDn</a>
                         </div>
                         <div class="card-body text-lg-start">
-                            <a style="    color: #3D3BB2;  font-size: 14px;   font-style: normal;   font-weight: 600;  letter-spacing: .175px;  line-height: 22px;" href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=Model.FkSMaDn})" class="card-link fs-6">xem thêm chi tiết...</a>
+                            <a style="text-decoration:none;color: #003493;  font-size: 14px;   font-style: normal;   font-weight: 600;  letter-spacing: .175px;  line-height: 22px;" href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=Model.FkSMaDn})" class="card-link fs-6">xem thêm chi tiết...</a>
                         </div>
                     </div>
-                  @*   <div class="card " style="width: 18rem;">
-                        <img src="data:image/png;base64,@Model.SLogo" alt="Hình ảnh" class="item-image card-img-top p-2">
-                        <div class="card-body">
-                            <a style="text-decoration:none" href="@Url.Action("btnHienthichitietDN","UngVien", new {FkSMaDn=Model.FkSMaDn})" class="card-title fs-6 ">@Model.STenDn</a>
-                            <p  class="card-text text-truncate">@Model.SMota</p>
-                        </div>
-                        <div class="card-body text-lg-start">
-                            <a href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=Model.FkSMaDn})" class="card-link fs-6">xem thêm chi tiết...</a>
-                        </div>
-                    </div> *@
                 </div>
             </div>
         </div>
@@ -147,27 +162,6 @@
                 });
             });
         });
-        // $(document).ready(function () {
-        //     // Chuyển đổi chuỗi JSON thành đối tượng JavaScript
-        //     var inputText = @Html.Raw(Json.Serialize(Model.SYeuCau));
-
-        //     // Chuyển đổi văn bản thành danh sách HTML
-        //     function textToList(text) {
-        //         var lines = text.split('\n');
-        //         var listItems = lines.map(function (line) {
-        //             if (line.trim().length > 0) {
-        //                 var marker = line.trim().charAt(0);
-        //                 var listItem = line.trim().substring(1).trim();
-        //                 return '<li class="marker-' + marker + '">' + listItem + '</li>';
-        //             }
-        //         });
-        //         return listItems.join('');
-        //     }
-
-        //     // Hiển thị danh sách trong thẻ ul
-        //     $('#text').text(inputText);
-        //     $('#list').html(textToList(inputText));
-        // });
     </script>
 </body>
 </html>
