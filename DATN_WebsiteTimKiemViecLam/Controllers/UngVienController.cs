@@ -99,6 +99,20 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             ViewBag.tblBaituyendung = danhSachBaiTuyenDung;
             return View("vChitietdoanhnghiep", tblDoanhnghiep);
         }
+        public bool CheckValidTimkiemVieclam(String dThoigiandangtuyen, String txtkinhnghiem, String txtDiachi, String txtMucluong, String txtTencongviec)
+        {
+            if(dThoigiandangtuyen==null)
+                return false;
+            if(txtkinhnghiem==null)
+                return false;
+            if( txtDiachi==null)
+                return false;
+            if(txtMucluong==null)
+                return false;
+            if(txtTencongviec==null)
+                return false;
+            return true;
+        }
         public IActionResult btnTimkiemViecLam()
         {
             return View("vDanhsachtatcavieclam");

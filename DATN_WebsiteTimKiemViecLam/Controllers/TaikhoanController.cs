@@ -8,6 +8,8 @@ using System.IO;
 using System.Web;
 using static System.Collections.Specialized.BitVector32;
 using System.Web.Helpers;
+using System.Text.RegularExpressions;
+using NuGet.Protocol;
 
 namespace DATN_WebsiteTimKiemViecLam.Controllers
 {
@@ -19,6 +21,142 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         public TaikhoanController(db_WebsiteTimkiemvieclamContext context)
         {
             _context = context;
+        }
+        public bool IsContainNumberinPass(string password)
+        {
+            // Biểu thức chính quy để kiểm tra xem mật khẩu có chứa ít nhất một ký tự số hay không
+            string pattern = @"^(?=.*\d).+$";
+            Regex regex = new Regex(pattern);
+
+            return regex.IsMatch(password);
+        }
+        public bool IsContainSpecialChar(string password)
+        {
+            // Biểu thức chính quy để kiểm tra mật khẩu không chứa ký tự đặc biệt !, @, #, $, %, _
+            string pattern = @"^[^!@#$%_]*$";
+            Regex regex = new Regex(pattern);
+
+            return regex.IsMatch(password);
+        }
+        public bool CheckValidDangki(string txtEmail,string  txtMatkhau, string txtMatkhaunhaplai,string iMaquyen)
+        {
+            if (txtEmail == null && txtMatkhau == null && txtMatkhaunhaplai == null&&iMaquyen==null)
+                return false;
+            if(!txtEmail.Contains("@"))
+                return false;
+            if(txtEmail.Contains("!")) 
+                return false;
+            if (!IsContainNumberinPass(txtMatkhau))
+                return false; 
+            if (IsContainSpecialChar(txtMatkhau))
+                return false;
+            if(txtMatkhau.Length!=8)
+                return false;
+            if(txtMatkhaunhaplai!=txtMatkhau)
+                return false;
+            return true;
+        }
+        public bool CheckValidDoimatkhau(string txtEmail, string txtMatkhaucu, string txtMatkhaumoi,string txtMatkhaumoinhaplai)
+        {
+            if(txtEmail == null &&txtMatkhaucu == null &&txtMatkhaumoi == null)
+                return false;
+            if(txtEmail==null)
+                return false;
+            if(txtMatkhaucu==null)
+                return false;
+            if(txtMatkhaumoi==null)
+                return false;
+            if (!IsContainNumberinPass(txtMatkhaumoi))
+                return false;
+            if (IsContainSpecialChar(txtMatkhaumoi))
+                return false;
+            if (txtMatkhaumoi.Length != 8)
+                return false;
+            if (txtMatkhaumoi!=txtMatkhaumoinhaplai)
+                return false;
+            TblTaikhoan tblTaikhoan= _context.TblTaikhoans.Where(p=>p.PkSEmail==txtEmail&&p.SMatkhau==txtMatkhaumoi).FirstOrDefault();
+            if(tblTaikhoan==null)
+                return false;
+            return true;
+        }
+        public bool IsValidPhoneNumber(string phoneNumber)
+        {
+            // Biểu thức chính quy để kiểm tra xem chuỗi không chứa ký tự không phải số
+            string pattern = @"^[0-9]+$";
+            Regex regex = new Regex(pattern);
+
+            return regex.IsMatch(phoneNumber);
+        }
+        public bool CheckValidthongtinUV(string txtHoten, string txtGioitinh, string txtAnh, string txtSodienthoai)
+        {
+            if(txtHoten==null&&txtGioitinh==null&&txtAnh==null&&txtSodienthoai==null)
+                return false;
+            if(txtHoten==null)
+                return false;
+            if(txtGioitinh==null)
+                return false;
+            if(txtAnh==null)
+                return false;
+            if(txtSodienthoai==null)
+                return false;
+            if(IsContainNumberinPass(txtHoten))
+                return false;
+            if (IsContainSpecialChar(txtHoten))
+                return false;
+            if(!IsValidPhoneNumber(txtSodienthoai))
+                return false;
+            if(txtSodienthoai.Length!=10)
+                return false;
+            return true;
+        }
+        public int btnChinhsuathongtinnUV_Click(string txtHoten, string txtGioitinh, string txtSodienthoai)
+        {
+            var file = Request.Form.Files["file"];
+            TblUngVien tblUngVien = new TblUngVien();
+            tblUngVien.SHoTen = txtHoten;
+            tblUngVien.BGioiTinh = txtGioitinh == "nữ" ? true : false;
+            tblUngVien.SSdt = txtSodienthoai;
+
+            if (file != null && file.Length > 0)
+            {
+                try
+                {
+                    // Đọc dữ liệu từ tập tin ảnh vào một mảng byte
+                    byte[] imageData;
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        file.CopyTo(memoryStream);
+                        imageData = memoryStream.ToArray();
+                    }
+                    // Chuyển đổi mảng byte thành chuỗi base64
+                    string base64String = Convert.ToBase64String(imageData);
+                    tblUngVien.SAnh = base64String;
+                    string email = HttpContext.Session.GetString("PK_sEmail");
+                    tblUngVien.FkSEmail = email;
+                    var existingEntity = _context.TblUngViens.FirstOrDefault(e => e.FkSEmail == email);
+                    if (existingEntity != null)
+                    {
+                        existingEntity.SHoTen = txtHoten;
+                        existingEntity.BGioiTinh = txtGioitinh == "Nữ" ? true : false;
+                        existingEntity.SSdt = txtSodienthoai;
+                        existingEntity.SAnh = base64String;
+                        _context.Update(existingEntity);
+                        _context.SaveChanges();
+                    }
+                    return 1;
+                }
+                catch (Exception ex)
+                {
+                    // Xử lý nếu có lỗi
+                    return 0;
+                }
+            }
+            else
+            {
+                // Xử lý nếu không có tập tin được chọn
+                return 0;
+            }
+
         }
         public bool CheckExisitTaikhoan(String PKsEmail)
         {

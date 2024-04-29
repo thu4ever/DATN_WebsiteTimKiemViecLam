@@ -5,6 +5,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ghostscript.NET.Rasterizer;
 using NuGet.Common;
+using System.Text.RegularExpressions;
 
 namespace DATN_WebsiteTimKiemViecLam.Controllers
 {
@@ -19,11 +20,63 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             _context = context;
             _pdfProcessor = pdfProcessor;
         }
+        public bool IsValidPhoneNumber(string phoneNumber)
+        {
+            // Biểu thức chính quy để kiểm tra xem chuỗi không chứa ký tự không phải số
+            string pattern = @"^[0-9]+$";
+            Regex regex = new Regex(pattern);
+
+            return regex.IsMatch(phoneNumber);
+        }
         public IActionResult btnThembaidang()
         {
             TblBaituyendung tblBaituyendung = new TblBaituyendung();
             return View("vDangtaibaituyendung", tblBaituyendung);
         }
+        public bool CheckValidthembaidang(String txtTen , String txtMota, String txtYeucau, String txtQuyenloi, float txtMucluongthoithieu,float txtMucluongtoida, int txtNamkinhnghiem,DateTime txtTGtuyendung,string txtsoluong, DateTime txttgbaidang, int txtTrangthai)
+        {
+            if (txtTen == null && txtMota == null && txtYeucau == null && txtQuyenloi == null && txtMucluongthoithieu == 0 && txtMucluongtoida == 0 && txtNamkinhnghiem == 0)
+                return false;
+            if(txtTen == null)
+                return false;
+            if (txtMota == null)
+                return false;
+            if (txtYeucau == null)
+                return false;
+            if (txtQuyenloi == null) 
+                return false;
+            if(txtMucluongthoithieu==0)
+                return false;
+            if(txtMucluongtoida==0)
+                return false;
+            if(txtNamkinhnghiem==0)
+                return false;
+            if(!IsValidPhoneNumber(txtsoluong))
+                return false;
+                return true;
+        }
+        public int btnThembaidangg(TblBaituyendung tblBaituyendung)
+        {
+            if (tblBaituyendung.DTgDangBai > DateTime.Now.Date)
+            {
+                tblBaituyendung.ITrangthai = 0;
+            }
+            else if (tblBaituyendung.DTgTuyenDung <= DateTime.Now.Date)
+            {
+                tblBaituyendung.ITrangthai = 2;
+            }
+            else
+                tblBaituyendung.ITrangthai = 1;
+            var check = _context.TblBaituyendungs.Add(tblBaituyendung);
+            _context.SaveChanges();
+            if (check != null)
+            {
+                ViewBag.MS_039 = "Them bai dang thanh cong";
+                return 1;
+            }
+            return 0;
+        }
+
         [HttpPost]
         public IActionResult btnThembaidang(TblBaituyendung tblBaituyendung)
         {
@@ -121,6 +174,15 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             _context.TblBaituyendungs.Remove(tblBaituyendung);
             _context.SaveChanges();
             return Json(new { success = true });
+        }
+        public int btnXoaBaiDang(long PKsMabai)
+        {
+            TblBaituyendung tblBaituyendung = _context.TblBaituyendungs.Where(p => p.PkSMaBai == PKsMabai).FirstOrDefault();
+            _context.TblBaituyendungs.Remove(tblBaituyendung);
+            var check = _context.SaveChanges();
+            if (check != 0)
+                return 1;
+            return 0;
         }
         public IActionResult LoadStatus()
         {
