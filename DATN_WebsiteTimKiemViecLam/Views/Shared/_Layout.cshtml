@@ -11,10 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trang Chủ</title>
     <link href="~/css/layout.css" rel="stylesheet" />
-<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
-<link href="~/lib/bootstrap/dist/css/bootstrap.rtl.css" rel="stylesheet" />
-<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DATN_WebsiteTimKiemViecLam.styles.css" asp-append-version="true" />
@@ -38,7 +38,15 @@
                             <a class="navbar-brand text-white text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachDN" style="padding-bottom:1.5%; ">DOANH NGHIỆP</a>
                         </div>
                         @* <div class=" navbar-brand text-white text-bar ">@PK_sEmail</div> *@
-                        <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" onmousemove="hienthimenu()" onmousewheel="anmenu()" src="data:image/png;base64,@avatar" />
+                        @if(avatar!=null)
+                        {
+                            <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" onmousemove="hienthimenu()" onmousewheel="anmenu()" src="data:image/png;base64,@avatar" />
+                        }
+                        else
+                        {
+                            <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" onmousemove="hienthimenu()" onmousewheel="anmenu()" src="~/images/logo.jpg" />
+
+                        }
                     </div>
                 </div>
                 <div style="z-index: 2; border: 0.5px solid #ccc; border-radius: 5px;" id="hienthimenu" class="custom-vertical-menu">
@@ -143,7 +151,7 @@
         </header>
     }
     <div class="container">
-        <main role="main" class="pb-3" style="margin-bottom: 250px;">
+        <main role="main" class="pb-3" style=" background-color:#F5FAFF">
             @RenderBody()
         </main>
     </div>

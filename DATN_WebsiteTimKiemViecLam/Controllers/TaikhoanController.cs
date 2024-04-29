@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Web;
 using static System.Collections.Specialized.BitVector32;
+using System.Web.Helpers;
 
 namespace DATN_WebsiteTimKiemViecLam.Controllers
 {
@@ -19,10 +20,27 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         {
             _context = context;
         }
+        public bool CheckExisitTaikhoan(String PKsEmail)
+        {
+            var check = _context.TblTaikhoans.FirstOrDefault(p => p.PkSEmail == PKsEmail);
+            bool result = check != null ? true : false;
+            return result;
+        }
+        public bool CheckDisableTaikhoan(String PKsEmail)
+        {
+            TblTaikhoan check = _context.TblTaikhoans.FirstOrDefault(p => p.PkSEmail == PKsEmail);
+            bool result = check.FkSMaQuyen ==5 ? true : false;
+            return result;
+        }
         public ActionResult Login()
         {
            // return RedirectToAction("HomePage", "BaiUngTuyen");
             return View("Login");
+        }
+        public long Dangnhap_Click(String Email, String Matkhau)
+        {
+            TblTaikhoan result = _context.TblTaikhoans.FirstOrDefault(p => p.PkSEmail == Email && p.SMatkhau == Matkhau);
+            return result.FkSMaQuyen;
         }
         [HttpPost]
         public ActionResult Login(String Email, String Matkhau)
@@ -39,9 +57,14 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             if (result.FkSMaQuyen==1)
             {
                 TblUngVien tblUngVien = _context.TblUngViens.FirstOrDefault(p => p.FkSEmail == Email);
-                HttpContext.Session.SetString("Avatar", tblUngVien.SAnh);
-                HttpContext.Session.SetInt32("PKsMaUngVien", Int32.Parse(tblUngVien.PkSMaUngVien.ToString()));
-                
+                //var savedText = sessionStorage.getItem(listKey);
+                //// Truyền dữ liệu vào view
+                //ViewBag.SavedText = savedText;
+                if (tblUngVien != null)
+                {
+                    HttpContext.Session.SetString("Avatar", tblUngVien.SAnh);
+                    HttpContext.Session.SetInt32("PKsMaUngVien", Int32.Parse(tblUngVien.PkSMaUngVien.ToString()));
+                }
                 if(HttpContext.Session.GetInt32("Mabaituyendung")!=null)
                 {
                     return RedirectToAction("btnGuithongtinUngTuyen","Ungvien");
@@ -84,6 +107,19 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 return View("Resgiter");
             }
         }
+        public int btnDangky_Click(long quyendki, String Email, String Matkhau)
+        {
+            TblTaikhoan taikhoan = new TblTaikhoan();
+            taikhoan.SMatkhau = Matkhau;
+            taikhoan.FkSMaQuyen = quyendki;
+            taikhoan.PkSEmail = Email;
+
+            var check = _context.TblTaikhoans.Add(taikhoan);
+            _context.SaveChanges();
+            if (check != null)
+            return 1;
+            return 0;
+        }
         public ActionResult Resgiter()
         {
             return View("Resgiter");
@@ -100,6 +136,11 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             _context.SaveChanges();
             if (check != null)
             {
+                if(quyendki==1)
+                {
+                    HttpContext.Session.SetString("PK_sEmail", Email);
+                    return RedirectToAction("Login");
+                }    
                 HttpContext.Session.SetString("PK_sEmail", Email);
                 return RedirectToAction("EditInForCompany");
             } 
@@ -227,6 +268,28 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 return Content("No file selected");
             }
             
+        }
+
+        public bool btnDoimatkhauu_Click(string Email,string txtMatkhaucu, string txtMatkhaumoi)
+        {
+            TblTaikhoan check = _context.TblTaikhoans.Where(p => p.PkSEmail ==Email).FirstOrDefault();
+            if (check != null)
+            {
+                if (check.SMatkhau == txtMatkhaucu)
+                {
+                    check.SMatkhau = txtMatkhaumoi;
+                    _context.Update(check);
+                    _context.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    ViewBag.MS_050 = "Mật khẩu cũ không đúng";
+                }
+
+            }
+          //  return View("vDoimatkhau");
+            return false;
         }
         public ActionResult btnDoimatkhau_Click()
         {

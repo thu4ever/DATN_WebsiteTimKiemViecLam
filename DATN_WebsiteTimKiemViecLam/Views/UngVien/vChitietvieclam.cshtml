@@ -34,16 +34,22 @@
             font-family: Inter,sans-serif;
             box-sizing: border-box;
      }
+     p
+     {
+            font-weight: 400;
+     }
     </style>
 </head>
-<body style="background:#F5FAFF; font-family:Tahoma;">
-    <div style="color:black; background:#FFFF; " class="container">
+<body>
+    <div style="color:black;">
         <div class="row">
             <div style="color:#003493" class="col-12 col-sm-12 col-lg-12 fs-2">
-                <h3 style="padding: 2%;text-transform:uppercase;font-weight:600">@Model.STenBai</h3>
+                <h3 style="    text-align: center;  padding: 2%;  text-transform: uppercase;   font-weight: 700;">
+                    @Model.STenBai
+                </h3>
             </div>
         </div>
-        <div style=" border-radius:15px; padding:3%" class="row">
+        <div style=" border-radius: 15px; margin: 20px;" class="row">
             <div style="" class="col-12 col-sm-12 col-lg-8">
                 <div class="row">
                     <div class="col-4 col-sm-4 col-lg-4">
@@ -97,17 +103,17 @@
                     <div class="col-12 col-sm-12 col-lg-12">
                         <p class="text-lg-start">
                             <label style="font-size:15px;" class="fw-bold text-lg-start fs-5" for="">Số lượng: </label>
-                            @Model.ISoLuong <span>ứng viên</span>
+                            @Model.ISoLuong <span style="font-size:15px;">ứng viên</span>
                         </p>
                         <p class="text-lg-start">
                             <label class="fw-bold" for="">Yêu cầu: </label>
-                            <ul style="font-size:16px;text-align: justify">
+                            <ul style="font-size:16px;text-align: justify;font-weight: 400;">
                                 @Html.Raw(Model.SYeuCau)
                             </ul>
                         </p>
                         <p class="text-lg-start">
                             <label class="fw-bold " for="">Quyền lợi: </label>
-                            <ul style="font-size:16px;text-align: justify">
+                            <ul style="font-size:16px;text-align: justify;font-weight: 400;">
                                 @Html.Raw(Model.SQuyenLoi)  
                             </ul>
                         </p>
@@ -131,9 +137,6 @@
                         <span>Thời gian ứng tuyển còn @numberOfDays ngày</span>
                     }
                 </p>
-
-
-
                 <div class="infor-company">
                     <div class="card " style="width: 25rem;">
                         <div class="card" style="width: 21rem; height:250px; padding-left:20px; margin-bottom:20px;border:none">
@@ -166,5 +169,6 @@
             });
         });
     </script>
+    </
 </body>
 </html>

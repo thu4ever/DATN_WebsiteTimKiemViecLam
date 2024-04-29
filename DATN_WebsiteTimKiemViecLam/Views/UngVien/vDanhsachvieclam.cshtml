@@ -71,6 +71,36 @@
         }
     </style>
     <script>
+        function updateStatus() {
+            $.ajax({
+                url: '/Doanhnghiep/LoadStatus',
+                type: 'GET',
+                success: function (data) {
+                    // Xử lý kết quả trả về nếu cần
+                    $.ajax({
+                        url: '/Doanhnghiep/GetItemBaidang',
+                        type: 'GET',
+                        success: function (partialHtml) {
+                            $('#content').empty(); // Remove existing content before appending new content
+                            $('#content').append(partialHtml);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Đã xảy ra lỗi khi lấy partial view:", error);
+                        }
+                    });
+                    // Load lại trạng thái bài đăng sau khi cập nhật thành công
+                },
+                error: function (xhr, status, error) {
+                    // Xử lý lỗi nếu có
+                    console.error("Đã xảy ra lỗi khi cập nhật tình trạng bài đăng:", error);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            updateStatus();
+        });
+
         function DetailsPost(PkSMaBai) {
             $.ajax({
                 url: '/UngVien/btnHienthichitietvieclam?PkSMaBai=' + PkSMaBai, // Đường dẫn đến hàm Xoa trong controller
@@ -96,7 +126,7 @@
             <form asp-controller="UngVien" asp-action="btnTimkiemViecLam" method="post">
                 <div style="height:70px; " class="row text-center">
                     <div style="padding:5px;  width:210px" class="col-sm-2 col-lg-2">
-                        <input class="form-control" name="txtTencongviec" placeholder="Tên công việc..." type="text" value="" />
+                        <input class="form-control" name="txtTencongviec" placeholder="Tên công việc..." type="text" value="" oninput="saveText()" />
                     </div>
                     <div style="padding:5px; width:210px" class="col-sm-2 col-lg-2">
                         <div class="input-group flex-nowrap">
@@ -246,8 +276,8 @@
         <div class="row text-center">
             @foreach (var item in Model)
             {
-                <div onclick="DetailsPost(@item.PkSMaBai)" id="item" style="max-width: 430px !important;" href="@Url.Action("btnHienthichitietvieclam", new {PkSMaBai=item.PkSMaBai})" class="card mb-3">
-                    <div class="row g-0">
+                    <div onclick="DetailsPost(@item.PkSMaBai)" id="item" style="max-width: 430px !important;" href="@Url.Action("btnHienthichitietvieclam", new {PkSMaBai=item.PkSMaBai})" class="card mb-3">
+                        <div class="row g-0">
                         <div class="col-md-4" >
                             <img src="data:image/png;base64,@item.SLogo" alt="Hình ảnh" class="item-image card-img-top p-2" @* data-id="@item.PkSMaBai" *@>
                         </div>
@@ -365,6 +395,10 @@
             </div>
    
     <script>
+        function saveText() {
+            var text = document.getElementById('textbox').value;
+            sessionStorage.setItem('savedText', text);
+        }
         // Khởi tạo carousel khi tài liệu đã tải hoàn tất
         $(document).ready(function () {
             $('#carouselExampleIndicators').carousel();

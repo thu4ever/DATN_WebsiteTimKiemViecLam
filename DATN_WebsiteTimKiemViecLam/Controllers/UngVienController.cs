@@ -27,6 +27,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
 
             var danhSachBaiTuyenDung = _context.TblBaituyendungs
               .Include(baiTuyenDung => baiTuyenDung.FkSMaDnNavigation) // Nạp dữ liệu từ bảng TblDoanhnghiep
+              .Where(p=>p.ITrangthai==1)
               .Select(baiTuyenDung => new vDanhsachvieclam
               {
                   PkSMaBai = baiTuyenDung.PkSMaBai,
@@ -35,8 +36,9 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                   sTendoanhnghiep = baiTuyenDung.FkSMaDnNavigation.STenDn,
                   sDiachi = baiTuyenDung.SDiachicuthe,
                   FMucLuong = baiTuyenDung.FMucLuongtoithieu,
-                  FMucLuongTD=baiTuyenDung.FMucluongtoida,
-                  FkSMaDn=baiTuyenDung.FkSMaDn
+                  FMucLuongTD = baiTuyenDung.FMucluongtoida,
+                  FkSMaDn = baiTuyenDung.FkSMaDn,
+                  ITrangthai = baiTuyenDung.ITrangthai
               })
               .ToList();
             ViewBag.TotalPages = Math.Ceiling((double)danhSachBaiTuyenDung.Count / pageSize);

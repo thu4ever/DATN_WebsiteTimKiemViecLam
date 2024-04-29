@@ -5,10 +5,8 @@ body {
 
 /* Kiểu cho phần header */
 .container {
-    color: aliceblue;
     display: block;
     text-align: center;
-    font-size: 18px;
 }
 
 /* Kiểu cho logo */
@@ -31,11 +29,6 @@ body {
     .container-fluid a {
         margin-right: 20px; /* Khoảng cách giữa các mục */
     }
-/* Kiểu cho phần nền của container-fluid */
-.container-fluid {
-    background: #3D3BB2;
-    color: white;
-}
 
 /* Thiết lập cho menu */
 .custom-vertical-menu {

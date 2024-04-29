@@ -11,6 +11,6 @@
         public double? FMucLuong { get; set; }
         public double? FMucLuongTD { get; set; }
         public string? sDiachi { get; set; }
-
+        public int? ITrangthai { get; set; }
     }
 }
