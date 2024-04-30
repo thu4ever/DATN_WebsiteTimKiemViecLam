@@ -101,6 +101,8 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         }
         public bool CheckValidTimkiemVieclam(String dThoigiandangtuyen, String txtkinhnghiem, String txtDiachi, String txtMucluong, String txtTencongviec)
         {
+            if(dThoigiandangtuyen == null && txtkinhnghiem == null && txtDiachi == null && txtMucluong == null && txtTencongviec == null)
+                return false;
             if(dThoigiandangtuyen==null)
                 return false;
             if(txtkinhnghiem==null)
@@ -117,6 +119,41 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         {
             return View("vDanhsachtatcavieclam");
         }
+
+        //Kiem tr unit cho Button Tim Kiem
+        public int btn_TimkiemViecLam(String dThoigiandangtuyen, String txtkinhnghiem, String txtDiachi, String txtMucluong, String txtTencongviec)
+        {
+            if (CheckValidTimkiemVieclam(dThoigiandangtuyen, txtkinhnghiem, txtDiachi, txtMucluong, txtTencongviec))
+                return 0;
+            DateTime now = DateTime.Now;
+
+            TimeSpan time = TimeSpan.FromDays(int.Parse(dThoigiandangtuyen));
+            var query = _context.TblBaituyendungs
+           .Where(u => u.STenBai.Contains(txtTencongviec))
+           .Where(u => u.SDiachicuthe.Contains(txtDiachi))
+           .Where(u => u.FNamKinhNghiem < float.Parse(txtkinhnghiem))
+           .ToList(); // Chuyển kết quả của truy vấn thành danh sách
+
+            var result = query.AsEnumerable() // Chuyển sang việc thực hiện trên máy khách
+                .Where(u => u.FMucluongtoida > float.Parse(txtMucluong))
+                .Where(u => now - u.DTgDangBai < TimeSpan.FromDays(int.Parse(dThoigiandangtuyen)))
+                .Join(_context.TblDoanhnghieps,
+                      baiTuyenDung => baiTuyenDung.FkSMaDn,
+                      doanhNghiep => doanhNghiep.PkSMaDn,
+                      (baiTuyenDung, doanhNghiep) => new vDanhsachvieclam
+                      {
+                          STenBai = baiTuyenDung.STenBai,
+                          SLogo = doanhNghiep.SLogo,
+                          sTendoanhnghiep = doanhNghiep.STenDn,
+                          sDiachi = baiTuyenDung.SDiachicuthe,
+                          FMucLuong = baiTuyenDung.FMucLuongtoithieu,
+                          FMucLuongTD = baiTuyenDung.FMucluongtoida
+                      }).ToList();
+            if (result.Count > 0)
+                return 1;
+            return 0;
+        }
+
         [HttpPost]
         public IActionResult btnTimkiemViecLam(int? page, String dThoigiandangtuyen, String txtkinhnghiem, String txtDiachi, String txtMucluong, String txtTencongviec)
         {

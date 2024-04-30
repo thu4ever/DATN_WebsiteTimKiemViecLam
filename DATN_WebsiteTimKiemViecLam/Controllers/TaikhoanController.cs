@@ -10,6 +10,7 @@ using static System.Collections.Specialized.BitVector32;
 using System.Web.Helpers;
 using System.Text.RegularExpressions;
 using NuGet.Protocol;
+using Google.Apis.Logging;
 
 namespace DATN_WebsiteTimKiemViecLam.Controllers
 {
@@ -44,7 +45,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 return false;
             if(!txtEmail.Contains("@"))
                 return false;
-            if(txtEmail.Contains("!")) 
+            if(!txtEmail.Contains(".")) 
                 return false;
             if (!IsContainNumberinPass(txtMatkhau))
                 return false; 
@@ -101,7 +102,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 return false;
             if(IsContainNumberinPass(txtHoten))
                 return false;
-            if (IsContainSpecialChar(txtHoten))
+            if (!IsContainSpecialChar(txtHoten))
                 return false;
             if(!IsValidPhoneNumber(txtSodienthoai))
                 return false;
@@ -109,8 +110,22 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 return false;
             return true;
         }
+
+        //Kiem tra neu tai khoan Dang ky da ton tai tra ve false
+        public bool CheckExisitTaikhoanDK(String PKsEmail)
+        {
+            var check = _context.TblTaikhoans.FirstOrDefault(p => p.PkSEmail == PKsEmail);
+            bool result = check != null ? false : true;
+            return result;
+        }
+
+
+        //Kiem tra luu thong tin sau Chinh sua
+
         public int btnChinhsuathongtinnUV_Click(string txtHoten,string txtAnh, string txtGioitinh, string txtSodienthoai)
         {
+            if (!CheckValidthongtinUV(txtHoten, txtAnh, txtGioitinh, txtSodienthoai))
+                return 0;
             TblUngVien tblUngVien = new TblUngVien();
             tblUngVien.FkSEmail = "hoaiungvien@gmail.com";
             tblUngVien.SHoTen = txtHoten;
@@ -123,6 +138,8 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 return 1;
             return 0;
         }
+
+        //Check Exist tai khoan Dang nhap
         public bool CheckExisitTaikhoan(String PKsEmail)
         {
             var check = _context.TblTaikhoans.FirstOrDefault(p => p.PkSEmail == PKsEmail);
@@ -132,7 +149,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         public bool CheckDisableTaikhoan(String PKsEmail)
         {
             TblTaikhoan check = _context.TblTaikhoans.FirstOrDefault(p => p.PkSEmail == PKsEmail);
-            bool result = check.FkSMaQuyen ==5 ? true : false;
+            bool result = check.FkSMaQuyen ==7 ? true : false;
             return result;
         }
         public ActionResult Login()
@@ -143,7 +160,8 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         public long Dangnhap_Click(String Email, String Matkhau)
         {
             TblTaikhoan result = _context.TblTaikhoans.FirstOrDefault(p => p.PkSEmail == Email && p.SMatkhau == Matkhau);
-            return result.FkSMaQuyen;
+            var check = result != null ? 1 : 0;
+            return check;
         }
         [HttpPost]
         public ActionResult Login(String Email, String Matkhau)
@@ -210,17 +228,22 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 return View("Resgiter");
             }
         }
-        public int btnDangky_Click(long quyendki, String Email, String Matkhau)
+        public int btnDangky_Click(String quyendki, String Email, String Matkhau, String MatKhauNhapLai)
         {
+
+            if (CheckValidDangki(Email, Matkhau, MatKhauNhapLai, quyendki) == false)
+                return 0;
             TblTaikhoan taikhoan = new TblTaikhoan();
             taikhoan.SMatkhau = Matkhau;
-            taikhoan.FkSMaQuyen = quyendki;
+            taikhoan.FkSMaQuyen = long.Parse(quyendki);
             taikhoan.PkSEmail = Email;
 
             var check = _context.TblTaikhoans.Add(taikhoan);
             _context.SaveChanges();
             if (check != null)
-            return 1;
+            {
+                return 1;
+            } else 
             return 0;
         }
         public ActionResult Resgiter()

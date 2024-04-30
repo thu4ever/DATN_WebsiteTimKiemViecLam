@@ -33,11 +33,11 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             TblBaituyendung tblBaituyendung = new TblBaituyendung();
             return View("vDangtaibaituyendung", tblBaituyendung);
         }
-        public bool CheckValidthembaidang(String txtTen , String txtMota, String txtYeucau, String txtQuyenloi, float txtMucluongthoithieu,float txtMucluongtoida, int txtNamkinhnghiem,DateTime txtTGtuyendung,string txtsoluong, DateTime txttgbaidang, int txtTrangthai)
+        public bool CheckValidthembaidang(String txtTen , String txtMota, String txtYeucau, String txtQuyenloi, float txtMucluongthoithieu,float txtMucluongtoida, int txtNamkinhnghiem,string txtsoluong, int txtTrangthai)
         {
             if (txtTen == null && txtMota == null && txtYeucau == null && txtQuyenloi == null && txtMucluongthoithieu == 0 && txtMucluongtoida == 0 && txtNamkinhnghiem == 0)
                 return false;
-            if(txtTen == null)
+            if (txtTen == null)
                 return false;
             if (txtMota == null)
                 return false;
@@ -57,6 +57,8 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         }
         public int btnThembaidangg(TblBaituyendung tblBaituyendung)
         {
+            if (CheckValidthembaidang(tblBaituyendung.STenBai, tblBaituyendung.SMoTa, tblBaituyendung.SYeuCau, tblBaituyendung.SQuyenLoi, (float)tblBaituyendung.FMucLuongtoithieu, (float)tblBaituyendung.FMucluongtoida, (int)tblBaituyendung.FNamKinhNghiem, tblBaituyendung.ISoLuong.ToString(), (int)tblBaituyendung.ITrangthai)== false)
+                return 0;
             if (tblBaituyendung.DTgDangBai > DateTime.Now.Date)
             {
                 tblBaituyendung.ITrangthai = 0;

@@ -4,7 +4,7 @@ using DATN_WebsiteTimKiemViecLam.Models;
 namespace UnitTestWebsite
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTestSuaTTNguoiDung
     {
         TaikhoanController taikhoan;
        [TestInitialize]
@@ -34,8 +34,8 @@ namespace UnitTestWebsite
             bool expected = false;
             string txtHoten = "";
             string txtGioitinh = "nu";
-            string txtAnh = "hanam";
-            string txtSodienthoai = "0347382190";
+            string txtAnh = "hanoi";
+            string txtSodienthoai = "01234567891";
 
             // Gọi phương thức cần kiểm tra
             bool actual = taikhoan.CheckValidthongtinUV(txtHoten, txtGioitinh, txtAnh, txtSodienthoai);
@@ -49,7 +49,7 @@ namespace UnitTestWebsite
             bool expected = false;
             string txtHoten = "thuhoai";
             string txtGioitinh = "nu";
-            string txtAnh = "hanam";
+            string txtAnh = "hanoi";
             string txtSodienthoai = "";
 
             // Gọi phương thức cần kiểm tra
@@ -65,7 +65,7 @@ namespace UnitTestWebsite
             string txtHoten = "thuhoai";
             string txtGioitinh = "nu";
             string txtAnh = "";
-            string txtSodienthoai = "0347382190";
+            string txtSodienthoai = "01234567891";
 
             // Gọi phương thức cần kiểm tra
             bool actual = taikhoan.CheckValidthongtinUV(txtHoten, txtGioitinh, txtAnh, txtSodienthoai);
@@ -79,8 +79,8 @@ namespace UnitTestWebsite
             bool expected = false;
             string txtHoten = "thuhoai";
             string txtGioitinh = "";
-            string txtAnh = "hanam";
-            string txtSodienthoai = "0347382190";
+            string txtAnh = "hanoi";
+            string txtSodienthoai = "01234567891";
 
             // Gọi phương thức cần kiểm tra
             bool actual = taikhoan.CheckValidthongtinUV(txtHoten, txtGioitinh, txtAnh, txtSodienthoai);
@@ -154,8 +154,8 @@ namespace UnitTestWebsite
             bool expected = false;
             string txtHoten = "thuhoai";
             string txtGioitinh = "nu";
-            string txtAnh = "hanam";
-            string txtSodienthoai = "03472223221";
+            string txtAnh = "hanoi";
+            string txtSodienthoai = "01234567891";
 
             // Gọi phương thức cần kiểm tra
             bool actual = taikhoan.CheckValidthongtinUV(txtHoten, txtGioitinh, txtAnh, txtSodienthoai);
@@ -169,8 +169,8 @@ namespace UnitTestWebsite
             int expected = 1;
             string txtHoten = "thuhoai";
             string txtGioitinh = "nu";
-            string txtAnh = "hanam";
-            string txtSodienthoai = "0347222322";
+            string txtAnh = "hanoi";
+            string txtSodienthoai = "0123456789";
 
             // Gọi phương thức cần kiểm tra
             int actual = taikhoan.btnChinhsuathongtinnUV_Click(txtHoten, txtGioitinh, txtAnh, txtSodienthoai);
@@ -181,11 +181,11 @@ namespace UnitTestWebsite
         [TestMethod]
         public void TC_UT_STTND_012()
         {
-            int expected = 1;
+            int expected = 0;
             string txtHoten = "thuhoai";
             string txtGioitinh = "";
-            string txtAnh = "hanam";
-            string txtSodienthoai = "0347222322";
+            string txtAnh = "hanoi";
+            string txtSodienthoai = "01234567891";
 
             // Gọi phương thức cần kiểm tra
             int actual = taikhoan.btnChinhsuathongtinnUV_Click(txtHoten, txtGioitinh, txtAnh, txtSodienthoai);
