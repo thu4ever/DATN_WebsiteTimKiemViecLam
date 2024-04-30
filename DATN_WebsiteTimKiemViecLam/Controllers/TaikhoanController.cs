@@ -109,54 +109,19 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 return false;
             return true;
         }
-        public int btnChinhsuathongtinnUV_Click(string txtHoten, string txtGioitinh, string txtSodienthoai)
+        public int btnChinhsuathongtinnUV_Click(string txtHoten,string txtAnh, string txtGioitinh, string txtSodienthoai)
         {
-            var file = Request.Form.Files["file"];
             TblUngVien tblUngVien = new TblUngVien();
+            tblUngVien.FkSEmail = "hoaiungvien@gmail.com";
             tblUngVien.SHoTen = txtHoten;
+            tblUngVien.SAnh = txtAnh;
             tblUngVien.BGioiTinh = txtGioitinh == "nữ" ? true : false;
             tblUngVien.SSdt = txtSodienthoai;
-
-            if (file != null && file.Length > 0)
-            {
-                try
-                {
-                    // Đọc dữ liệu từ tập tin ảnh vào một mảng byte
-                    byte[] imageData;
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        file.CopyTo(memoryStream);
-                        imageData = memoryStream.ToArray();
-                    }
-                    // Chuyển đổi mảng byte thành chuỗi base64
-                    string base64String = Convert.ToBase64String(imageData);
-                    tblUngVien.SAnh = base64String;
-                    string email = HttpContext.Session.GetString("PK_sEmail");
-                    tblUngVien.FkSEmail = email;
-                    var existingEntity = _context.TblUngViens.FirstOrDefault(e => e.FkSEmail == email);
-                    if (existingEntity != null)
-                    {
-                        existingEntity.SHoTen = txtHoten;
-                        existingEntity.BGioiTinh = txtGioitinh == "Nữ" ? true : false;
-                        existingEntity.SSdt = txtSodienthoai;
-                        existingEntity.SAnh = base64String;
-                        _context.Update(existingEntity);
-                        _context.SaveChanges();
-                    }
-                    return 1;
-                }
-                catch (Exception ex)
-                {
-                    // Xử lý nếu có lỗi
-                    return 0;
-                }
-            }
-            else
-            {
-                // Xử lý nếu không có tập tin được chọn
-                return 0;
-            }
-
+            _context.Update(tblUngVien);
+            var check=_context.SaveChanges();
+            if (check > 0)
+                return 1;
+            return 0;
         }
         public bool CheckExisitTaikhoan(String PKsEmail)
         {
