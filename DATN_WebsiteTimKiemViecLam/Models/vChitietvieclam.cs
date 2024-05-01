@@ -14,6 +14,7 @@
         public long FkSMaDn { get; set; }
         public int? ITrangthai { get; set; }
         public string? SDiachicuthe { get; set; }
+        public string? SDiachi { get; set; }
         public double? FMucluongtoida { get; set; }
         public string STenDn { get; set; } = null!;
         public string SLogo { get; set; } = null!;

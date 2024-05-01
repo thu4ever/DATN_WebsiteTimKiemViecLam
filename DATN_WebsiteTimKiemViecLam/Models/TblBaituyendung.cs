@@ -18,7 +18,7 @@ namespace DATN_WebsiteTimKiemViecLam.Models
             DTgTuyenDung = DateTime.Now;
             DTgDangBai = new DateTime(2023, 3, 2);
             ISoLuong = 0;
-            SDiachicuthe = "Hà Nam";
+            SDiachicuthe = "";
             FNamKinhNghiem = 0;
         }
 

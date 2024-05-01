@@ -154,7 +154,17 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             {
                 ChitietCVungvien.BTrangthai = false;
                 _context.TblThongTinUngTuyens.Update(ChitietCVungvien); 
-                _context.SaveChanges();
+                var check=_context.SaveChanges();
+                if(check>0)
+                {
+                    TblBaituyendung tblBaituyendung = _context.TblBaituyendungs.Where(p => p.PkSMaBai == PkFkSMaBai).FirstOrDefault();
+                    TblUngVien tblUngVien= _context.TblUngViens.Where(p => p.PkSMaUngVien == PkFkSMaUngVien).FirstOrDefault();
+                    string sub = "Thông báo từ FreeWork";
+                    string content = "Chúng tôi rất tiếc khi phải thông báo cho bạn rằng CV của bạn cho công việc  " + tblBaituyendung.STenBai + "đã bị từ chối bởi nhà tuyển dụng. Nếu có bất cứ thắc mắc hay câu hỏi gì bạn có thể liên hệ trực tiếp với chúng tôi thông qua email chính thức: freework@gmail.com";
+                    string sTennguoinhan = HttpContext.Session.GetString("PK_sEmail");
+                    AutoSendEmaiil autoSendEmaiil = new AutoSendEmaiil();
+                    autoSendEmaiil.SendEmail(tblUngVien.FkSEmail, sub, content);
+                }    
                 return Json(new { success = true });
             }
             return Json(new { success = false });
