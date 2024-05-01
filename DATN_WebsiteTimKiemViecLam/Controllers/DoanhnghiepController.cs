@@ -180,10 +180,13 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         public int btnXoaBaiDang(long PKsMabai)
         {
             TblBaituyendung tblBaituyendung = _context.TblBaituyendungs.Where(p => p.PkSMaBai == PKsMabai).FirstOrDefault();
-            _context.TblBaituyendungs.Remove(tblBaituyendung);
-            var check = _context.SaveChanges();
-            if (check != 0)
-                return 1;
+            if(tblBaituyendung!=null)
+            {
+                _context.TblBaituyendungs.Remove(tblBaituyendung);
+                var check = _context.SaveChanges();
+                if (check != 0)
+                    return 1;
+            }    
             return 0;
         }
         public IActionResult LoadStatus()
