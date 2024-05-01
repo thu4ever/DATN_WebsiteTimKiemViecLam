@@ -123,8 +123,20 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         //Kiem tr unit cho Button Tim Kiem
         public int btn_TimkiemViecLam(String dThoigiandangtuyen, String txtkinhnghiem, String txtDiachi, String txtMucluong, String txtTencongviec)
         {
-            if (CheckValidTimkiemVieclam(dThoigiandangtuyen, txtkinhnghiem, txtDiachi, txtMucluong, txtTencongviec))
-                return 0;
+            if (txtTencongviec == null)
+            {
+                txtTencongviec = " ";
+            }
+            if (txtDiachi == null)
+            {
+                txtDiachi = " ";
+            }
+            if (txtkinhnghiem == null)
+            {
+                txtkinhnghiem = "100";
+            }
+            //if (CheckValidTimkiemVieclam(dThoigiandangtuyen, txtkinhnghiem, txtDiachi, txtMucluong, txtTencongviec))
+            //    return 0;
             DateTime now = DateTime.Now;
 
             TimeSpan time = TimeSpan.FromDays(int.Parse(dThoigiandangtuyen));

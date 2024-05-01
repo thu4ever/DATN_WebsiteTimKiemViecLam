@@ -21,18 +21,18 @@ namespace UnitTestWebsite
             string diachi = "";
             string mucluong = "";
             string tencv = "";
-            bool exp =false;
+            bool exp =true;
             bool act = uv.CheckValidTimkiemVieclam(tg, kinhnghiem, diachi, mucluong, tencv);
             Assert.AreEqual(exp, act);
         }
         [TestMethod]
         public void TestTimKiem_Click_WithTenCongviec()
         {
-            string tg = "";
-            string kinhnghiem = "";
-            string diachi = "";
-            string mucluong = "";
-            string tencv = "Nhân Viên Kinh Doanh";
+            string tg = "100";
+            string kinhnghiem =null;
+            string diachi = null;
+            string mucluong = "5";
+            string tencv = "Nhân Viên";
             int exp = 1;
             int act = uv.btn_TimkiemViecLam(tg,kinhnghiem,diachi,mucluong,tencv);
             Assert.AreEqual(exp, act);
@@ -40,11 +40,11 @@ namespace UnitTestWebsite
         [TestMethod]
         public void TestTimKiem_Click_WithMucLuong()
         {
-            string tg = "";
-            string kinhnghiem = "";
-            string diachi = "";
+            string tg = "100";
+            string kinhnghiem = null;
+            string diachi = null;
             string mucluong = "5";
-            string tencv = "";
+            string tencv = null;
             int exp = 1;
             int act = uv.btn_TimkiemViecLam(tg, kinhnghiem, diachi, mucluong, tencv);
             Assert.AreEqual(exp, act);
@@ -52,11 +52,11 @@ namespace UnitTestWebsite
         [TestMethod]
         public void TestTimKiem_Click_WithDiaChi()
         {
-            string tg = "";
-            string kinhnghiem = "";
-            string diachi = "Hà Nam";
-            string mucluong = "";
-            string tencv = "";
+            string tg = "100";
+            string kinhnghiem = null;
+            string diachi = "Hà";
+            string mucluong = "1";
+            string tencv = null;
             int exp = 1;
             int act = uv.btn_TimkiemViecLam(tg, kinhnghiem, diachi, mucluong, tencv);
             Assert.AreEqual(exp, act);
@@ -64,11 +64,11 @@ namespace UnitTestWebsite
         [TestMethod]
         public void TestTimKiem_Click_WithKinhNghiem()
         {
-            string tg = "";
+            string tg = "100";
             string kinhnghiem = "1";
-            string diachi = "";
-            string mucluong = "";
-            string tencv = "";
+            string diachi = " ";
+            string mucluong = "1";
+            string tencv = " ";
             int exp = 1;
             int act = uv.btn_TimkiemViecLam(tg, kinhnghiem, diachi, mucluong, tencv);
             Assert.AreEqual(exp, act);
@@ -76,11 +76,11 @@ namespace UnitTestWebsite
         [TestMethod]
         public void TestTimKiem_Click_WithThoiGian()
         {
-            string tg = "2023-03-02";
-            string kinhnghiem = "";
-            string diachi = "";
-            string mucluong = "";
-            string tencv = "";
+            string tg = "3";
+            string kinhnghiem = "100";
+            string diachi = " ";
+            string mucluong = "1";
+            string tencv = " ";
             int exp = 1;
             int act = uv.btn_TimkiemViecLam(tg, kinhnghiem, diachi, mucluong, tencv);
             Assert.AreEqual(exp, act);
@@ -88,11 +88,11 @@ namespace UnitTestWebsite
         [TestMethod]
         public void TestTimKiem_Click_WithAll()
         {
-            string tg = "2023-03-02";
-            string kinhnghiem = "1";
-            string diachi = "Hà Nam";
-            string mucluong = "5";
-            string tencv = "Nhân Viên Kinh Doanh";
+            string tg = "2";
+            string kinhnghiem = "100";
+            string diachi = "Hà";
+            string mucluong = "1";
+            string tencv = "Nhân Viên";
             int exp = 1;
             int act = uv.btn_TimkiemViecLam(tg, kinhnghiem, diachi, mucluong, tencv);
             Assert.AreEqual(exp, act);
@@ -100,11 +100,11 @@ namespace UnitTestWebsite
         [TestMethod]
         public void TestTimKiem_Click_WithFailName()
         {
-            string tg = "";
-            string kinhnghiem = "";
-            string diachi = "";
-            string mucluong = "";
-            string tencv = "Nhân Viên Kinh Doanh12";
+            string tg = "100";
+            string kinhnghiem = null;
+            string diachi = null;
+            string mucluong = "1";
+            string tencv = "Nhân Viên Kinh Doanh 12";
             int exp = 0;
             int act = uv.btn_TimkiemViecLam(tg, kinhnghiem, diachi, mucluong, tencv);
             Assert.AreEqual(exp, act);
