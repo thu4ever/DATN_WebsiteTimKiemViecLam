@@ -10,6 +10,7 @@ using System.Text;
 using static NuGet.Packaging.PackagingConstants;
 using Google.Apis.Services;
 using Microsoft.AspNetCore.Http;
+using DATN_WebsiteTimKiemViecLam.Service;
 
 namespace DATN_WebsiteTimKiemViecLam.Controllers
 {
@@ -65,6 +66,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                  SLogo = baiTuyenDung.FkSMaDnNavigation.SLogo,
                  STenDn = baiTuyenDung.FkSMaDnNavigation.STenDn,
                  SDiachicuthe = baiTuyenDung.SDiachicuthe,
+                 SDiachi=baiTuyenDung.FkSMaDnNavigation.SDiachi,
                  FMucLuongtoithieu = baiTuyenDung.FMucLuongtoithieu,
                  SYeuCau = baiTuyenDung.SYeuCau,
                  SQuyenLoi = baiTuyenDung.SQuyenLoi,
@@ -114,6 +116,38 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             if(txtTencongviec==null)
                 return false;
             return true;
+        }
+        public int btnTimkiemViecLam( String dThoigiandangtuyen, String txtkinhnghiem, String txtDiachi, String txtMucluong, String txtTencongviec)
+        {
+            if (CheckValidTimkiemVieclam(dThoigiandangtuyen, txtkinhnghiem, txtDiachi, txtMucluong, txtTencongviec))
+                return 0;
+            DateTime now = DateTime.Now;
+            
+            TimeSpan time = TimeSpan.FromDays(int.Parse(dThoigiandangtuyen));
+            var query = _context.TblBaituyendungs
+           .Where(u => u.STenBai.Contains(txtTencongviec))
+           .Where(u => u.SDiachicuthe.Contains(txtDiachi))
+           .Where(u => u.FNamKinhNghiem < float.Parse(txtkinhnghiem))
+           .ToList(); // Chuyển kết quả của truy vấn thành danh sách
+
+            var result = query.AsEnumerable() // Chuyển sang việc thực hiện trên máy khách
+                .Where(u => u.FMucluongtoida > float.Parse(txtMucluong))
+                .Where(u => now - u.DTgDangBai < TimeSpan.FromDays(int.Parse(dThoigiandangtuyen)))
+                .Join(_context.TblDoanhnghieps,
+                      baiTuyenDung => baiTuyenDung.FkSMaDn,
+                      doanhNghiep => doanhNghiep.PkSMaDn,
+                      (baiTuyenDung, doanhNghiep) => new vDanhsachvieclam
+                      {
+                          STenBai = baiTuyenDung.STenBai,
+                          SLogo = doanhNghiep.SLogo,
+                          sTendoanhnghiep = doanhNghiep.STenDn,
+                          sDiachi = baiTuyenDung.SDiachicuthe,
+                          FMucLuong = baiTuyenDung.FMucLuongtoithieu,
+                          FMucLuongTD = baiTuyenDung.FMucluongtoida
+                      }).ToList();
+            if (result.Count > 0)
+                return 1;
+            return 0;
         }
         public IActionResult btnTimkiemViecLam()
         {
@@ -231,7 +265,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         [HttpPost]
         public IActionResult btnGuithongtinUngTuyen(IFormFile file, String txtGioithieu)
         {
-
+            
             UploadFileModel up = new UploadFileModel();
             String slink = up.OnPostAsync(file, txtGioithieu);
             TblThongTinUngTuyen tblThongTinUngTuyen = new TblThongTinUngTuyen();
@@ -244,6 +278,12 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             _context.SaveChanges();
             if (check != null)
             {
+                TblBaituyendung tblBaituyendung =_context.TblBaituyendungs.Where(p=>p.PkSMaBai== (int) HttpContext.Session.GetInt32("Mabaituyendung")).FirstOrDefault();
+                string sub = "Thông báo từ FreeWork";
+                string content = "Nhà tuyển dụng đã nhận được CV của bạn cho vị trí " + tblBaituyendung.STenBai+". Thông tin phản hồi từ nhà tuyển dụng sẽ có thời gian phản hồi từ 3-7 ngày. Bạn chú ý theo dõi Email nhé. Nếu có bất cứ thắc mắc hay câu hỏi gì bạn có thể liên hệ trực tiếp với chúng tôi thông qua email chính thức: freework@gmail.com";
+                string sTennguoinhan = HttpContext.Session.GetString("PK_sEmail");
+                AutoSendEmaiil autoSendEmaiil = new AutoSendEmaiil();
+                autoSendEmaiil.SendEmail(sTennguoinhan, sub, content);
                 ViewBag.MS_028 = "Gui CV thanh cong";
             }
             return View("vThongtinungtuyen");

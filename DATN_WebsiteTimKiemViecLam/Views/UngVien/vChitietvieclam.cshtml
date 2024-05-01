@@ -44,7 +44,7 @@
     <div style="color:black;">
         <div class="row">
             <div style="color:#003493" class="col-12 col-sm-12 col-lg-12 fs-2">
-                <h3 style="    text-align: center;  padding: 2%;  text-transform: uppercase;   font-weight: 700;">
+                <h3 style="text-align: center;  padding: 2%;  text-transform: uppercase;   font-weight: 700;">
                     @Model.STenBai
                 </h3>
             </div>
@@ -148,6 +148,10 @@
                         </div>
                     </div>
                 </div>
+                <p class="text-lg-start">
+                    <label style="margin-top:20px" class="fw-bold " for="">Địa chỉ cụ thể: </label>
+                <div id="map" style=" margin-top:20px; width: 100%; height: 200px;"></div>
+                </p>
             </div>
         </div>
     </div>
@@ -168,7 +172,30 @@
                 });
             });
         });
+            // Hàm để hiển thị bản đồ với tọa độ của một địa chỉ cụ thể
+            function initMap() {
+                var geocoder = new google.maps.Geocoder();
+                var address = "@Model.SDiachi"; // Địa chỉ bạn muốn hiển thị
+
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    if (status === 'OK') {
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 15,
+                            center: results[0].geometry.location
+                        });
+
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location
+                        });
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            }
+    <!-- Nhúng API Google Maps -->
     </script>
-    </
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuZL5E6pDgbYVpFdxPGaqC9phmFV7ZzpU&callback=initMap" async defer></script>
+
 </body>
 </html>

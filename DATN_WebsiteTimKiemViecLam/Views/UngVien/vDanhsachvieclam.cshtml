@@ -132,10 +132,10 @@
                         <div class="input-group flex-nowrap">
                             <select class="form-select item-search" name="txtMucluong">
                                 <option value="0">Mức lương </option>
-                                <option value="3">trên 3 triệu </option>
-                                <option value="6">trên 6 triệu</option>
-                                <option value="10">trên 10 triệu</option>
-                                <option value="15">trên 15 triệu</option>
+                                <option value="3000000">Trên 3 triệu </option>
+                                <option value="6000000">Trên 6 triệu</option>
+                                <option value="10000000">Trên 10 triệu</option>
+                                <option value="15000000">Trên 15 triệu</option>
                             </select>
                         </div>
                     </div>
@@ -214,10 +214,10 @@
                         <div class="input-group flex-nowrap">
                             <select class="form-select item-search" name="txtKinhnghiem">
                                 <option value="100">Kinh nghiệm</option>
-                                <option value="1">dưới 1 năm </option>
+                                <option value="100">Không yêu cầu</option>
+                                <option value="1">Dưới 1 năm </option>
                                 <option value="2">1-2 năm</option>
                                 <option value="3">Trên 3 năm </option>
-                                <option value="100">Không yêu cầu</option>
                             </select>
                         </div>
                     </div>
@@ -286,8 +286,8 @@
                                 <h5 style="color: #212f3f;font-size: 20px;font-weight: 600;line-height: 20px;" class="card-title text-lg-start ">
                                     @item.STenBai
                                 </h5>
-                                <a id="link_dn" href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=item.FkSMaDn})"  class="card-text text-lg-start p-0">@item.sTendoanhnghiep</a>
-                                <p class="card-text">
+                                <a style="text-transform:uppercase" id="link_dn" href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=item.FkSMaDn})"  class="card-text text-lg-start p-0">@item.sTendoanhnghiep</a>
+                                <p class="card-text" style="    margin-top: 20px;">
                                     <small style="font-size:13px;margin-right:20px;background:#f4f5f5;padding:10px;color:#212f3f " class=" rounded">@item.FMucLuong-@item.FMucLuongTD Triệu</small>
                                     <small style="font-size:13px; background:#f4f5f5;padding:10px;color:#212f3f" class=" rounded">@item.sDiachi</small>
                                 </p>
@@ -351,7 +351,7 @@
                                         @{
                                             img = img + 1;
                                         }
-                              </div>
+                                    </div>
                                  
                                 }
                             </div>

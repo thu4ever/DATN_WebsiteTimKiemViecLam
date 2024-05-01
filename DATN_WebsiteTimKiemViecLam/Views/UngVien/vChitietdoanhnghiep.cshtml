@@ -7,6 +7,58 @@
 <head>
     <title>Hiển thị Vị trí trên Bản đồ</title>
     <style>
+        /* CSS cho các mục trong danh sách việc làm */
+        #item {
+            text-decoration: none;
+            max-width: 400px;
+            background-color: #fff;
+            border-color: #fff;
+            border-radius: 4px;
+            padding: 12px;
+            position: relative;
+        }
+        /* Hiệu ứng hover cho mục */
+        #item:hover {
+            background: #eef3ec;
+            border-color: #0d6aa5; /* Màu xanh lam */
+        }
+
+        #link_dn {
+            color: #6f7882;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+        }
+
+            #link_dn:hover {
+                color: #F56444;
+            }
+        #nameDN {
+            text-transform: uppercase;
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            margin-top: 12px;
+        }
+
+        .itemdn {
+            width: 100% !important;
+            height: 250px;
+            margin-bottom: 20px;
+            border: none;
+        }
+
+            .itemdn:hover {
+                border: 0.5px solid rgba(97,196,220,255);
+                box-shadow: 0 0 5px rgba(97,196,220,255);
+            }
+
+        #nameDN:hover {
+            color: #F56444;
+        }
         /* Thiết lập kích thước của phần tử bản đồ */
         #map {
             height: 400px;
@@ -39,14 +91,14 @@
 
         <div class="row text-center">
             <div class="col-12 col-sm-12 col-lg-12">
-                <p style="border-radius:5px; color: #0d6efd;font-size:larger;" class="pt-3 pb-2 fw-bold">
+                <p style="text-transform:uppercase; border-radius:5px; color: #003493;font-size:24px;" class="pt-3 pb-2 fw-bold">
                     Thông tin công ty và tuyển dụng từ @Model.STenDn
                 </p>
             </div>
         </div>
         <div class="row" >
             <div class="col-12 col-sm-12 col-lg-8" style="background:#FFFF; padding-right:5px;margin-bottom:10px">
-                <div style="background-color: #3D3BB2" class="infor-company rounded">
+                <div style="background-color: #003493" class="infor-company rounded">
                     <h6 class="text-center fw-bold pt-2 pb-2">THÔNG TIN DOANH NGHIỆP</h6>
                 </div>
                 <div class="row">
@@ -64,7 +116,7 @@
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-lg-4" style="background:#FFFF">
-                <div style="background-color: #3D3BB2;" class="infor-lh rounded">
+                <div style="background-color: #003493;" class="infor-lh rounded">
                     <h6 class="text-center fw-bold pt-2 pb-2">
                        CÁCH THỨC LIÊN HỆ 
                     </h6>
@@ -86,47 +138,39 @@
             </div>
         </div>
         <div style="color: #FFFFFF;">
-        <div class="dsvl rounded" style="background-color: #3D3BB2; ">
+            <div class="dsvl rounded" style="background-color: #003493; ">
             <h5 class="text-uppercase pt-2 pb-2 text-center">DANH SÁCH VIỆC LÀM</h5>
         </div>
         <div class="content1">
             <div class="row text-center" style="background:#FFFF">
                 @foreach (vDanhsachvieclam item in ViewBag.tblBaituyendung)
                 {
-                      <div class="col-sm-3 col-lg-3">
-                    <div class="card mb-3" style="max-width: 540px;height:150px">
-                        <div class="row no-gutters">
-                            <div class="col-md-4">
-                                <div class="img-card d-block">
-                                            <img style="height:56px; width: 120px;" src="data:image/png;base64,@item.SLogo" alt="Hình ảnh" class="item-image card-img-top p-2">
+                        <div onclick="DetailsPost(@item.PkSMaBai)" id="item" style="max-width: 430px !important;" href="@Url.Action("btnHienthichitietvieclam", new {PkSMaBai=item.PkSMaBai})" class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="data:image/png;base64,@item.SLogo" alt="Hình ảnh" class="item-image card-img-top p-2" @* data-id="@item.PkSMaBai" *@>
                                 </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                        <a style="text-decoration:none;height:100px" href="@Url.Action("btnHienthichitietvieclam", new {PkSMaBai=@item.PkSMaBai})" class="card-title fw-bold fs-5 text-black">@item.STenBai</a>
-                                    <div style="padding-bottom: 5px" class="row">
-                                            <div class="col-6 col-sm-6 col-lg-6">
-                                            <span style="font-size:15px" class="text-black ">@item.FMucLuong</span>
-                                        </div>
-                                            <div class="col-6 col-sm-6 col-lg-6">
-                                                    <span style="font-size:15px" class="text-black ">@item.sDiachi</span>
-                                        </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 style="color: #212f3f;font-size: 20px;font-weight: 600;line-height: 20px;" class="card-title text-lg-start ">
+                                            @item.STenBai
+                                        </h5>
+                                        <a style="text-transform:uppercase" id="link_dn" href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=item.FkSMaDn})" class="card-text text-lg-start p-0">@item.sTendoanhnghiep</a>
+                                        <p class="card-text" style="    margin-top: 20px;">
+                                            <small style="font-size:13px;margin-right:20px;background:#f4f5f5;padding:10px;color:#212f3f " class=" rounded">@item.FMucLuong-@item.FMucLuongTD Triệu</small>
+                                            <small style="font-size:13px; background:#f4f5f5;padding:10px;color:#212f3f" class=" rounded">@item.sDiachi</small>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
                 }
               
             </div>
-            <p class="text-center">Trang 1,2,3....</p>
+            @* <p class="text-center">Trang 1,2,3....</p> *@
         </div>
         </div>
     </div>
-
-    <!-- Phần tử để chứa bản đồ -->
-    @Model.SDiachi
     <script>
         // Hàm để hiển thị bản đồ với tọa độ của một địa chỉ cụ thể
         function initMap() {
