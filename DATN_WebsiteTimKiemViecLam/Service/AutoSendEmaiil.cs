@@ -22,8 +22,8 @@ namespace DATN_WebsiteTimKiemViecLam.Service
             MailMessage mail = new MailMessage(fromEmail, toEmail);
 
             // Tiêu đề và nội dung email
-            mail.Subject = subject;
-            mail.Body = body;
+            mail.Subject = subject; 
+            mail.Body = body; 
 
             // Cấu hình SMTP client để gửi email qua Gmail
             SmtpClient smtpClient = new SmtpClient("smtp-mail.outlook.com", 587);
@@ -40,6 +40,8 @@ namespace DATN_WebsiteTimKiemViecLam.Service
             {
               return false;
             }
+
+
         }
     }
 }
