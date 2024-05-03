@@ -9,8 +9,14 @@ namespace DATN_WebsiteTimKiemViecLam.Models
         {
             TblDoanhnghieps = new HashSet<TblDoanhnghiep>();
             TblUngViens = new HashSet<TblUngVien>();
+           
         }
-
+        public TblTaikhoan(string PkSEmail,string SMatkhau,long FkSMaQuyen)
+        {
+            this.PkSEmail = PkSEmail;
+            this.SMatkhau = SMatkhau;
+            this.FkSMaQuyen = FkSMaQuyen;
+        }
         public string PkSEmail { get; set; } = null!;
         public string SMatkhau { get; set; } = null!;
         public long FkSMaQuyen { get; set; }

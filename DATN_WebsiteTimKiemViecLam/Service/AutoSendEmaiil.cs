@@ -12,8 +12,8 @@ namespace DATN_WebsiteTimKiemViecLam.Service
 
     public bool SendEmail( string toEmail, string subject, string body)
     {
-            string fromEmail = "bynunbruleyt@hotmail.com";
-            string password = "M2iAGF75";
+            string fromEmail = "annotamiyac@hotmail.com";
+            string password = "5XselT72";
 
             // Thông tin người nhận
             //string toEmail = "hoainhoc101@gmail.com";

@@ -88,11 +88,11 @@ namespace UnitTestWebsite
         [TestMethod]
         public void TestTimKiem_Click_WithAll()
         {
-            string tg = "2";
+            string tg = "15";
             string kinhnghiem = "100";
-            string diachi = "Hà";
-            string mucluong = "1";
-            string tencv = "Nhân Viên";
+            string diachi = "Hà Nội";
+            string mucluong = "3";
+            string tencv = "FRESHER";
             int exp = 1;
             int act = uv.btn_TimkiemViecLam(tg, kinhnghiem, diachi, mucluong, tencv);
             Assert.AreEqual(exp, act);

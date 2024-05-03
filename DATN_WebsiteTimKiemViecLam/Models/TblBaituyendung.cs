@@ -15,8 +15,8 @@ namespace DATN_WebsiteTimKiemViecLam.Models
             SQuyenLoi = "";
             FMucluongtoida = 0;
             FMucLuongtoithieu = 0;
-            DTgTuyenDung = DateTime.Now;
-            DTgDangBai = new DateTime(2023, 3, 2);
+            DTgTuyenDung = DateTime.Now.AddDays(15);
+            DTgDangBai = DateTime.Now;
             ISoLuong = 0;
             SDiachicuthe = "";
             FNamKinhNghiem = 0;

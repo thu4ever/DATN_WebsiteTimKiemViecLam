@@ -49,7 +49,7 @@
                 </h3>
             </div>
         </div>
-        <div style=" border-radius: 15px; margin: 20px;" class="row">
+        <div style=" border-radius: 15px; margin: 20px;margin-bottom: 50px;" class="row">
             <div style="" class="col-12 col-sm-12 col-lg-8">
                 <div class="row">
                     <div class="col-4 col-sm-4 col-lg-4">
@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="col-9 col-sm-9 col-lg-9 " style="  margin: inherit; padding-top: 3%;  text-align: center;   line-height: 20px;">
                                     <b>Mức lương</b>
-                                    <p>@Model.FMucluongtoida</p>
+                                    <p>@Model.FMucLuongtoithieu - @Model.FMucluongtoida Triệu</p>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                     <i class="fa-solid fa-location-dot " style="font-size: 30px; color: #0a58ca; width: 110px; padding-top: 20%;"></i>
                                 </div>
                                 <div class="col-9 col-sm-9 col-lg-9 fs-6" style=" margin: inherit; padding-top: 3%;  text-align: center;   line-height: 20px;">
-                                    <b>Địa chỉ</b>
+                                    <b>Khu vực</b>
                                     <p>@Model.SDiachicuthe</p>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                     }
                                     else
                                     {
-                                        <p>Không yêu cầu kinh nghiệm</p>
+                                        <p>Không yêu cầu </p>
                                     }
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-12 col-lg-12">
                         <p class="text-lg-start">
-                            <label style="font-size:15px;" class="fw-bold text-lg-start fs-5" for="">Số lượng: </label>
+                            <label class="fw-bold text-lg-start " for="">Số lượng: </label>
                             @Model.ISoLuong <span style="font-size:15px;">ứng viên</span>
                         </p>
                         <p class="text-lg-start">
@@ -113,7 +113,7 @@
                         </p>
                         <p class="text-lg-start">
                             <label class="fw-bold " for="">Quyền lợi: </label>
-                            <ul style="font-size:16px;text-align: justify;font-weight: 400;">
+                            <ul style="font-size:16px;text-align: justify;">
                                 @Html.Raw(Model.SQuyenLoi)  
                             </ul>
                         </p>
@@ -149,10 +149,39 @@
                     </div>
                 </div>
                 <p class="text-lg-start">
-                    <label style="margin-top:20px" class="fw-bold " for="">Địa chỉ cụ thể: </label>
+                    <label style="margin-top:20px" class="fw-bold " for="">Địa chỉ cụ thể: @Model.SDiachi </label>
                 <div id="map" style=" margin-top:20px; width: 100%; height: 200px;"></div>
                 </p>
             </div>
+        </div>
+        <div class="row">
+            <span class="fw-bold text-lg-start ">GỢI Ý DANH SÁCH VIỆC LÀM</span>
+            <div class="content1">
+                <div class="row text-center" style="background:#FFFF">
+                    @foreach (vDanhsachvieclam item in ViewBag.tblBaituyendung)
+                    {
+                        <div onclick="DetailsPost(@item.PkSMaBai)" id="item" style="max-width: 430px !important;" href="@Url.Action("btnHienthichitietvieclam", new {PkSMaBai=item.PkSMaBai})" class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="data:image/png;base64,@item.SLogo" alt="Hình ảnh" class="item-image card-img-top p-2" @* data-id="@item.PkSMaBai" *@>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 style="color: #212f3f;font-size: 20px;font-weight: 600;line-height: 20px;" class="card-title text-lg-start ">
+                                            @item.STenBai
+                                        </h5>
+                                        <a style="text-transform:uppercase" id="link_dn" href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=item.FkSMaDn})" class="card-text text-lg-start p-0">@item.sTendoanhnghiep</a>
+                                        <p class="card-text" style="    margin-top: 20px;">
+                                            <small style="font-size:13px;margin-right:20px;background:#f4f5f5;padding:10px;color:#212f3f " class=" rounded">@item.FMucLuong-@item.FMucLuongTD Triệu</small>
+                                            <small style="font-size:13px; background:#f4f5f5;padding:10px;color:#212f3f" class=" rounded">@item.sDiachi</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
         </div>
     </div>
     <script>

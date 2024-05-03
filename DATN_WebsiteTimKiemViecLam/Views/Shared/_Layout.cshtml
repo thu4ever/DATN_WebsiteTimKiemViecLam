@@ -2,7 +2,9 @@
 @{
     int? fkSMaQuyen = HttpContextAccessor.HttpContext.Session.GetInt32("FkSMaQuyen");
     string? avatar = HttpContextAccessor.HttpContext.Session.GetString("Avatar");
+    string? AvatarDN = HttpContextAccessor.HttpContext.Session.GetString("AvatarDN");
     string? PK_sEmail = HttpContextAccessor.HttpContext.Session.GetString("PK_sEmail");
+    string? sTenDN = HttpContextAccessor.HttpContext.Session.GetString("sTenDN");
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -29,15 +31,15 @@
                 <div class="container-fluid" >
                     <img style="margin-right: 15px; " class="logo" src="~/images/logo.jpg" />
                     <a class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL" style="padding-bottom:1.5%; ">VIỆC LÀM</a>
+                    <a class="navbar-brand text-white text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachDN" style="padding-bottom:1.5%; ">DOANH NGHIỆP</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <div class="navbar-nav flex-grow-1">
-                            <a class="navbar-brand text-white text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachDN" style="padding-bottom:1.5%; ">DOANH NGHIỆP</a>
+                        <div style="    margin-top: 7px;   margin-left: 780px;" class=" navbar-brand text-white text-bar ">
+                            @PK_sEmail
                         </div>
-                        @* <div class=" navbar-brand text-white text-bar ">@PK_sEmail</div> *@
                         @if(avatar!=null)
                         {
                             <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" onmousemove="hienthimenu()" onmousewheel="anmenu()" src="data:image/png;base64,@avatar" />
@@ -81,7 +83,8 @@
         <div style="position: absolute" class="custom-vertical-menu-dn">
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 @* <div style="margin-left: 550px;" class=" navbar-brand text-white text-bar ">@PK_sEmail</div>*@
-                <img style="height: 50px;width: 50px; border: 1px solid #ccc;margin: 10px;border-radius: 90%;" src="data:image/png;base64,@avatar" />
+                <img style="height: 50px;width: 50px; border: 1px solid #ccc;margin: 10px;border-radius: 90%;" src="data:image/png;base64,@AvatarDN" />
+                    <span style=" font-size: 10px; font-weight: 600;">@sTenDN</span>
             </div>
             <div style="position: absolute" class="custom-vertical-menu-dn">
                 <a asp-controller="Doanhnghiep" asp-action="hienthidanhsachbaidang" style="color:#302F2F; text-decoration: none; display: block;">
@@ -151,7 +154,7 @@
         </header>
     }
     <div style="padding-bottom:100px" class="container">
-        <main role="main" class="pb-3" style=" background-color:#F5FAFF">
+        <main role="main" class="pb-3" style=" background-color:#F5FAFF !important">
             @RenderBody()
         </main>
     </div>

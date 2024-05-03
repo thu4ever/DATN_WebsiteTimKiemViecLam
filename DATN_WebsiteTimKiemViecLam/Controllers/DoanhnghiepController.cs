@@ -82,7 +82,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         [HttpPost]
         public IActionResult btnThembaidang(TblBaituyendung tblBaituyendung)
         {
-            tblBaituyendung.FkSMaDn = 5;
+            tblBaituyendung.FkSMaDn =(long) HttpContext.Session.GetInt32("PkSMaDn");
             tblBaituyendung.PkSMaBai = PK_sMabai;
             if (tblBaituyendung.DTgDangBai > DateTime.Now.Date)
             {
@@ -115,7 +115,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         }
         public IActionResult hienthidanhsachbaidang()
         {
-            List<TblBaituyendung> tblBaituyendung = _context.TblBaituyendungs.Where(p => p.FkSMaDn == 5).ToList();
+            List<TblBaituyendung> tblBaituyendung = _context.TblBaituyendungs.Where(p => p.FkSMaDn == HttpContext.Session.GetInt32("PkSMaDn")).ToList();
             return View("vQuanlybaidang", tblBaituyendung);
         }
         public IActionResult btnTimkiembaidang(String txtTencongviec)
@@ -135,7 +135,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             var checkexist = _context.TblBaituyendungs.Where(p => p.Equals(tblBaituyendung)).FirstOrDefault();
             if (checkexist != null)
             {
-                tblBaituyendung.FkSMaDn = 5;
+                tblBaituyendung.FkSMaDn = (long)HttpContext.Session.GetInt32("PkSMaDn");
                 DateTime dtupdate = tblBaituyendung.DTgDangBai.Date;
                 tblBaituyendung.ITrangthai = dtupdate.Equals(DateTime.Now.Date) ? 1 : 0;
                 var checkrecordupdate = _context.TblBaituyendungs.Add(tblBaituyendung);
@@ -163,7 +163,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                     TblUngVien tblUngVien= _context.TblUngViens.Where(p => p.PkSMaUngVien == PkFkSMaUngVien).FirstOrDefault();
                     string sub = "Thông báo từ FreeWork";
                     string content = "Chúng tôi rất tiếc khi phải thông báo cho bạn rằng CV của bạn cho công việc  " + tblBaituyendung.STenBai + "đã bị từ chối bởi nhà tuyển dụng. Nếu có bất cứ thắc mắc hay câu hỏi gì bạn có thể liên hệ trực tiếp với chúng tôi thông qua email chính thức: freework@gmail.com";
-                    string sTennguoinhan = HttpContext.Session.GetString("PK_sEmail");
+                    string sTennguoinhan = tblUngVien.FkSEmail;
                     AutoSendEmaiil autoSendEmaiil = new AutoSendEmaiil();
                     autoSendEmaiil.SendEmail(tblUngVien.FkSEmail, sub, content);
                 }    
@@ -280,7 +280,14 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             TblThongTinUngTuyen ChitietCVungvien = _context.TblThongTinUngTuyens.Where(p => p.PkFkSMaBai == PkFkSMaBai && p.PkFkSMaUngVien == PkFkSMaUngVien).FirstOrDefault();
             ChitietCVungvien.BTrangthai = true;
             _context.SaveChanges();
-            return View("vGuiEmailchoungvien");
+            TblBaituyendung tblBaituyendung =_context.TblBaituyendungs.Where(p => p.PkSMaBai == PkFkSMaBai).FirstOrDefault();
+            TblUngVien tblUngVien = _context.TblUngViens.Where(p => p.PkSMaUngVien == PkFkSMaUngVien).FirstOrDefault();
+            string sub = "Thông báo từ FreeWork";
+            string content = "Chúng tôi rất vui mừng khi  thông báo cho bạn rằng CV của bạn cho công việc  " + tblBaituyendung.STenBai + " đã được nhà tuyển dụng chấp nhận và tiến hành sắp xếp lịch quản lý. Bạn hãy chú ý email hoặc số điện thoại để có thể nhận được thông tin sớm nhất từ nhà tuyển dụng nhé. Nếu có bất cứ thắc mắc hay câu hỏi gì bạn có thể liên hệ trực tiếp với chúng tôi thông qua email chính thức: freework@gmail.com";
+            string sTennguoinhan = tblUngVien.FkSEmail;
+            AutoSendEmaiil autoSendEmaiil = new AutoSendEmaiil();
+            autoSendEmaiil.SendEmail(tblUngVien.FkSEmail, sub, content);
+            return View("vchinhsuatrangthaiCV");
 
         }
         [HttpPost]

@@ -149,7 +149,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         public bool CheckDisableTaikhoan(String PKsEmail)
         {
             TblTaikhoan check = _context.TblTaikhoans.FirstOrDefault(p => p.PkSEmail == PKsEmail);
-            bool result = check.FkSMaQuyen ==7 ? true : false;
+            bool result = check.FkSMaQuyen == 10002 ? true : false;
             return result;
         }
         public ActionResult Login()
@@ -169,6 +169,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             TblTaikhoan result = _context.TblTaikhoans.FirstOrDefault(p => p.PkSEmail == Email && p.SMatkhau == Matkhau);
             if (result == null)
             {
+                ViewBag.MS_005 = "Sai mật khẩu";
                 return View();
             }
             HttpContext.Session.SetInt32("FkSMaQuyen", Int32.Parse(result.FkSMaQuyen.ToString()));
@@ -183,7 +184,8 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 //ViewBag.SavedText = savedText;
                 if (tblUngVien != null)
                 {
-                    HttpContext.Session.SetString("Avatar", tblUngVien.SAnh);
+                    if(tblUngVien.SAnh!=null)
+                    HttpContext.Session.SetString("Avatar",tblUngVien.SAnh);
                     HttpContext.Session.SetInt32("PKsMaUngVien", Int32.Parse(tblUngVien.PkSMaUngVien.ToString()));
                 }
                 if(HttpContext.Session.GetInt32("Mabaituyendung")!=null)
@@ -197,7 +199,8 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 TblDoanhnghiep tblDoanhnghiep = _context.TblDoanhnghieps.FirstOrDefault(p => p.FkSEmail == Email);
                 if(tblDoanhnghiep!=null)
                 {
-                    HttpContext.Session.SetString("Avatar", tblDoanhnghiep.SLogo);
+                    HttpContext.Session.SetString("AvatarDN", tblDoanhnghiep.SLogo);
+                    HttpContext.Session.SetString("sTenDN", tblDoanhnghiep.STenDn);
                     HttpContext.Session.SetInt32("PkSMaDn", Int32.Parse(tblDoanhnghiep.PkSMaDn.ToString()));
 
                 }
@@ -250,14 +253,13 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         {
             return View("Resgiter");
         }
-            [HttpPost]
+        [HttpPost]
         public ActionResult Resgiter( long quyendki,String Email, String Matkhau)
         {
             TblTaikhoan taikhoan= new TblTaikhoan();
             taikhoan.SMatkhau = Matkhau;
             taikhoan.FkSMaQuyen = quyendki;
             taikhoan.PkSEmail = Email;
-
             var check =_context.TblTaikhoans.Add(taikhoan);
             _context.SaveChanges();
             if (check != null)
@@ -270,6 +272,10 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 HttpContext.Session.SetString("PK_sEmail", Email);
                 return RedirectToAction("EditInForCompany");
             } 
+            return View();
+        }
+        public ActionResult EditInforUser(string iMaquyen,string PK_sEmail)
+        {
             return View();
         }
         //public ActionResult EditInForCompany()
@@ -336,6 +342,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             TblUngVien check = _context.TblUngViens.Where(p => p.FkSEmail == HttpContext.Session.GetString("PK_sEmail")).FirstOrDefault();
             ViewBag.sHoten = check.SHoTen;
             ViewBag.SSdt = check.SSdt;
+            ViewBag.SAnh = check.SAnh;
                 return View("vThongtinUV");  
         }
         [HttpPost]

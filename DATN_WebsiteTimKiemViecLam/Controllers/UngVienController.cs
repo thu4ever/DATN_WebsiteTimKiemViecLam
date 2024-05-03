@@ -80,6 +80,27 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                  DTgDangBai = baiTuyenDung.DTgDangBai
              })
              .FirstOrDefault();
+            if( result != null )
+            {
+                string[] lst = result.STenBai.Trim().Split(" ");
+                var danhSachBaiTuyenDunggoiy = _context.TblBaituyendungs
+                  .Include(baiTuyenDung => baiTuyenDung.FkSMaDnNavigation) // Nạp dữ liệu từ bảng TblDoanhnghiep
+                  .Where(p => p.ITrangthai == 1 && p.STenBai.Contains(lst[0]))
+                  .Select(baiTuyenDung => new vDanhsachvieclam
+                  {
+                      PkSMaBai = baiTuyenDung.PkSMaBai,
+                      STenBai = baiTuyenDung.STenBai,
+                      SLogo = baiTuyenDung.FkSMaDnNavigation.SLogo,
+                      sTendoanhnghiep = baiTuyenDung.FkSMaDnNavigation.STenDn,
+                      sDiachi = baiTuyenDung.SDiachicuthe,
+                      FMucLuong = baiTuyenDung.FMucLuongtoithieu,
+                      FMucLuongTD = baiTuyenDung.FMucluongtoida,
+                      FkSMaDn = baiTuyenDung.FkSMaDn,
+                      ITrangthai = baiTuyenDung.ITrangthai
+                  })
+                  .ToList();
+                ViewBag.tblBaituyendung = danhSachBaiTuyenDunggoiy;
+            }    
             return View("vChitietvieclam", result);
         }
         public IActionResult btnHienthichitietDN(long FkSMaDn)
@@ -204,17 +225,11 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         public IActionResult btnTimkiemViecLam(int? page, String dThoigiandangtuyen, String txtkinhnghiem, String txtDiachi, String txtMucluong, String txtTencongviec)
         {
             if (txtTencongviec == null)
-            {
                 txtTencongviec = " ";
-            }
             if (txtDiachi == null)
-            {
                 txtDiachi = " ";
-            }
             if (txtkinhnghiem == null)
-            {
                 txtkinhnghiem = "100";
-            }
             DateTime now = DateTime.Now;
             int pageSize = 8; // Số lượng mục trên mỗi trang
             int pageNumber = (page ?? 1);
@@ -226,7 +241,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
            .ToList(); // Chuyển kết quả của truy vấn thành danh sách
 
             var result = query.AsEnumerable() // Chuyển sang việc thực hiện trên máy khách
-                .Where(u => u.FMucluongtoida > float.Parse(txtMucluong))
+                .Where(u => u.FMucLuongtoithieu > float.Parse(txtMucluong))
                 .Where(u => now - u.DTgDangBai < TimeSpan.FromDays(int.Parse(dThoigiandangtuyen)))
                 .Join(_context.TblDoanhnghieps,
                       baiTuyenDung => baiTuyenDung.FkSMaDn,
@@ -244,8 +259,6 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             ViewBag.CurrentPage = pageNumber;
             List<TblDoanhnghiep> model1Data = _context.TblDoanhnghieps.ToList();
             ViewBag.model1Data = model1Data;
-
-
             return View("vDanhsachvieclam", result.ToPagedList(pageNumber, pageSize));
         }
 
@@ -253,13 +266,9 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         {
             HttpContext.Session.SetInt32("Ungtuyen", 0);
             if (PKsMabai != 0)
-            {
                 HttpContext.Session.SetInt32("Mabaituyendung", PKsMabai);
-            }
             if (HttpContext.Session.GetInt32("FkSMaQuyen") == null && HttpContext.Session.GetString("PK_sEmail") == null)
-            {
                 return RedirectToAction("Login", "Taikhoan");
-            }
             return View("vThongtinungtuyen");
         }
         [HttpPost]

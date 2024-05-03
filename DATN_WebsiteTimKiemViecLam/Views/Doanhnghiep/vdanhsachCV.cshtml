@@ -34,8 +34,9 @@
             url: '/DoanhNghiep/btnGuiEmailchoungvien?PkFkSMaUngVien=' + PkFkSMaUngVien + '&PkFkSMaBai=' + PkFkSMaBai, // Đường dẫn đến hàm Xoa trong controller
                 type: 'GET', // Sử dụng phương thức DELETE
                 success: function (result) {
+                alert("Đặt lịch phỏng vấn thành công")
                 // location.reload();
-                $('#emailInfoModal').modal('show');
+                // $('#emailInfoModal').modal('show');
                 },
                 error: function (xhr, status, error) {
                     alert(error); // Hiển thị thông báo khi xóa không thành công

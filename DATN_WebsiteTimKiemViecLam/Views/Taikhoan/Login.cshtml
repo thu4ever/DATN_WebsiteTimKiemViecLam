@@ -6,6 +6,7 @@ Des: Created
 @{
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,21 +15,14 @@ Des: Created
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Elegant Login Form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript">
-        function togglePassword() {
-            var passwordField = document.getElementById("password");
-            var fieldType = passwordField.type;
-           passwordField.type = (fieldType === "password") ? "text" : "password";
-        }
-    </script>
     <link href="~/css/style.css" rel="stylesheet" />
     <link href="~/css/font-awesome.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
     <style>
         .display_pass {
             position: relative;
         }
-
             .display_pass img {
                 position: absolute;
                 right: 5px;
@@ -36,7 +30,64 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 transform: translateY(-50%);
                 cursor: pointer;
             }
+
     </style>
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var fieldType = passwordField.type;
+            passwordField.type = (fieldType === "password") ? "text" : "password";
+        }
+        function validateForm() {
+            var email = document.querySelector('input[name="Email"]').value;
+            var pass = document.querySelector('input[name="Matkhau"]').value;
+            var errorMessage = document.getElementById("errorMessage");
+            var errorMessage1 = document.getElementById("errorMessage1");
+            if (email === "" && pass === "") {
+                errorMessage.innerText = "Bạn chưa nhập đầy đủ thông tin ";
+                return false; // Ngăn form được submit
+            }
+            if (email === "") {
+                errorMessage.innerText = "Bạn chưa nhập tên tài khoản";
+                return false; // Ngăn form được submit
+            }
+            if (pass === "") {
+                errorMessage1.innerText = "Bạn chưa nhập mật khẩu";
+                return false; // Ngăn form được submit
+            }
+            // $.ajax({
+            //     url: "/Taikhoan/CheckExisitTaikhoanDK?PKsEmail=" + email,
+            //     type: "GET", // Đã sửa thành "GET"
+            //     success: function (response) {
+            //         //console.log(response); // In ra response để xem cấu trúc của nó
+            //         if (response == "true")
+            //             errorMessage.innerText = "Tên tài khoản không tồn tại";
+            //         else
+            //             errorMessage.innerText = "Tên tài khoản tồn tại";
+            //     },
+            //     error: function (xhr, status, error) {
+            //         console.error("AJAX request failed: " + status + ", " + error);
+            //     }
+            // });
+            // $.ajax({
+            //     url: "/Taikhoan/CheckDisableTaikhoan?PKsEmail=" + email,
+            //     type: "GET", // Đã sửa thành "GET"
+            //     success: function (response) {
+            //         //console.log(response); // In ra response để xem cấu trúc của nó
+            //         if (response == "true")
+            //             errorMessage.innerText = "Tài kh";
+            //         else
+            //             errorMessage.innerText = "Tên tài khoản tồn tại";
+            //     },
+            //     error: function (xhr, status, error) {
+            //         console.error("AJAX request failed: " + status + ", " + error);
+            //     }
+            // });
+
+            // Nếu mọi thứ hợp lệ, cho phép form được submit
+            return true;
+        }
+    </script>
 </head>
 <body style="    background: url(../Images/background-xanh-duong-dep.jpg) no-repeat 0px 0px;">
     <div class="login-form w3_form">
@@ -45,14 +96,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="login w3_login">
             <div class="w3l_grid">
-                <form class="login-container" action="Login" method="post">
-                    <input type="email" placeholder="Email" Name="Email" required="">
+                <form onsubmit="return validateForm()" class="login-container" action="Login" method="post">
+                    <input type="email" placeholder="Email" Name="Email" title="Email chưa đúng định dạng">
+                    <span style="font-size: 10px; color: red;" id="errorMessage" class="error-message"></span>
                     <div class="display_pass">
-                        <input id="password" type="password" placeholder="Password" Name="Matkhau" required="">
+                        <input id="password" type="password" placeholder="Password" Name="Matkhau">
                         <img style="width:20px;" id="dispass" onclick="togglePassword()" src="~/images/iconhienmatkhau.png" />
                          <img style="width:20px;display:none" id="hidepass" src="~/images/hidepass.png" /> 
                     </div>
-                    <input style="margin-left: 120px;text-align: center;margin-bottom: 15px;background-color: #003493;color: white;height: 50px;width: 200px;padding: 10px 20px;border: none;border-radius: 29px;" id="Dangnhap" type="submit" value="ĐĂNG NHẬP">
+                    @{
+                        if (ViewBag.MS_005 != null)
+                        {
+                            <div style="font-size: 10px; color: red;" class="error-message">@ViewBag.MS_005</div>
+
+                        }
+                    }
+                    <div style="font-size: 10px; color: red;" id="errorMessage1" class="error-message"></div>
+                    <input  style="margin-left: 120px;text-align: center;margin-bottom: 15px;background-color: #003493;color: white;height: 50px;width: 200px;padding: 10px 20px;border: none;border-radius: 29px;" id="Dangnhap" type="submit" value="ĐĂNG NHẬP">
                 </form>
                 <div class="bottom-text w3_bottom_text">
                     <p>Bạn đã có tài khoản chưa?<a href="@Url.Action("Resgiter","Taikhoan")">Đăng ký </a></p>
