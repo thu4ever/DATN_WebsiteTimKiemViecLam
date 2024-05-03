@@ -11,6 +11,9 @@ using System.Web.Helpers;
 using System.Text.RegularExpressions;
 using NuGet.Protocol;
 using Google.Apis.Logging;
+using PuppeteerSharp;
+using OfficeOpenXml;
+
 
 namespace DATN_WebsiteTimKiemViecLam.Controllers
 {
@@ -249,30 +252,34 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             } else 
             return 0;
         }
+        [HttpGet]
         public ActionResult Resgiter()
         {
             return View("Resgiter");
         }
+        
         [HttpPost]
-        public ActionResult Resgiter( long quyendki,String Email, String Matkhau)
+        public ActionResult Resgiter1( long quyendki,String Email, String Matkhau)
         {
             TblTaikhoan taikhoan= new TblTaikhoan();
             taikhoan.SMatkhau = Matkhau;
             taikhoan.FkSMaQuyen = quyendki;
             taikhoan.PkSEmail = Email;
-            var check =_context.TblTaikhoans.Add(taikhoan);
-            _context.SaveChanges();
-            if (check != null)
+            if (_context.TblTaikhoans.Add(taikhoan) != null)
             {
-                if(quyendki==1)
+                if(!CheckExisitTaikhoan(Email))
+                {
+                    _context.SaveChanges();
+                }        
+                if (quyendki==1)
                 {
                     HttpContext.Session.SetString("PK_sEmail", Email);
-                    return RedirectToAction("Login");
+                    return View("Login");
                 }    
                 HttpContext.Session.SetString("PK_sEmail", Email);
                 return RedirectToAction("EditInForCompany");
             } 
-            return View();
+            return View("Register");
         }
         public ActionResult EditInforUser(string iMaquyen,string PK_sEmail)
         {
@@ -288,6 +295,16 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         }
         public ActionResult EditInForCompany()
         {
+            String email = HttpContext.Session.GetString("PK_sEmail");
+            if(email!=null)
+            {
+                TblDoanhnghiep tblDoanhnghiep= _context.TblDoanhnghieps.Where(p=>p.FkSEmail==email).FirstOrDefault();
+                ViewBag.sTenDN = tblDoanhnghiep.STenDn;
+                ViewBag.sDiachi=tblDoanhnghiep.SDiachi;
+                ViewBag.sMasothue = tblDoanhnghiep.SMasothue;
+                ViewBag.sSDT = tblDoanhnghiep.SSdt;
+                ViewBag.sMota = tblDoanhnghiep.SMota;
+            }    
             return View();
         }
        [HttpPost]
@@ -319,11 +336,22 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                     // Chuyển đổi mảng byte thành chuỗi base64
                     string base64String = Convert.ToBase64String(imageData);
                     doanhnghiep.SLogo = base64String;
-                    var check = _context.TblDoanhnghieps.Add(doanhnghiep);
-                    _context.SaveChanges();
-                    if(check != null)
+                    if(checkMasothue(tendoanhnghiep))
                     {
-                        TempData["Message"] = "Chỉnh sửa thông tin đăng nhập thành công";
+                        var check = _context.TblDoanhnghieps.Add(doanhnghiep);
+                        _context.SaveChanges();
+                        if (check != null)
+                        {
+                            TempData["Message"] = "Chỉnh sửa thông tin đăng nhập thành công";
+                            return RedirectToAction("Login");
+                        }
+                    }    
+                    else
+                    {
+                        TempData["Message"] = "Doanh nghiep cua ban hien dang nam trong danh sach rui ro. Chinh vi vay he thong se xoa tai khoan doanh nghiep cua ban ";
+                        TblTaikhoan tblTaikhoan = _context.TblTaikhoans.Where(p=>p.PkSEmail== email).FirstOrDefault();
+                        _context.TblTaikhoans.Remove(tblTaikhoan); 
+                        _context.SaveChanges();
                         return RedirectToAction("Login");
                     }    
                     // Trả về chuỗi base64 cho client
@@ -341,6 +369,31 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 return Content("No file selected");
             }
         }
+
+        private bool checkMasothue(string sTenDN)
+        {
+            FileInfo fileInfo = new FileInfo("C:\\Users\\admin\\Desktop\\Thực Tập\\DATN_WebsiteTimKiemViecLam\\DATN_WebsiteTimKiemViecLam\\dscongtyruiro.xlsx");
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            List<String> lstCompany = new List<string>();
+            using (ExcelPackage package = new ExcelPackage(fileInfo))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[0]; // Lấy trang tính đầu tiên (index bắt đầu từ 1)
+                int rowCount = worksheet.Dimension.Rows;
+
+                for (int row = 2; row <= rowCount; row++)
+                {
+                    string cellValue = worksheet.Cells[row, 2].Value?.ToString().Trim();
+                    lstCompany.Add(cellValue);
+                }
+            }
+            foreach(string item in lstCompany)
+            {
+                if (item == sTenDN)
+                    return false;
+            }    
+            return true;
+        }
+
         public ActionResult btnChinhsuathongtinUV_Admin(string PkSEmail)
         {
             TblUngVien check = new TblUngVien();
@@ -369,6 +422,11 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                     _context.TblThongTinUngTuyens.Remove(item);
                 _context.TblUngViens.Remove(tblUngVien);
             }
+            else
+            {
+               TblDoanhnghiep tblDoanhnghiep=new TblDoanhnghiep();
+
+            }    
             TblTaikhoan tblTaikhoan = _context.TblTaikhoans.Where(p => p.PkSEmail == PkSEmail).FirstOrDefault();
             if(tblTaikhoan!=null)
             _context.TblTaikhoans.Remove(tblTaikhoan);

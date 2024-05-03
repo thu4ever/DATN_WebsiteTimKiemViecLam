@@ -248,12 +248,16 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                       doanhNghiep => doanhNghiep.PkSMaDn,
                       (baiTuyenDung, doanhNghiep) => new vDanhsachvieclam
                       {
+                          PkSMaBai = baiTuyenDung.PkSMaBai,
                           STenBai = baiTuyenDung.STenBai,
-                          SLogo = doanhNghiep.SLogo,
-                          sTendoanhnghiep = doanhNghiep.STenDn,
+                          SLogo = baiTuyenDung.FkSMaDnNavigation.SLogo,
+                          sTendoanhnghiep = baiTuyenDung.FkSMaDnNavigation.STenDn,
                           sDiachi = baiTuyenDung.SDiachicuthe,
                           FMucLuong = baiTuyenDung.FMucLuongtoithieu,
-                          FMucLuongTD=baiTuyenDung.FMucluongtoida
+                          FMucLuongTD = baiTuyenDung.FMucluongtoida,
+                          FkSMaDn = baiTuyenDung.FkSMaDn,
+                          ITrangthai = baiTuyenDung.ITrangthai
+
                       }).ToList();
             ViewBag.TotalPages = Math.Ceiling((double)result.Count / pageSize);
             ViewBag.CurrentPage = pageNumber;

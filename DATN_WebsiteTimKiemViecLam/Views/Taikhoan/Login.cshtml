@@ -6,7 +6,6 @@ Des: Created
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +32,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     </style>
     <script>
+
         function togglePassword() {
             var passwordField = document.getElementById("password");
             var fieldType = passwordField.type;
@@ -90,6 +90,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </script>
 </head>
 <body style="    background: url(../Images/background-xanh-duong-dep.jpg) no-repeat 0px 0px;">
+    @if (TempData["Message"]!=null)
+    {
+        <script>alert('@TempData["Message"]');</script>
+    }
     <div class="login-form w3_form">
         <div class="login-title w3_title">
             <img src="~/images/logo.jpg" />
@@ -102,7 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="display_pass">
                         <input id="password" type="password" placeholder="Password" Name="Matkhau">
                         <img style="width:20px;" id="dispass" onclick="togglePassword()" src="~/images/iconhienmatkhau.png" />
-                         <img style="width:20px;display:none" id="hidepass" src="~/images/hidepass.png" /> 
+                        <img style="width:20px;display:none" id="hidepass" src="~/images/hidepass.png" /> 
                     </div>
                     @{
                         if (ViewBag.MS_005 != null)
