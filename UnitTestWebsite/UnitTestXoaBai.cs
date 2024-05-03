@@ -18,7 +18,7 @@ namespace UnitTestWebsite
         [TestMethod]
         public void TestXoa_Click_Succes()
         {
-            long pk = 19;
+            long pk = 10021;
             int exp = 1;
             int act = dn.btnXoaBaiDang(pk);
             Assert.AreEqual(exp, act);
