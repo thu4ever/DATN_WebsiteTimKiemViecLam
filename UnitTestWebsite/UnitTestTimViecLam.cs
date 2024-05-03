@@ -76,8 +76,8 @@ namespace UnitTestWebsite
         [TestMethod]
         public void TestTimKiem_Click_WithThoiGian()
         {
-            string tg = "3";
-            string kinhnghiem = "100";
+            string tg = "100";
+            string kinhnghiem = "1";
             string diachi = " ";
             string mucluong = "1";
             string tencv = " ";
@@ -88,10 +88,10 @@ namespace UnitTestWebsite
         [TestMethod]
         public void TestTimKiem_Click_WithAll()
         {
-            string tg = "15";
+            string tg = "7";
             string kinhnghiem = "100";
             string diachi = "Hà Nội";
-            string mucluong = "3";
+            string mucluong = "1";
             string tencv = "FRESHER";
             int exp = 1;
             int act = uv.btn_TimkiemViecLam(tg, kinhnghiem, diachi, mucluong, tencv);

@@ -28,10 +28,10 @@ namespace UnitTestWebsite
         public void TestCheckValidOldPassNull()
         {
             string email, mkcu, mkmoi, mkmoinhaplai;
-            email = "havhh@gmailcom";
+            email = "h.haqbhg@gmail.com";
             mkcu = "";
-            mkmoi = "havhh@11";
-            mkmoinhaplai = "havhh@11";
+            mkmoi = "hh@12345";
+            mkmoinhaplai = "hh@12345";
             bool exp = false;
             bool act = taikhoan.CheckValidDoimatkhau(email, mkcu, mkmoi, mkmoinhaplai);
             Assert.AreEqual(exp, act);
@@ -40,10 +40,10 @@ namespace UnitTestWebsite
         public void TestCheckValidNewPassNull()
         {
             string email, mkcu, mkmoi, mkmoinhaplai;
-            email = "havhh@gmailcom";
-            mkcu = "havhh#12";
+            email = "havhh@gmail.com";
+            mkcu = "Ha@12345";
             mkmoi = "";
-            mkmoinhaplai = "havhh@11";
+            mkmoinhaplai = "hh@12345";
             bool exp = false;
             bool act = taikhoan.CheckValidDoimatkhau(email, mkcu, mkmoi, mkmoinhaplai);
             Assert.AreEqual(exp, act);
@@ -52,9 +52,9 @@ namespace UnitTestWebsite
         public void TestCheckValidNewPassReEnterNull()
         {
             string email, mkcu, mkmoi, mkmoinhaplai;
-            email = "havhh@gmailcom";
-            mkcu = "havhh#12";
-            mkmoi = "havhh@11";
+            email = "h.haqbhg@gmail.com";
+            mkcu = "Ha@12345";
+            mkmoi = "hh@12345";
             mkmoinhaplai = "";
             bool exp = false;
             bool act = taikhoan.CheckValidDoimatkhau(email, mkcu, mkmoi, mkmoinhaplai);
@@ -64,10 +64,10 @@ namespace UnitTestWebsite
         public void TestCheckValidNewPassNoNum()
         {
             string email, mkcu, mkmoi, mkmoinhaplai;
-            email = "havhh@gmailcom";
-            mkcu = "havhh#12";
-            mkmoi = "hh@hangh";
-            mkmoinhaplai = "hh@hangh";
+            email = "h.haqbhg@gmail.com";
+            mkcu = "Ha@12345";
+            mkmoi = " hh@hangh";
+            mkmoinhaplai = "hh@12345";
             bool exp = false;
             bool act = taikhoan.CheckValidDoimatkhau(email, mkcu, mkmoi, mkmoinhaplai);
             Assert.AreEqual(exp, act);
@@ -76,10 +76,10 @@ namespace UnitTestWebsite
         public void TestCheckValidNewPassNoSpecialChar()
         {
             string email, mkcu, mkmoi, mkmoinhaplai;
-            email = "havhh@gmailcom";
+            email = "h.haqbhg@gmail.com";
             mkcu = "havhh#12";
             mkmoi = "hh123456";
-            mkmoinhaplai = "hh123456";
+            mkmoinhaplai = "hh12345";
             bool exp = false;
             bool act = taikhoan.CheckValidDoimatkhau(email, mkcu, mkmoi, mkmoinhaplai);
             Assert.AreEqual(exp, act);
@@ -88,8 +88,8 @@ namespace UnitTestWebsite
         public void TestCheckValidNewPassWith7Num()
         {
             string email, mkcu, mkmoi, mkmoinhaplai;
-            email = "havhh@gmailcom";
-            mkcu = "havhh#12";
+            email = "h.haqbhg@gmail.com";
+            mkcu = "Ha@12345";
             mkmoi = "hh@1234";
             mkmoinhaplai = "hh@12345";
             bool exp = false;
@@ -100,8 +100,8 @@ namespace UnitTestWebsite
         public void TestCheckValidNewPassWith9Num()
         {
             string email, mkcu, mkmoi, mkmoinhaplai;
-            email = "havhh@gmailcom";
-            mkcu = "havhh#12";
+            email = "havhh@gmail.com";
+            mkcu = "Ha@12345";
             mkmoi = "hh@123456";
             mkmoinhaplai = "hh@12345";
             bool exp = false;
@@ -112,8 +112,8 @@ namespace UnitTestWebsite
         public void TestCheckValidNewPassReEnterFail()
         {
             string email, mkcu, mkmoi, mkmoinhaplai;
-            email = "havhh@gmailcom";
-            mkcu = "havhh#12";
+            email = "h.haqbhg@gmail.com";
+            mkcu = "Ha@12345";
             mkmoi = "hh@12345";
             mkmoinhaplai = "hh@56789";
             bool exp = false;
@@ -124,8 +124,8 @@ namespace UnitTestWebsite
         public void TestDoiMatKhau_Click()
         {
             string email, mkcu, mkmoi;
-            email = "havhh@gmailcom";
-            mkcu = "havhh#12";
+            email = "h.haqbhg@gmail.com";
+            mkcu = "Ha@12345";
             mkmoi = "hh@12345";
             bool exp = true;
             bool act = taikhoan.btnDoimatkhauu_Click(email, mkcu, mkmoi);
@@ -135,9 +135,9 @@ namespace UnitTestWebsite
         public void TestDoiMatKhau_ClickFail()
         {
             string email, mkcu, mkmoi;
-            email = "havhh@gmailcom";
-            mkcu = "Ha@56789";
-            mkmoi = "hh@12345";
+            email = "h.haqbhg@gmail.com";
+            mkcu = "";
+            mkmoi = "";
             bool exp = false;
             bool act = taikhoan.btnDoimatkhauu_Click(email, mkcu, mkmoi);
             Assert.AreEqual(exp, act);
