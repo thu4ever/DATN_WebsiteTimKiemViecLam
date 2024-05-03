@@ -282,6 +282,10 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         //{
         //    return View();
         //}
+        public ActionResult btnChinhsuathongtinDN_Admin(string PkSEmail)
+        {
+            return View("EditInForCompany");
+        }
         public ActionResult EditInForCompany()
         {
             return View();
@@ -337,13 +341,57 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 return Content("No file selected");
             }
         }
+        public ActionResult btnChinhsuathongtinUV_Admin(string PkSEmail)
+        {
+            TblUngVien check = new TblUngVien();
+            check = _context.TblUngViens.Where(p => p.FkSEmail == PkSEmail).FirstOrDefault();
+            ViewBag.sHoten = check.SHoTen;
+            ViewBag.SSdt = check.SSdt;
+            ViewBag.SAnh = check.SAnh;
+            return View("vThongtinUV");
+        }
         public ActionResult btnChinhsuathongtinUV_Click()
         {
-            TblUngVien check = _context.TblUngViens.Where(p => p.FkSEmail == HttpContext.Session.GetString("PK_sEmail")).FirstOrDefault();
+            TblUngVien check = new TblUngVien();
+               check = _context.TblUngViens.Where(p => p.FkSEmail == HttpContext.Session.GetString("PK_sEmail")).FirstOrDefault();
             ViewBag.sHoten = check.SHoTen;
             ViewBag.SSdt = check.SSdt;
             ViewBag.SAnh = check.SAnh;
                 return View("vThongtinUV");  
+        }
+        public bool btnXoaTaikhoan(string PkSEmail)
+        {
+            TblUngVien tblUngVien=_context.TblUngViens.Where(p=>p.FkSEmail==PkSEmail).FirstOrDefault();
+            if(tblUngVien != null)
+            {
+                List<TblThongTinUngTuyen> tblThongTinUngTuyens = _context.TblThongTinUngTuyens.Where(p => p.PkFkSMaUngVien == tblUngVien.PkSMaUngVien).ToList();
+                foreach(TblThongTinUngTuyen  item in tblThongTinUngTuyens)
+                    _context.TblThongTinUngTuyens.Remove(item);
+                _context.TblUngViens.Remove(tblUngVien);
+            }
+            TblTaikhoan tblTaikhoan = _context.TblTaikhoans.Where(p => p.PkSEmail == PkSEmail).FirstOrDefault();
+            if(tblTaikhoan!=null)
+            _context.TblTaikhoans.Remove(tblTaikhoan);
+            var check=_context.SaveChanges();
+            if(check>0)
+            return true;
+            return false;
+        }
+        public bool btnKhoaTaikhoan(string PkSEmail)
+        {
+            TblTaikhoan tblTaikhoan = _context.TblTaikhoans.Where(p => p.PkSEmail == PkSEmail).FirstOrDefault();
+            tblTaikhoan.FkSMaQuyen = 10002;
+            if (tblTaikhoan != null)
+                _context.TblTaikhoans.Update(tblTaikhoan);
+            var check = _context.SaveChanges();
+            if (check > 0)
+                return true;
+            return false;
+        }
+        public ActionResult btnTimkiemtaikhoan(String sPkSMabai)
+        {
+            List<TblTaikhoan> tblBaituyendung = _context.TblTaikhoans.Where(p => p.PkSEmail.Contains(sPkSMabai)).ToList();
+            return View("vQuanlytaikhoan", tblBaituyendung);
         }
         [HttpPost]
         public ActionResult btnChinhsuathongtinUV_Click(string txtHoten,string txtGioitinh, string txtSodienthoai)

@@ -8,6 +8,9 @@ namespace DATN_WebsiteTimKiemViecLam.Models
         public TblDoanhnghiep()
         {
             TblBaituyendungs = new HashSet<TblBaituyendung>();
+            this.STenDn = "";
+            this.SMota = "";
+            this.SSdt = "";
         }
 
         public long PkSMaDn { get; set; }

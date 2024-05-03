@@ -38,6 +38,60 @@
      {
             font-weight: 400;
      }
+
+        #item {
+            text-decoration: none;
+            background-color: #fff;
+            border-color: #fff;
+            border-radius: 4px;
+            max-width:405px;
+            margin: 5px;
+            padding: 12px;
+            position: relative;
+        }
+            /* Hiệu ứng hover cho mục */
+            #item:hover {
+                background: #eef3ec;
+                border-color: #0d6aa5; /* Màu xanh lam */
+            }
+
+        #link_dn {
+            color: #6f7882;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+        }
+
+            #link_dn:hover {
+                color: #F56444;
+            }
+
+        #nameDN {
+            text-transform: uppercase;
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            margin-top: 12px;
+        }
+
+        .itemdn {
+            width: 100% !important;
+            height: 250px;
+            margin-bottom: 20px;
+            border: none;
+        }
+
+            .itemdn:hover {
+                border: 0.5px solid rgba(97,196,220,255);
+                box-shadow: 0 0 5px rgba(97,196,220,255);
+            }
+
+        #nameDN:hover {
+            color: #F56444;
+        }
     </style>
 </head>
 <body>
@@ -153,14 +207,14 @@
                 <div id="map" style=" margin-top:20px; width: 100%; height: 200px;"></div>
                 </p>
             </div>
-        </div>
-        <div class="row">
-            <span class="fw-bold text-lg-start ">GỢI Ý DANH SÁCH VIỆC LÀM</span>
+            <div class="dsvl rounded" style="background-color: #003493; ">
+                <h5 class="text-white text-uppercase pt-2 pb-2 text-center">GỢI Ý DANH SÁCH VIỆC LÀM</h5>
+            </div>
             <div class="content1">
-                <div class="row text-center" style="background:#FFFF">
+                <div class="row text-center" style="margin-top:20px">
                     @foreach (vDanhsachvieclam item in ViewBag.tblBaituyendung)
                     {
-                        <div onclick="DetailsPost(@item.PkSMaBai)" id="item" style="max-width: 430px !important;" href="@Url.Action("btnHienthichitietvieclam", new {PkSMaBai=item.PkSMaBai})" class="card mb-3">
+                        <div onclick="DetailsPost(@item.PkSMaBai)" id="item" href="@Url.Action("btnHienthichitietvieclam", new {PkSMaBai=item.PkSMaBai})" class="card mb-3">
                             <div class="row g-0">
                                 <div class="col-md-4">
                                     <img src="data:image/png;base64,@item.SLogo" alt="Hình ảnh" class="item-image card-img-top p-2" @* data-id="@item.PkSMaBai" *@>
@@ -180,9 +234,9 @@
                             </div>
                         </div>
                     }
-
                 </div>
         </div>
+    </div>
     </div>
     <script>
         $(document).ready(function () {
