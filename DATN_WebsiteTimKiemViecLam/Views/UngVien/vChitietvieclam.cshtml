@@ -194,7 +194,7 @@
                 <div class="infor-company">
                     <div class="card " style="width: 25rem;">
                         <div class="card" style="width: 21rem; height:250px; padding-left:20px; margin-bottom:20px;border:none">
-                            <img src="~/images/11.jpg" alt="Hình ảnh" class="card-img-top p-2">
+                            <a href="@Url.Action("btnHienthichitietDN", new {FkSMaDn=Model.FkSMaDn})"><img src="~/images/11.jpg" alt="Hình ảnh" class="card-img-top p-2"></a>
                             <a style="text-decoration:none;font-size: 12px;font-weight: 500;line-height: 16px;margin-top: 12px;width: 100%;" href="@Url.Action("btnHienthichitietDN","UngVien", new {FkSMaDn=Model.FkSMaDn})" class="card-title ">@Model.STenDn</a>
                         </div>
                         <div class="card-body text-lg-start">

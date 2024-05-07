@@ -2,9 +2,17 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    @if (ViewBag.MS_003 != null)
+    {
+        <script>
+            // Gọi hàm JavaScript để hiển thị thông báo
+            alert('@ViewBag.MS_003');
+        </script>
+    }
 }
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
     function updateStatus() {
         $.ajax({
             url: '/Doanhnghiep/LoadStatus',

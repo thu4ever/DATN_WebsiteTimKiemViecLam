@@ -55,34 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 errorMessage1.innerText = "Bạn chưa nhập mật khẩu";
                 return false; // Ngăn form được submit
             }
-            // $.ajax({
-            //     url: "/Taikhoan/CheckExisitTaikhoanDK?PKsEmail=" + email,
-            //     type: "GET", // Đã sửa thành "GET"
-            //     success: function (response) {
-            //         //console.log(response); // In ra response để xem cấu trúc của nó
-            //         if (response == "true")
-            //             errorMessage.innerText = "Tên tài khoản không tồn tại";
-            //         else
-            //             errorMessage.innerText = "Tên tài khoản tồn tại";
-            //     },
-            //     error: function (xhr, status, error) {
-            //         console.error("AJAX request failed: " + status + ", " + error);
-            //     }
-            // });
-            // $.ajax({
-            //     url: "/Taikhoan/CheckDisableTaikhoan?PKsEmail=" + email,
-            //     type: "GET", // Đã sửa thành "GET"
-            //     success: function (response) {
-            //         //console.log(response); // In ra response để xem cấu trúc của nó
-            //         if (response == "true")
-            //             errorMessage.innerText = "Tài kh";
-            //         else
-            //             errorMessage.innerText = "Tên tài khoản tồn tại";
-            //     },
-            //     error: function (xhr, status, error) {
-            //         console.error("AJAX request failed: " + status + ", " + error);
-            //     }
-            // });
+         
 
             // Nếu mọi thứ hợp lệ, cho phép form được submit
             return true;

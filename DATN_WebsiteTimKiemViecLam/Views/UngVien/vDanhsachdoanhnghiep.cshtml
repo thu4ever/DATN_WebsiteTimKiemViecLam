@@ -4,6 +4,15 @@
 @{
     int img = 10;
 }
+@{
+    @if (ViewBag.MS_028 != null)
+    {
+        <script>
+            // Gọi hàm JavaScript để hiển thị thông báo
+            alert('@ViewBag.MS_028');
+        </script>
+    }
+}
 <style>
     #nameDN {
         text-transform: uppercase;
@@ -35,6 +44,7 @@
     <h5 style="color: #003493;padding-top: 20px;margin-left: 400px;font-size: 24px;padding-bottom: 20px;" class="fs-3 fw-bold d-flex flex-nowrap">
         DANH SÁCH DOANH NGHIỆP
     </h5>
+    <form asp-controller="Ungvien" asp-action="btnTimkiemcongty">
     <div style="margin:30px" class="row">
         <div style="padding:5px;  width:500px" class="col-sm-2 col-lg-2">
             <input class="form-control" name="txtTencongviec" placeholder="Tên doanh nghiệp..." type="text" value="" />
@@ -46,6 +56,7 @@
             </button>
         </div>
     </div>
+    </form>
     <div style="padding: 20px;" class="content2">
     <div class="row text-center">
         @foreach (TblDoanhnghiep item in ViewBag.model1Data)

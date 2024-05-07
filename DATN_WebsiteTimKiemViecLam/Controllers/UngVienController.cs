@@ -291,6 +291,12 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             tblThongTinUngTuyen.PkFkSMaBai = (long)HttpContext.Session.GetInt32("Mabaituyendung");
             tblThongTinUngTuyen.SGioithieu = txtGioithieu;
             tblThongTinUngTuyen.DNgayGui = DateTime.Now;
+            var check_exist = _context.TblThongTinUngTuyens.Where(p => p.PkFkSMaUngVien == tblThongTinUngTuyen.PkFkSMaUngVien && p.PkFkSMaBai == tblThongTinUngTuyen.PkFkSMaBai);
+            if(check_exist!=null)
+            {
+                ViewBag.MS_028 = "Gui CV khong thanh cong, ban da ung tuyen viec nay roi!!!";
+                return View("vThongtinungtuyen");
+            }    
             var check = _context.TblThongTinUngTuyens.Add(tblThongTinUngTuyen);
             _context.SaveChanges();
             if (check != null)
@@ -303,9 +309,22 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                 autoSendEmaiil.SendEmail(sTennguoinhan, sub, content);
                 ViewBag.MS_028 = "Gui CV thanh cong";
             }
+            else
+            {
+                ViewBag.MS_028 = "Gui CV khong thanh cong";
+            }    
             return View("vThongtinungtuyen");
         }
-
+        public IActionResult btnTimkiemcongty(string txtTencongviec)
+        {
+            List<TblDoanhnghiep> model1Data = _context.TblDoanhnghieps.Where(p=>p.STenDn.Contains( txtTencongviec)).ToList();
+            if (model1Data.Count == 0)
+            {
+                ViewBag.MS_028 = "Khong tim duoc cong ty phu hop";
+            }    
+            ViewBag.model1Data = model1Data;
+            return View("vDanhsachdoanhnghiep");
+        }
         public IActionResult btnHienthidanhsachcv(bool? bTrangthai)
         {
             List<vdanhsachcvdaungtuyen> danhsachcv= _context.TblThongTinUngTuyens

@@ -31,6 +31,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         public IActionResult btnThembaidang()
         {
             TblBaituyendung tblBaituyendung = new TblBaituyendung();
+
             return View("vDangtaibaituyendung", tblBaituyendung);
         }
         public bool CheckValidthembaidang(String txtTen , String txtMota, String txtYeucau, String txtQuyenloi, float txtMucluongthoithieu,float txtMucluongtoida, int txtNamkinhnghiem,string txtsoluong, int txtTrangthai)
@@ -121,6 +122,10 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         public IActionResult btnTimkiembaidang(String txtTencongviec)
         {
             List<TblBaituyendung> tblBaituyendung = _context.TblBaituyendungs.Where(p => p.STenBai.Contains(txtTencongviec)).ToList();
+            if(tblBaituyendung.Count<=0)
+            {
+                ViewBag.MS_003 = "Khong tim thay ket qua phu hop";
+            }    
             return View("vQuanlybaidang", tblBaituyendung);
         }
         public IActionResult btnSuabaidang(long PKsMabai)

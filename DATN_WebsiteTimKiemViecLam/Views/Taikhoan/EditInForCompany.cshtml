@@ -11,7 +11,35 @@ Des: Created
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Elegant Login Form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function validateForm() {
+            var tendn = document.querySelector('input[name="tendoanhnghiep"]').value;
+            var file = document.querySelector('input[name="file"]').value;
+            var mota = document.querySelector('input[name="mota"]').value;
+            var diachi = document.querySelector('input[name="diachi"]').value;
+            var masothue = document.querySelector('input[name="masothue"]').value;
+            var sdt = document.querySelector('input[name="sodienthoai"]').value;
+            var errorMessage = document.getElementById("errorMessage");
+            var errorMessage1 = document.getElementById("errorMessage1");
+            if (tendn === "" && file === "" && mota==="") {
+                errorMessage.innerText = "Bạn chưa nhập đầy đủ thông tin ";
+                return false; // Ngăn form được submit
+            }
+            if (tendn === "") {
+                errorMessage.innerText = "Bạn chưa nhập tên doanh nghiệp";
+                return false; // Ngăn form được submit
+            }
+            if (mota === "") {
+                errorMessage.innerText = "Bạn chưa nhập mô tả";
+                return false; // Ngăn form được submit
+            }
+            if (diachi === "") {
+                errorMessage.innerText = "Bạn chưa nhập địa chỉ";
+                return false; // Ngăn form được submit
+            }
+        }
+
     </script>
     <link href="~/css/style.css" rel="stylesheet" />
     <link href="~/css/font-awesome.css" rel="stylesheet" />
@@ -24,7 +52,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="text-center mb-4">
                         <span style="color:red;">(*)</span> <span class="text-black">Các thông tin bắt buộc</span>
                     </div>
-                    <form class="w3l_grid" enctype="multipart/form-data" action="@Url.Action("EditInForCompany", "Taikhoan")" method="post">
+                    <form onsubmit="return validateForm()" class="w3l_grid" enctype="multipart/form-data" action="@Url.Action("EditInForCompany", "Taikhoan")" method="post">
                         <div class="mb-3 row">
                             <label for="tendoanhnghiep" class="col-sm-3 col-form-label text-black">Tên doanh nghiệp:</label>
                             <div class="col-sm-9">
@@ -61,6 +89,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <input type="text" class="form-control" id="sodienthoai" name="sodienthoai" placeholder="@ViewBag.sSDT">
                             </div>
                         </div>
+                        <div style="font-size: 10px; color: red;" id="errorMessage">@ViewBag.MS_005</div>
+
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary" style="background:#3D3BB2;">Lưu thông tin</button>
                         </div>
