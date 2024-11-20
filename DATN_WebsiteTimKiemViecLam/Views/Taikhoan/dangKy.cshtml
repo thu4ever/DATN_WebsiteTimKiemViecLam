@@ -1,0 +1,215 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Freework</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Elegant Login Form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); }
+                function togglePassword()
+         {
+          var passwordField = document.getElementById("password");
+
+          // Kiểm tra kiểu hiện tại của trường mật khẩu
+          var fieldType = passwordField.type;
+
+          // Nếu đang ở dạng password, chuyển sang text; ngược lại, chuyển về password
+          passwordField.type = (fieldType === "password") ? "text" : "password";
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="~/css/login.css" rel="stylesheet" />
+    <script>
+        // function validateForm() {
+        //     var email = document.querySelector('input[name="Email"]').value;
+        //     var pass = document.querySelector('input[name="Matkhau"]').value;
+        //     var passretype = document.querySelector('input[name="Matkhaunhaplai"]').value;
+        //     var errorMessage = document.getElementById("errorMessage");
+        //     var errorMessage1 = document.getElementById("errorMessage1");
+
+        //     // Kiểm tra xem có nhập đủ thông tin không
+        //     if (email === "" || pass === "" || passretype === "") {
+        //         errorMessage.innerText = "Bạn chưa nhập đầy đủ thông tin";
+        //         return false; // Ngăn form được submit
+        //     }
+
+        //     // Kiểm tra xem mật khẩu và nhập lại mật khẩu có khớp không
+        //     if (pass !== passretype) {
+        //         errorMessage1.innerText = "Mật khẩu nhập lại không khớp";
+        //         return false; // Ngăn form được submit
+        //     }
+
+        //     // Nếu mọi thứ hợp lệ, gửi yêu cầu AJAX để kiểm tra email đã tồn tại hay chưa
+        //     $.ajax({
+        //         url: "/Taikhoan/CheckExisitTaikhoanDK",
+        //         type: "GET",
+        //         data: { PKsEmail: email },
+        //         success: function (response) {
+        //             if (response === "true") {
+        //                 errorMessage.innerText = "Email đã tồn tại";
+        //             } else {
+        //                 // Nếu email chưa tồn tại, cho phép submit form
+        //                 document.querySelector('.login-container').submit();
+        //             }
+        //         },
+        //         error: function (xhr, status, error) {
+        //             console.error("AJAX request failed: " + status + ", " + error);
+        //         }
+        //     });
+
+        //     // Ngăn form được submit ngay lập tức
+        //     return true;
+        // }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <section class="overflow-hidden pl-20 bg-white max-md:pl-5">
+        <div class="flex gap-5 max-md:flex-col">
+            <div class="flex flex-col w-[35%] max-md:ml-0 max-md:w-full">
+                <div class="flex flex-col mt-8 w-full max-md:mt-10 max-md:max-w-full">
+                    <img loading="lazy"
+                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f912245dfb70c2756ea6bae66287b8b5e8a66aee211ead734f40118d3d3c5a7?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                         class="object-contain max-w-full aspect-[2.78] w-[111px]" alt="Company logo" />
+                    <div class="flex flex-col mt-44 max-w-full w-[312px] max-md:mt-10">
+                        <h1 class="text-3xl font-medium leading-none text-zinc-900">Tạo tài khoản</h1>
+                        <div class="flex items-start self-start mt-4 text-base">
+                            <p class="text-gray-500">Bạn đã có tài khoản? </p>
+                            <a href="@Url.Action("Login","Taikhoan")" class="font-medium text-blue-700"> Đăng nhập</a>
+                        </div>
+                    </div>
+                    <form onsubmit="return validateForm()" asp-controller="Taikhoan" asp-action="Resgiter1" method="post" class="flex flex-col mt-8 w-full text-base max-w-[536px] max-md:max-w-full">
+                        <div class="mt-5">
+                            <label for="email" class="sr-only">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Email"
+                                   class="px-5 py-3 w-full max-w-[536px] whitespace-nowrap bg-white rounded-md border border-solid border-zinc-200
+                                focus:border-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none" />
+                        </div>
+                        <div class="mt-5 relative">
+                            <label for="password" class="sr-only">Mật khẩu</label>
+                            <input type="password" id="password" name="password" placeholder="Mật khẩu"
+                                   class="px-5 py-3 w-full max-w-[536px] bg-white rounded-md border border-solid border-zinc-200
+                                focus:border-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none" />
+                            <img loading="lazy"
+                                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/2d27be22ba0379f3c61ce104c215ea936f401f2de14ba72696964db51f45618b?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                 class="object-contain absolute right-5 top-1/2 transform -translate-y-1/2 w-[22px] aspect-square"
+                                 alt="" />
+                        </div>
+                        <div class="mt-5 relative">
+                            <label for="confirmPassword" class="sr-only">Nhập lại mật khẩu</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword"
+                                   placeholder="Nhập lại mật khẩu"
+                                   class="px-5 py-3 w-full max-w-[536px] bg-white rounded-md border border-solid border-zinc-200
+                                focus:border-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none" />
+                            <img loading="lazy"
+                                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/2d27be22ba0379f3c61ce104c215ea936f401f2de14ba72696964db51f45618b?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                 class="object-contain absolute right-5 top-1/2 transform -translate-y-1/2 w-[22px] aspect-square"
+                                 alt="" />
+                        </div>
+                        <div class="flex  gap-2.5 items-center mt-5 text-sm leading-none text-blue-700 max-md:max-w-full">
+                            <input name="quyendki" value="1" type="checkbox" id="termsAgreement" 
+                                   class="w-5 h-5 bg-white rounded border border-blue-300 border-solid" />
+                            <label for="termsAgreement" class="w-[506px] max-md:max-w-full text-gray-500">
+                                Ứng viên
+                            </label>
+                            <input name="quyendki" value="2" type="checkbox" id="termsAgreement"
+                                   class="w-5 h-5 bg-white rounded border border-blue-300 border-solid" />
+                            <label for="termsAgreement" class="w-[506px] max-md:max-w-full text-gray-500">
+                                Doanh nghiệp
+                            </label>
+                        </div>
+                        <button type ="submit" value="Đăng ký"
+                                class="flex flex-wrap gap-3 justify-center items-center px-8 py-4 mt-8 text-base font-semibold text-white capitalize bg-blue-700 rounded max-md:px-5 hover:bg-[#0851A3]">
+                            <span class="self-stretch my-auto">Tạo tài khoản</span>
+                            <img loading="lazy"
+                                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/73d846242d81440991c405465fb6285799f5fa2446c9ea3497360f89b46aa39c?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                 class="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" alt="" />
+                        </button>
+                    </form>
+                    <div class="flex flex-col justify-center items-center mt-8 text-sm leading-none max-md:max-w-full">
+                        <p class="text-center text-gray-500">hoặc</p>
+                        <div class="flex flex-wrap gap-5 items-start mt-4 text-neutral-600 max-md:max-w-full">
+                            <a href="#"
+                               class="flex gap-3 justify-center items-center px-6 py-3 bg-white rounded border border-solid border-zinc-200 min-w-[240px] w-[258px] max-md:px-5">
+                                <img loading="lazy"
+                                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/da2c67dfaaae22c699385217541c47faa452f94b0f59df85d32d65320afdeb83?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                     class="object-contain shrink-0 self-stretch my-auto w-5 aspect-square"
+                                     alt="Facebook logo" />
+                                <span class="self-stretch my-auto">Sign up with Facebook</span>
+                            </a>
+                            <a href="#"
+                               class="flex gap-3 justify-center items-center px-6 py-3 bg-white rounded border border-solid border-zinc-200 min-w-[240px] w-[258px] max-md:px-5">
+                                <img loading="lazy"
+                                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/f170e6f7b53cfed32c8280241d0af35cccc8ac70e3bbad1fda4645500b8f5ced?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                     class="object-contain shrink-0 self-stretch my-auto w-5 aspect-square"
+                                     alt="Google logo" />
+                                <span class="self-stretch my-auto">Sign up with Google</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col ml-5 w-[65%] max-md:ml-0 max-md:w-full">
+                <div class="flex relative flex-col grow items-center px-20 pb-28 min-h-[1080px] max-md:px-5 max-md:pb-24 max-md:mt-10 max-md:max-w-full">
+                    <img loading="lazy"
+                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/57d2d33763040f9186148535908617acd0b39c7847354a9237336f828368857f?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                         class="object-cover absolute inset-0 size-full" alt="Background image" />
+                    <div class="flex relative flex-col max-w-full w-[753px]">
+                        <img loading="lazy"
+                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/ebed4f49647314381b21eebe065b8c1b0a708c9c7cc20efaa3502fe35f9d3d8c?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                             class="object-contain z-10 w-full aspect-[1.1] max-md:max-w-full" alt="Decorative image" />
+                        <div class="flex flex-col -mt-1.5 max-w-full w-[560px]">
+                            <h2 class="text-4xl font-medium leading-10 text-white max-md:max-w-full">
+                                Hơn 1,75,324 công việc đang chờ những ứng viên.
+                            </h2>
+                            <div class="flex flex-wrap gap-2.5 justify-between items-start mt-12 w-full max-md:mt-10">
+                                <div class="flex flex-col justify-center w-[180px]">
+                                    <div class="flex gap-2.5 items-center p-4 w-16 h-16 rounded-lg bg-white bg-opacity-10">
+                                        <img loading="lazy"
+                                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/d9623429d95acb1657dc39c79e5374f16909e29202b7bbb6690a857cdf9e1d55?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                             class="object-contain w-8 aspect-square" alt="" />
+                                    </div>
+                                    <div class="flex flex-col mt-6 max-w-full text-white w-[180px]">
+                                        <p class="text-xl font-medium leading-relaxed">1,75,324</p>
+                                        <p class="mt-1 text-sm leading-none opacity-70">Live Job</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-center w-[180px]">
+                                    <div class="flex gap-2.5 items-center p-4 w-16 h-16 rounded-lg bg-white bg-opacity-10">
+                                        <img loading="lazy"
+                                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/26e4631a5289b9ac07f338f1cdd93c4b038a904f1257b0f3f8a1dba9dddbbf6c?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                             class="object-contain w-8 aspect-square" alt="" />
+                                    </div>
+                                    <div class="flex flex-col mt-6 max-w-full text-white whitespace-nowrap w-[180px]">
+                                        <p class="text-xl font-medium leading-relaxed">97,354</p>
+                                        <p class="mt-1 text-sm leading-none opacity-70">Companies</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-center w-[180px]">
+                                    <div class="flex gap-2.5 items-center p-4 w-16 h-16 rounded-lg bg-white bg-opacity-10">
+                                        <img loading="lazy"
+                                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/0116937f5251c49cabda889a77ccfaffe7a589c6fd8a2eb474e3abdcb3be897a?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                             class="object-contain w-8 aspect-square" alt="" />
+                                    </div>
+                                    <div class="flex flex-col mt-6 max-w-full text-white w-[180px]">
+                                        <p class="text-xl font-medium leading-relaxed">7,532</p>
+                                        <p class="mt-1 text-sm leading-none opacity-70">New Jobs</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,774 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model DATN_WebsiteTimKiemViecLam.Models.vChitietvieclam
+}
+@{
+    TimeSpan difference = Model.DTgTuyenDung.Subtract(DateTime.Now);
+    int numberOfDays = difference.Days;
+    Layout = null;
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết việc làm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+     <section class="flex overflow-hidden flex-col bg-white">
+        <header
+            class="flex flex-col justify-center items-center px-16 py-3 w-full text-sm leading-none bg-gray-100 max-md:px-5 max-md:max-w-full">
+            <nav class="flex flex-wrap gap-5 justify-between w-full max-w-[1320px] max-md:max-w-full">
+                <ul class="flex gap-6 my-auto text-gray-500">
+                    <li><a href="/" class="grow text-gray-500">Trang chủ</a></li>
+                    <li><a href="/jobs" class="font-medium text-blue-700">Việc làm</a></li>
+                    <li><a href="/companies">Doanh nghiệp</a></li>
+                    <li><a href="/blog">Blog IT</a></li>
+                </ul>
+                <div class="flex gap-2 font-medium text-zinc-900">
+                    <img loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/8bbfe5413f7e6cccba515408f610812a22f0cf0eb7dcdbde1437c68782afc970?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                        class="object-contain shrink-0 w-6 aspect-square" alt="" />
+                    <a href="tel:+84 33456789" class="my-auto basis-auto">+84 33456789</a>
+                </div>
+            </nav>
+        </header>
+        <header
+            class="flex flex-col justify-center items-center px-16 py-5 w-full bg-white max-md:px-5 max-md:max-w-full">
+            <div class="flex flex-wrap gap-5 justify-between w-full max-w-[1322px] max-md:max-w-full">
+                <div class="flex flex-wrap gap-8 text-base text-gray-400">
+                    <img loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/47e8dcde21ea38af29fab7a7393bbea713dddd79f49d17096d025290941d1c5a?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                        class="object-contain shrink-0 my-auto max-w-full aspect-[2.76] w-[116px]" alt="Company Logo" />
+                    <form
+                        class="flex flex-wrap flex-auto gap-3 px-7 py-3.5 rounded-md border border-solid bg-zinc-300 bg-opacity-0 border-zinc-200 max-md:px-5">
+                        <label for="search-input" class="sr-only">Tìm kiếm theo tên việc làm, doanh nghiệp</label>
+                        <img loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/d3f1205c4e3952ff56cc646c0c3e09e7d246151e6042269c524301150e8c594c?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                            class="object-contain shrink-0 w-6 aspect-square" alt="" />
+                        <input type="text" id="search-input" class="flex-auto max-md:max-w-full"
+                            placeholder="Tìm kiếm theo tên việc làm, doanh nghiệp" />
+                    </form>
+                </div>
+                <div class="flex gap-6 self-start">
+                    <img loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/fae272aac90fd4c28645f3e4360bb3e36839429875fc7794c995def64aed8270?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                        class="object-contain shrink-0 my-auto aspect-square w-[25px]" alt="Notification Icon" />
+                    <img loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/f048df5fa8c3d8ee8f695136dfc007d1cb71f9f3bc460a6ede1c953810f4c543?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                        class="object-contain shrink-0 w-12 aspect-square" alt="User Profile" />
+                </div>
+            </div>
+        </header>
+        <nav
+            class="flex flex-wrap gap-10 justify-between items-center px-72 py-6 w-full bg-gray-100 max-md:px-5 max-md:max-w-full">
+            <h1 class="self-stretch my-auto text-lg font-medium leading-loose text-center text-zinc-900">
+                Chi tiết việc làm
+            </h1>
+            <ol class="flex gap-2 items-start self-stretch my-auto text-sm leading-none text-gray-500 min-w-[240px]">
+                <li><a href="/">Trang chủ</a></li>
+                <li>/</li>
+                <li><a href="/jobs">Việc làm</a></li>
+                <li>/</li>
+                <li class="text-zinc-900">@Model.STenBai</li>
+            </ol>
+        </nav>
+
+        <main class="flex flex-wrap gap-5 justify-between self-center mt-8 w-full max-w-[1320px] max-md:max-w-full">
+            <section class="flex flex-wrap gap-6 items-center max-md:max-w-full">
+                <img loading="lazy"
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/b3c18edf2ca31e46dab4424051bff0feaefa7e04bf986c541e78c1c19a593f4b?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                    class="object-contain shrink-0 self-stretch my-auto w-24 aspect-square rounded-[100px]"
+                    alt="Company Logo" />
+                <div class="flex flex-col self-stretch my-auto min-w-[240px] max-md:max-w-full">
+                    <div class="flex gap-2 items-center self-start text-sm leading-none">
+                        <h2 class="self-stretch my-auto text-2xl font-medium leading-none text-zinc-900">
+                            @Model.STenBai
+                        </h2>
+                        <span
+                            class="gap-2.5 self-stretch px-3 py-1 my-auto text-red-500 whitespace-nowrap bg-rose-50 rounded-[52px]">
+                            Featured
+                        </span>
+                        <span class="gap-2.5 self-stretch px-3 py-1 my-auto text-blue-600 bg-indigo-50 rounded-[52px]">
+                            Full Time
+                        </span>
+                    </div>
+                    <div class="flex flex-wrap gap-5 items-center mt-3.5 text-base text-neutral-600 max-md:max-w-full">
+                        <div class="flex gap-2 items-center self-stretch my-auto whitespace-nowrap">
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/02739a9ebaf1f5fba006e95fab851e10648a91e22a75b57c4d08e3743b254ca7?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain shrink-0 self-stretch my-auto w-5 aspect-square" alt="" />
+                            <a href="https://instagram.com" class="self-stretch my-auto">https://instagram.com</a>
+                        </div>
+                        <div class="flex gap-1.5 items-center self-stretch my-auto">
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/81b644a2b633af8ad2843b9c0d8fb650fe9509ebe2828ce6c7aa4bdca2b7c939?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" alt="" />
+                            <a href="tel:(406) 555-0120" class="self-stretch my-auto"> @ViewBag.thongtindoanhnghieptheobaidang.SSdt</a>
+                        </div>
+                        <div class="flex gap-1.5 items-center self-stretch my-auto whitespace-nowrap">
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/47fc0635f1dae6b89b040215928cfd4f55ef682c4e209d930fe9ccd14e8772bb?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" alt="" />
+                            <a href="mailto:career@instagram.com" class="self-stretch my-auto">@ViewBag.thongtindoanhnghieptheobaidang.FkSEmail</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="flex flex-col justify-center items-end my-auto">
+                <div class="flex gap-3 justify-center items-center">
+                    <button class="flex gap-2.5 items-center self-stretch p-4 my-auto w-14 h-14 bg-sky-100 rounded"
+                        aria-label="Save Job">
+                        <img loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/2863d2eaed9869edcaa918c2ab21f619c43f6e3d0255c0a1fbf813d0b6b7a6ce?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                            class="object-contain w-6 aspect-square" alt="" />
+                    </button>
+                    <button
+                        class="flex gap-3 justify-center items-center self-stretch px-8 py-4 my-auto text-base font-semibold text-white capitalize bg-blue-700 rounded min-w-[240px] w-[248px] max-md:px-5 hover:bg-[#0851A3]">
+                        <span class="self-stretch my-auto">ứng tuyển ngay</span>
+                        <img loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/72c910bdc0ab047ea5955f38a3ad60282ede593a9cd52829af6c667f07736419?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                            class="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" alt="" />
+                    </button>
+                </div>
+                <div class="flex items-start mt-3 text-sm leading-none">
+                    <span class="text-gray-500">Hạn còn lại: </span>
+                    <span class="font-medium text-red-500"> @numberOfDays ngày</span>
+                </div>
+            </div>
+        </main>
+        <section class="self-center mt-8 w-full max-w-[1320px] max-md:max-w-full">
+            <div class="flex gap-5 max-md:flex-col">
+                <div class="flex flex-col w-[58%] max-md:ml-0 max-md:w-full">
+                    <div class="flex flex-col w-full max-md:mt-10 max-md:max-w-full">
+                        <div class="flex flex-col max-w-full w-[734px]">
+                            <h3 class="text-lg font-medium leading-loose text-black">
+                                Mô tả công việc
+                            </h3>
+                            <p class="mt-4 text-base leading-6 text-gray-500 max-md:max-w-full">
+                                @Html.Raw(Model.SMota)
+                            </p>
+                        </div>
+                        <div class="flex flex-col mt-8 max-w-full w-[734px]">
+                            <h3 class="text-lg font-medium leading-loose text-black">
+                                Nhiệm vụ
+                            </h3>
+                            <ul class="flex flex-col mt-4 w-full leading-6 text-gray-500 h-[197px] list-disc pl-5">
+                                @Html.Raw(Model.SYeuCau)
+                            </ul>
+                        </div>
+                        <div class="flex flex-col mt-8 max-w-full h-[131px] w-[734px]">
+                            <h3 class="text-lg font-medium leading-loose text-black">
+                                Quyền lợi
+                            </h3>
+                            <ul class="flex flex-col mt-4 w-full text-base leading-6 text-gray-500 h-[197px] list-disc pl-5">
+                                @Html.Raw(Model.SQuyenLoi)
+                               
+                            </ul>
+                        </div>
+                        <div class="flex flex-wrap gap-5 items-center self-start mt-32 max-md:max-w-full">
+                            <span class="self-stretch my-auto text-base text-gray-800">Share this job:</span>
+                            <div
+                                class="flex gap-2 items-start self-stretch my-auto text-sm leading-none whitespace-nowrap min-w-[240px]">
+                                <a href="#"
+                                    class="flex gap-3 justify-center items-center px-4 py-3 text-blue-700 rounded border border-indigo-200 border-solid">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/1a6b1eb2ba1890f9d6e7c046a1a3a585c94767700ac3c9610280ba3bb213ce7e?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
+                                        alt="" />
+                                    <span class="self-stretch my-auto">Facebook</span>
+                                </a>
+                                <a href="#"
+                                    class="flex gap-3 justify-center items-center px-4 py-3 text-sky-500 rounded border border-gray-100 border-solid">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/14b5662aa81e12c03d9ffe5f2850b43694bc77d2d6a6b691a13278708873f4f3?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
+                                        alt="" />
+                                    <span class="self-stretch my-auto">Twitter</span>
+                                </a>
+                                <a href="#"
+                                    class="flex gap-3 justify-center items-center px-4 py-3 text-red-600 rounded border border-gray-100 border-solid">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/d5c1b37813aed1535bcb641ee57714b52ef617fa6491817d14e531f4e55c8daf?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
+                                        alt="" />
+                                    <span class="self-stretch my-auto">Pinterest</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <aside class="flex flex-col ml-5 w-[42%] max-md:ml-0 max-md:w-full">
+                    <div class="flex flex-col grow max-md:mt-10 max-md:max-w-full">
+                        <div
+                            class="flex flex-col p-8 bg-white rounded-lg border-2 border-sky-100 border-solid max-md:px-5 max-md:max-w-full">
+                            <h3 class="text-xl font-medium leading-relaxed text-gray-800">
+                                Tổng quan công việc
+                            </h3>
+                            <div class="flex gap-5 items-start mt-6 max-md:max-w-full">
+                                <div class="flex flex-col w-36">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/dfbd2123267a1bfab4313eadf237420709032b0bcabf931f8af8c0e994a191e7?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain w-8 aspect-square" alt="" />
+                                    <div class="flex flex-col mt-4 w-36 max-w-full">
+                                        <div class="text-xs text-gray-500 uppercase">NGÀY ĐĂNG:</div>
+                                        <div class="mt-1 text-sm font-medium leading-none text-zinc-900">
+                                            @Model.DTgDangBai.Value.ToShortDateString()
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col w-36">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/69e4eb974e55737e903288a6268f1964131cd494976f4736924f5e327e15a88a?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain w-8 aspect-square" alt="" />
+                                    <div class="flex flex-col mt-4 w-36 max-w-full">
+                                        <div class="text-xs text-gray-500 uppercase">
+                                            NGÀY HẾT HẠN
+                                        </div>
+                                        <div class="mt-1 text-sm font-medium leading-none text-zinc-900">
+                                            @Model.DTgTuyenDung
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col w-36">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/50101d22c918490206da00272e46d9d0a262bcc906a5f9524f1e3704970f386e?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain w-8 aspect-square" alt="" />
+                                    <div class="flex flex-col mt-4 w-36 max-w-full">
+                                        <div class="text-xs text-gray-500 uppercase">Lĩnh vực</div>
+                                        <div class="mt-1 text-sm font-medium leading-none text-zinc-900">
+                                            Công nghệ
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-5 items-start mt-6 max-md:max-w-full">
+                                <div class="flex flex-col w-36">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/072c8645bbe25f4f5198d6e8b3f0971b24d156767c8e5db77651e9151a59e159?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain w-8 aspect-square" alt="" />
+                                    <div class="flex flex-col mt-4 w-36 max-w-full">
+                                        <div class="text-xs text-gray-500 uppercase">Thu nhập:</div>
+                                        <div class="mt-1 text-sm font-medium leading-none text-zinc-900">
+                                           @Model.FMucLuongtoithieu tr -  @Model.FMucluongtoida tr
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col w-36">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/a2973a76b74fa21f2e4679cb392c5e343ee6c74e1f4693ba9bc76fe11d91c14b?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain w-8 aspect-square" alt="" />
+                                    <div class="flex flex-col mt-4 w-36 max-w-full">
+                                        <div class="text-xs text-gray-500 uppercase">Địa điểm</div>
+                                        <div class="mt-1 text-sm font-medium leading-none text-zinc-900">
+                                            @Model.SDiachicuthe
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col w-36">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f6eefc0130d364b9883f2344d25da743e47500cd726e61672c4e90a7ccc90b1?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain w-8 aspect-square" alt="" />
+                                    <div class="flex flex-col mt-4 w-36 max-w-full">
+                                        <div class="text-xs text-gray-500 uppercase">Hình thức</div>
+                                        <div class="mt-1 text-sm font-medium leading-none text-zinc-900">
+                                            Linh hoạt
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col mt-6 w-36 max-w-full">
+                                <img loading="lazy"
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/6bce0eaec8d586110c5cc3f5c06dc40d72179807a343eec1f85fedce7ac0cf10?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                    class="object-contain w-8 aspect-square" alt="" />
+                                <div class="flex flex-col mt-4 w-full">
+                                    <div class="text-xs text-gray-500 uppercase">
+                                        YÊU CẦU KINH NGHIỆM
+                                    </div>
+                                    <div class="mt-1 text-sm font-medium leading-none text-zinc-900">
+                                        @if (@Model.FNamKinhNghiem > 0)
+                                        {
+                                            <p>@Model.FNamKinhNghiem  Năm</p>
+                                        }
+                                        else
+                                        {
+                                            <p>Không yêu cầu kinh nghiệm</p>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div
+                            class="flex flex-col items-start p-8 mt-6 w-full rounded-xl border-2 border-sky-100 border-solid max-w-[536px] max-md:px-5 max-md:max-w-full">
+                            <div class="flex gap-4 items-center">
+                                <img loading="lazy"
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/117c2e0e9dbb81ef61a1a1440ce018422219d9f4bb05f9ce05bbe59e2433689e?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                    class="object-contain shrink-0 gap-2.5 self-stretch my-auto w-16 rounded-md aspect-square"
+                                    alt="Instagram Logo" />
+                                <div class="flex flex-col self-stretch my-auto">
+                                    <h4 class="text-xl font-medium leading-relaxed text-zinc-900">
+                                        @ViewBag.thongtindoanhnghieptheobaidang.STenDn
+                                    </h4>
+                                    <p class="mt-2 text-sm leading-none text-gray-500">
+                                       Technology
+                                    </p>
+                                </div>
+                            </div>
+                            <dl
+                                class="flex flex-col self-stretch mt-8 w-full text-base max-w-[472px] max-md:max-w-full">
+                                <div class="flex gap-10 justify-between items-center w-full">
+                                    <dt class="self-stretch my-auto text-gray-500">Thành lập:</dt>
+                                    <dd class="self-stretch my-auto text-zinc-900">
+                                        Tháng 3, năm 2006
+                                    </dd>
+                                </div>
+                                <div class="flex gap-10 justify-between items-center mt-4 w-full">
+                                    <dt class="self-stretch my-auto text-gray-500">
+                                        Loại hình tổ chức:
+                                    </dt>
+                                    <dd class="self-stretch my-auto text-zinc-900">
+                                        Công ty tư nhân
+                                    </dd>
+                                </div>
+                                <div class="flex gap-10 justify-between items-center mt-4 w-full">
+                                    <dt class="self-stretch my-auto text-gray-500">Quy mô:</dt>
+                                    <dd class="self-stretch my-auto text-zinc-900">
+                                        120-300 thành viên
+                                    </dd>
+                                </div>
+                                <div class="flex gap-10 justify-between items-center mt-4 w-full">
+                                    <dt class="self-stretch my-auto text-gray-500">Phone:</dt>
+                                    <dd class="self-stretch my-auto text-zinc-900">
+                                        @ViewBag.thongtindoanhnghieptheobaidang.SSdt
+                                    </dd>
+                                </div>
+                                <div class="flex gap-10 justify-between items-center mt-4 w-full whitespace-nowrap">
+                                    <dt class="self-stretch my-auto text-gray-500">Email:</dt>
+                                    <dd class="self-stretch my-auto text-zinc-900">
+                                        @ViewBag.thongtindoanhnghieptheobaidang.FkSEmail
+                                    </dd>
+                                </div>
+                                <div class="flex gap-10 justify-between items-center mt-4 w-full whitespace-nowrap">
+                                    <dt class="self-stretch my-auto text-gray-500">Website:</dt>
+                                    <dd class="self-stretch my-auto text-zinc-900">
+                                        https://Itseek123.com
+                                    </dd>
+                                </div>
+                            </dl>
+                            <div class="flex gap-2 items-start mt-8">
+                                <a href="#" class="flex gap-2.5 items-center p-3 w-10 h-10 bg-sky-100 rounded"
+                                    aria-label="Social Media Link">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/35b22c7aaa7c26e0c91476866dc87dc6302cf44148069c77abed3e2791cc421c?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain w-4 aspect-square" alt="" />
+                                </a>
+                                <a href="#" class="flex gap-2.5 items-center p-3 w-10 h-10 bg-blue-700 rounded"
+                                    aria-label="Social Media Link">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/ca400efc2db3227ad6d4198998e48020d47e408d44eecb2b37057a94f274ba7d?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain w-4 aspect-square" alt="" />
+                                </a>
+                                <a href="#" class="flex gap-2.5 items-center p-3 w-10 h-10 bg-sky-100 rounded"
+                                    aria-label="Social Media Link">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/e28abbe55404b361e0de28f5efef370928bdf55fb26c86590fab253e1d53ba35?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain w-4 aspect-square" alt="" />
+                                </a>
+                                <a href="#" class="flex gap-2.5 items-center p-3 w-10 h-10 bg-sky-100 rounded"
+                                    aria-label="Social Media Link">
+                                    <img loading="lazy"
+                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/6fbc0fd29b29af4ba52d3ed95474c80436f1441b4aa0ada3cc10a765d9fd6be6?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                        class="object-contain w-4 aspect-square" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+        <section
+            class="flex flex-wrap gap-10 justify-between items-center self-center mt-32 w-full max-w-[1320px] max-md:mt-10 max-md:max-w-full">
+            <h2
+                class="self-stretch my-auto text-4xl font-medium leading-tight text-center text-gray-800 max-md:max-w-full">
+                Các công việc tương tự (6)
+            </h2>
+            <div class="flex gap-4 items-start self-stretch my-auto">
+                <button class="flex gap-2.5 items-center p-3 w-12 h-12 bg-indigo-50 rounded-md" aria-label="Previous">
+                    <img loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/82e0c47a2bd1e6f07d50f6ee4fdea8c82bc2ef23ac79aa624e9229c7d1d674e2?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                        class="object-contain w-6 aspect-square" alt="" />
+                </button>
+                <button class="flex gap-2.5 items-center p-3 w-12 h-12 bg-indigo-50 rounded-md" aria-label="Next">
+                    <img loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/c11100e382323cc142561bf8e479c08a687484bb7061825f5216d435ea5d5939?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                        class="object-contain w-6 aspect-square" alt="" />
+                </button>
+            </div>
+        </section>
+        <section class="flex flex-col self-center mt-12 max-md:mt-10 max-md:max-w-full">
+
+            <div class="flex flex-wrap gap-6 items-start max-md:max-w-full">
+                <article
+                    class="flex overflow-hidden flex-col justify-center p-8 bg-white rounded-xl border border-gray-100 border-solid min-w-[240px] w-[424px] max-md:px-5 max-md:max-w-full
+                    hover:border hover:border-blue-700 hover:border-solid hover:shadow-xl hover:shadow-[#EDEDED] hover:bg-[linear-gradient(to_right,#FFF6E6_0%,#FFFFFF_100%)]">
+                    <header class="flex gap-4 items-start self-start">
+                        <div class="flex gap-2.5 items-center p-4 w-14 h-14 bg-blue-700 rounded">
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/4e55a66f5e8a16c665d835164bfad161b526418fe7d54d4395031db2be91547c?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain w-6 aspect-square" alt="" />
+                        </div>
+                        <div class="flex flex-col">
+                            <div class="flex gap-2 items-start whitespace-nowrap">
+                                <h3 class="text-base font-medium text-zinc-900">Freepik</h3>
+                                <span
+                                    class="gap-2.5 px-3 py-1 text-sm leading-none text-red-500 bg-rose-50 rounded-[52px]">
+                                    Featured
+                                </span>
+                            </div>
+                            <div class="flex gap-1.5 items-center self-start mt-1.5 text-sm leading-none text-gray-400">
+                                <img loading="lazy"
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb18d13f8245c2b76d548b7712304c36866ff4f13f359aa845d825e92e4c35e2?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                    class="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
+                                    alt="" />
+                                <span class="self-stretch my-auto">Hà Nội</span>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="flex flex-col mt-6 w-full">
+                        <h4 class="text-xl font-medium leading-relaxed text-gray-800">
+                            Visual Designer
+                        </h4>
+                        <div class="flex gap-2 items-center self-start mt-2 text-sm leading-none text-gray-500">
+                            <span class="self-stretch my-auto">Toàn thời gian</span>
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/5ed24945ee8db61ceb0803c4667d41f668a2f618b46a8e3a85991cc6d77afc76?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain shrink-0 self-stretch my-auto w-1 aspect-square fill-gray-500"
+                                alt="" />
+                            <span class="self-stretch my-auto">$10 - 15tr</span>
+                        </div>
+                    </div>
+                </article>
+                <article
+                    class="flex overflow-hidden flex-col justify-center p-8 bg-white rounded-xl border border-gray-100 border-solid min-w-[240px] w-[424px] max-md:px-5 max-md:max-w-full">
+                    <header class="flex gap-4 items-start self-start">
+                        <div class="flex gap-2.5 items-center p-4 w-14 h-14 bg-gray-100 rounded">
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/117c2e0e9dbb81ef61a1a1440ce018422219d9f4bb05f9ce05bbe59e2433689e?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain w-6 aspect-square" alt="Instagram Logo" />
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="gap-2 self-start text-base font-medium whitespace-nowrap text-zinc-900">
+                                Instagram
+                            </h3>
+                            <div class="flex gap-1.5 items-center mt-1.5 text-sm leading-none text-gray-400">
+                                <img loading="lazy"
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb18d13f8245c2b76d548b7712304c36866ff4f13f359aa845d825e92e4c35e2?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                    class="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
+                                    alt="" />
+                                <span class="self-stretch my-auto">Tp. Hồ Chí Minh</span>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="flex flex-col mt-6 w-full">
+                        <h4 class="text-xl font-medium leading-relaxed text-gray-800">
+                            Front End Developer
+                        </h4>
+                        <div class="flex gap-2 items-center self-start mt-2 text-sm leading-none text-gray-500">
+                            <span class="self-stretch my-auto">Linh hoạt</span>
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/5ed24945ee8db61ceb0803c4667d41f668a2f618b46a8e3a85991cc6d77afc76?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain shrink-0 self-stretch my-auto w-1 aspect-square fill-gray-500"
+                                alt="" />
+                            <span class="self-stretch my-auto">$5 - 10tr</span>
+                        </div>
+                    </div>
+                </article>
+                <article
+                    class="flex flex-col p-8 bg-white rounded-lg border border-solid border-zinc-200 min-w-[240px] w-[424px] max-md:px-5 max-md:max-w-full">
+                    <header class="flex gap-4 justify-center items-center self-start">
+                        <div class="flex gap-2.5 items-center self-stretch p-4 my-auto w-14 h-14 bg-lime-500 rounded">
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/1824a3e6d1b6a8532426cc0d1564d11ede551cc16c030a7c68ce2f4609b35bae?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain w-6 aspect-square" alt="" />
+                        </div>
+                        <div class="flex flex-col self-stretch my-auto">
+                            <h3 class="text-base font-medium text-zinc-900">Upwork</h3>
+                            <div class="flex gap-1.5 items-center mt-1.5 text-sm leading-none text-gray-400">
+                                <img loading="lazy"
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/45e6666eabe344f2058b5b55e13deb2e396de7b55a70eade0180d0749be30bf2?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                    class="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
+                                    alt="" />
+                                <span class="self-stretch my-auto">Hà Nội</span>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="flex flex-col mt-6 w-full max-w-[360px]">
+                        <h4 class="text-xl font-medium leading-relaxed text-zinc-900">
+                            Technical Support Specialist
+                        </h4>
+                        <div class="flex gap-2 items-center self-start mt-2 text-sm leading-none">
+                            <span class="self-stretch my-auto text-gray-500">Toàn thời gian</span>
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/e759dceaf3a471df15f00e1fe907da290efdc343d16ad20b9d3cf330ea241e52?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain shrink-0 self-stretch my-auto w-1 aspect-square fill-gray-500"
+                                alt="" />
+                            <span class="self-stretch my-auto text-gray-500">$10 - 15tr</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="flex flex-wrap gap-6 items-start mt-6 max-md:max-w-full">
+                <article
+                    class="flex flex-col p-8 bg-white rounded-lg border border-solid border-zinc-200 min-w-[240px] w-[424px] max-md:px-5 max-md:max-w-full">
+                    <header class="flex gap-4 justify-center items-center self-start">
+                        <div class="flex gap-2.5 items-center self-stretch p-4 my-auto w-14 h-14 bg-blue-600 rounded">
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/d27cb21a1a91dc2b31d6b2ae5dc7c3a9fa75b2178d8e5cf9f3ea015558ddc432?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain w-6 aspect-square" alt="" />
+                        </div>
+                        <div class="flex flex-col self-stretch my-auto">
+                            <h3 class="text-base font-medium text-zinc-900">Facebook</h3>
+                            <div class="flex gap-1.5 items-center self-start mt-1.5 text-sm leading-none text-gray-400">
+                                <img loading="lazy"
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/45e6666eabe344f2058b5b55e13deb2e396de7b55a70eade0180d0749be30bf2?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                    class="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
+                                    alt="" />
+                                <span class="self-stretch my-auto">Hà Nội</span>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="flex flex-col mt-6 w-full max-w-[360px]">
+                        <h4 class="text-xl font-medium leading-relaxed text-zinc-900">
+                            Software Engineer
+                        </h4>
+                        <div class="flex gap-2 items-center self-start mt-2 text-sm leading-none">
+                            <span class="self-stretch my-auto text-gray-500">Bán thời gian</span>
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/e759dceaf3a471df15f00e1fe907da290efdc343d16ad20b9d3cf330ea241e52?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain shrink-0 self-stretch my-auto w-1 aspect-square fill-gray-500"
+                                alt="" />
+                            <span class="self-stretch my-auto text-gray-500">$5 - 10tr</span>
+                        </div>
+                    </div>
+                </article>
+                <article
+                    class="flex flex-col p-8 bg-white rounded-lg border border-solid border-zinc-200 min-w-[240px] w-[424px] max-md:px-5 max-md:max-w-full">
+                    <header class="flex gap-4 justify-center items-center self-start">
+                        <div class="flex gap-2.5 items-center self-stretch p-4 my-auto w-14 h-14 bg-gray-100 rounded">
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/56e98cdc340fc849145d89518c2ab88a18c92a7062b6798d2056477e67a01b51?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain w-6 aspect-square" alt="" />
+                        </div>
+                        <div class="flex flex-col self-stretch my-auto">
+                            <h3 class="text-base font-medium text-zinc-900">Microsoft</h3>
+                            <div class="flex gap-1.5 items-center mt-1.5 text-sm leading-none text-gray-400">
+                                <img loading="lazy"
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/45e6666eabe344f2058b5b55e13deb2e396de7b55a70eade0180d0749be30bf2?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                    class="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
+                                    alt="" />
+                                <span class="self-stretch my-auto">Tp. Hồ Chí Minh</span>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="flex flex-col mt-6 w-full max-w-[360px]">
+                        <h4 class="text-xl font-medium leading-relaxed text-zinc-900">
+                            Product Designer
+                        </h4>
+                        <div class="flex gap-2 items-center self-start mt-2 text-sm leading-none">
+                            <span class="self-stretch my-auto text-gray-500">Toàn thời gian</span>
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/e759dceaf3a471df15f00e1fe907da290efdc343d16ad20b9d3cf330ea241e52?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain shrink-0 self-stretch my-auto w-1 aspect-square fill-gray-500"
+                                alt="" />
+                            <span class="self-stretch my-auto text-gray-500">$10 - 15tr</span>
+                        </div>
+                    </div>
+                </article>
+                <article
+                    class="flex flex-col p-8 bg-white rounded-lg border border-solid border-zinc-200 min-w-[240px] w-[424px] max-md:px-5 max-md:max-w-full">
+                    <header class="flex gap-4 justify-center items-center self-start">
+                        <div class="flex gap-2.5 items-center self-stretch p-4 my-auto w-14 h-14 bg-red-600 rounded">
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/726a5eb85c698da871b16bf4c9bafdc6e1f29101b156743e89faabd25bd1f4bb?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain w-6 aspect-square" alt="" />
+                        </div>
+                        <div class="flex flex-col self-stretch my-auto">
+                            <h3 class="text-base font-medium text-zinc-900">Youtube</h3>
+                            <div class="flex gap-1.5 items-center mt-1.5 text-sm leading-none text-gray-400">
+                                <img loading="lazy"
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/45e6666eabe344f2058b5b55e13deb2e396de7b55a70eade0180d0749be30bf2?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                    class="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
+                                    alt="" />
+                                <span class="self-stretch my-auto">Tp. Hồ Chí Minh</span>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="flex flex-col mt-6 w-full max-w-[360px]">
+                        <h4 class="text-xl font-medium leading-relaxed text-zinc-900">
+                            Interaction Designer
+                        </h4>
+                        <div class="flex gap-2 items-center self-start mt-2 text-sm leading-none">
+                            <span class="self-stretch my-auto text-gray-500">Toàn thời gian</span>
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/e759dceaf3a471df15f00e1fe907da290efdc343d16ad20b9d3cf330ea241e52?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain shrink-0 self-stretch my-auto w-1 aspect-square fill-gray-500"
+                                alt="" />
+                            <span class="self-stretch my-auto text-gray-500">$10 - 15tr</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <footer
+            class="flex flex-col justify-center items-center px-16 py-24 mt-24 w-full bg-sky-950 max-md:px-5 max-md:mt-10 max-md:max-w-full">
+            <div class="w-full max-w-[1322px] max-md:max-w-full">
+                <div class="flex gap-5 max-md:flex-col">
+                    <div class="flex flex-col w-3/12 max-md:ml-0 max-md:w-full">
+                        <div class="flex flex-col max-md:mt-10">
+                            <img loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/9e8088abbc346b3a00c7eadecda8bbef17030f71182fe127248a0eaa96d041c0?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                class="object-contain max-w-full aspect-[2.85] w-[114px]" alt="Company Logo" />
+                            <div class="flex flex-col mt-6 w-full">
+                                <div class="flex items-start self-start text-lg leading-loose">
+                                    <span class="text-gray-400">Liên hệ</span>
+                                    <a href="tel:+84 33456789" class="font-medium text-white">+84 33456789</a>
+                                </div>
+                                <address class="mt-3 text-sm leading-5 text-slate-500 not-italic">
+                                    6391 Elgin St. Celina, Delaware 10299, New York, United States of America
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="flex flex-col ml-5 w-9/12 max-md:ml-0 max-md:w-full">
+                        <div class="grow max-md:mt-10 max-md:max-w-full">
+                            <div class="flex gap-5 max-md:flex-col">
+                                <div class="flex flex-col w-3/12 max-md:ml-0 max-md:w-full">
+                                    <div class="flex flex-col grow max-md:mt-10">
+                                        <h5 class="text-xl font-medium leading-relaxed text-white">
+                                            Về Itseek
+                                        </h5>
+                                        <ul
+                                            class="flex flex-col items-start self-start mt-4 text-base text-center text-gray-400">
+                                            <li class="gap-1 self-stretch py-1.5"><a href="#">Trở lại</a></li>
+                                            <li
+                                                class="flex gap-1.5 items-center self-stretch py-1.5 mt-1 font-medium text-white">
+                                                <img loading="lazy"
+                                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/7300c226a67d6150c1222ddcf94e48ddc7c17b2d23cb6babd8d2f8ac95555488?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                                    class="object-contain shrink-0 self-stretch my-auto w-5 aspect-square"
+                                                    alt="" />
+                                                <a href="#">Liên hệ</a>
+                                            </li>
+                                            <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Đánh giá</a></li>
+                                            <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Tin tức</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col ml-5 w-3/12 max-md:ml-0 max-md:w-full">
+                                    <div class="flex flex-col grow max-md:mt-10">
+                                        <h5 class="text-xl font-medium leading-relaxed text-white">
+                                            Ứng viên
+                                        </h5>
+                                        <ul
+                                            class="flex flex-col items-start self-start mt-4 text-base text-center text-gray-400">
+                                            <li class="gap-1 self-stretch py-1.5"><a href="#">Công việc</a></li>
+                                            <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Nhà tuyển dụng</a>
+                                            </li>
+                                            <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Tổng quan ứng
+                                                    viên</a></li>
+                                            <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Việc làm đã lưu</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col ml-5 w-3/12 max-md:ml-0 max-md:w-full">
+                                    <div class="flex flex-col grow max-md:mt-10">
+                                        <h5 class="text-xl font-medium leading-relaxed text-white">
+                                            Nhà tuyển dụng
+                                        </h5>
+                                        <ul class="flex flex-col self-start mt-4 text-base text-center text-gray-400">
+                                            <li class="gap-1 self-start py-1.5"><a href="#">Đăng việc làm</a></li>
+                                            <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Duyệt công việc</a>
+                                            </li>
+                                            <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Bảng điều khiển</a>
+                                            </li>
+                                            <li class="gap-1 self-start py-1.5 mt-1"><a href="#">Ứng dụng</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col ml-5 w-3/12 max-md:ml-0 max-md:w-full">
+                                    <div class="flex flex-col max-md:mt-10">
+                                        <h5 class="text-xl font-medium leading-relaxed text-white">
+                                            Hỗ trợ
+                                        </h5>
+                                        <ul
+                                            class="flex flex-col items-start self-start mt-4 text-base text-center text-gray-400">
+                                            <li class="gap-1 self-stretch py-1.5"><a href="#">Câu hỏi thường gặp</a>
+                                            </li>
+                                            <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Chính sách bảo
+                                                    mật</a></li>
+                                            <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Điều khoản và điều
+                                                    kiện</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </footer>
+        <div
+            class="flex flex-wrap gap-10 justify-between items-center px-72 py-6 w-full border-t bg-sky-950 border-zinc-500 max-md:px-5 max-md:max-w-full">
+            <p class="self-stretch my-auto text-sm leading-none text-gray-500">
+                2024 Itseek - Thực hiện bởi Nguyễn Hồng Phong
+            </p>
+            <div class="flex gap-5 items-start self-stretch my-auto">
+                <a href="#" aria-label="Social Media Link">
+                    <img loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/d82db8891ea87d774b36c66d426cda30421077f7065ad493251b1105d8eabf89?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                        class="object-contain shrink-0 w-2.5 aspect-[0.5]" alt="" />
+                </a>
+                <a href="#" aria-label="Social Media Link">
+                    <img loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/9f12c782ef5955b6fa4a422ad317158542ca5196e2bb02db0575140f1222096d?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                        class="object-contain shrink-0 w-5 aspect-square" alt="" />
+                </a>
+                <a href="#" aria-label="Social Media Link">
+                    <img loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/d8ef843f9a1a5a911f4337d848d8156369d9bf8f9edc17abfaccd9d7d5aeed9a?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                        class="object-contain shrink-0 w-5 aspect-square" alt="" />
+                </a>
+                <a href="#" aria-label="Social Media Link">
+                    <img loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/88d691caf3fae36dfa513b16833be6481e64274b2b9feb4b932513e30799a876?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                        class="object-contain shrink-0 w-5 aspect-square" alt="" />
+                </a>
+            </div>
+        </div>
+    </section>
+    <script>
+        $(document).ready(function () {
+            $('#btnUngTuyen').click(function () {
+                $.ajax({
+                    url: '@Url.Action("btnGuithongtinUngTuyen")',
+                    method: 'POST',
+                    success: function (data) {
+                        // Xử lý phản hồi thành công nếu cần
+                        console.log(data);
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi nếu cần
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+    </
+</body>
+</html>
