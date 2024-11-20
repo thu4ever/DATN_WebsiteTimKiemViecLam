@@ -10,7 +10,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trang Chủ</title>
-    <link href="~/css/layout.css" rel="stylesheet" />
+    @* <link href="~/css/layout.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.css" rel="stylesheet" />
@@ -21,202 +21,194 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="~/css/footer.css" rel="stylesheet" />
+    <link href="~/css/footer.css" rel="stylesheet" /> *@
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    
-    @if (fkSMaQuyen == 1)
-    {
-        <header style="background:#003493">
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm text-white border-bottom box-shadow mb-3">
-                <div class="container-fluid" >
-                    <img style="margin-right: 15px; " class="logo" src="~/images/Login/logo.png" />
-                    <a class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL" style="padding-bottom:1.5%; ">VIỆC LÀM</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <div class="navbar-nav flex-grow-1">
-                            <a class="navbar-brand text-white text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachDN" style="padding-bottom:1.5%; ">DOANH NGHIỆP</a>
-                        </div>
-                        @* <div class=" navbar-brand text-white text-bar ">@PK_sEmail</div> *@
-                        @if(avatar!=null)
-                        {
-                            <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" onmousemove="hienthimenu()" onmousewheel="anmenu()" src="data:image/png;base64,@avatar" />
-                        }
-                        else
-                        {
-                            <img style="height: 50px;width: 50px;margin: 10px;border-radius: 90%;" onmousemove="hienthimenu()" onmousewheel="anmenu()" src="~/images/logo.jpg" />
-
-                        }
-                    </div>
-                </div>
-                <div style="z-index: 2; border: 0.5px solid #ccc; border-radius: 5px;" id="hienthimenu" class="custom-vertical-menu">
-                    <a style="    height: 50px;font-size: 14px;display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click">
-                        <i class="fas fa-user" style="margin-right: 5px;"></i> Sửa thông tin cá nhân
-                    </a>
-                    <a style="height: 50px;font-size: 14px;display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="UngVien" asp-action="btnHienthidanhsachcv">
-                        <i class="fas fa-file-alt" style="margin-right: 5px;"></i> Xem CV đã ứng tuyển
-                    </a>
-                    <a style="height: 50px;font-size: 14px;display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click">
-                        <i class="fas fa-key" style="margin-right: 5px;"></i> Đổi mật khẩu
-                    </a>
-                    <a style="height: 50px;font-size: 14px;display: block; padding: 5px 10px; text-decoration: none; color: #333;" asp-controller="Taikhoan" asp-action="btnDangxuat">
-                        <i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> Đăng xuất
-                    </a>
+    <header class="flex overflow-hidden flex-col bg-white">
+        <div class="flex flex-col justify-center items-center px-16 py-3 w-full text-sm leading-none bg-gray-100 max-md:px-5 max-md:max-w-full">
+            <nav class="flex flex-wrap gap-5 justify-between w-full max-w-[1320px] max-md:max-w-full">
+                <ul class="flex gap-6 my-auto text-gray-500">
+                    <li><a href="#" class="grow text-gray-500">Trang chủ</a></li>
+                    <li><a href="#" class="font-medium text-blue-700">Việc làm</a></li>
+                    <li><a href="#">Doanh nghiệp</a></li>
+                    <li><a href="#">Blog IT</a></li>
+                </ul>
+                <div class="flex gap-2 font-medium text-zinc-900">
+                    <img loading="lazy"
+                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/9db5717c3cef4d4edfe29e7ec52c306ee32fad9ca8bafb1abcfe41cde7633cbe?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                         class="object-contain shrink-0 w-6 aspect-square" alt="Phone icon" />
+                    <a href="tel:+84 33456789" class="my-auto basis-auto">+84 33456789</a>
                 </div>
             </nav>
-        </header>
-
-    }
-    else if (fkSMaQuyen == 2)
-    {
-        <div style="background:#003493">
-        <div class="container-fluid">
-            <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
-            <a style="margin-top: 20px; margin-bottom: 2%;" class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
-           
         </div>
-
-        <div style="position: absolute" class="custom-vertical-menu-dn">
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                @* <div style="margin-left: 550px;" class=" navbar-brand text-white text-bar ">@PK_sEmail</div>*@
-                <img style="height: 50px;width: 50px; border: 1px solid #ccc;margin: 10px;border-radius: 90%;" src="data:image/png;base64,@avatar" />
-            </div>
-            <div style="position: absolute" class="custom-vertical-menu-dn">
-                <a asp-controller="Doanhnghiep" asp-action="hienthidanhsachbaidang" style="color:#302F2F; text-decoration: none; display: block;">
-                    <i class="fas fa-home" style="font-size: 20px; margin-right: 5px;"></i>
-                    <span style="font-weight: bold;">Quản lý bài đăng</span>
-                </a>
-                <br>
-                <a asp-controller="Taikhoan" asp-action="EditInForCompany" style="color:#302F2F; text-decoration: none; display: block;">
-                    <i class="fas fa-user" style="font-size: 20px; margin-right: 5px;"></i>
-                    <span style="font-weight: bold;">Chỉnh sửa thông tin</span>
-                </a>
-                <br>
-                <a asp-controller="Taikhoan" asp-action="btnChinhsuathongtinUV_Click" style="color:#302F2F; text-decoration: none; display: block;">
-                    <i class="fas fa-cog chnh-sa-thng2" style="font-size: 20px; margin-right: 5px;"></i>
-                    <span style="font-weight: bold;">Xác thực thông tin</span>
-                </a>
-                <br>
-                <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click" style="color:#302F2F; text-decoration: none; display: block;">
-                    <i class="fas fa-pencil i-mt-khu2" style="font-size: 20px; margin-right: 5px;"></i>
-                    <span style="font-weight: bold;">Đổi mật khẩu</span>
-                </a>
-                <br>
-                <a asp-controller="Taikhoan" asp-action="btnDangxuat" style="color:#302F2F; text-decoration: none; display: block;">
-                    <i class="fas fa-location-arrow ng-xut2" style="font-size: 20px; margin-right: 5px;"></i>
-                    <span style="font-weight: bold;">Đăng xuất</span>
-                </a>
-            </div>
-
-        </div>
-        </div>
-    }
-    else if (fkSMaQuyen==4)
-    {
-        <div style="background:#003493">
-        <div class="container-fluid">
-            <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
-            <a style="margin-top: 20px;" class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">FREEWORK</a>
-        </div>
-
-        <div style="position: absolute" class="custom-vertical-menu-dn">
-            <a asp-controller="Doanhnghiep" asp-action="hienthidanhsachbaidang" style="color:#003493" class="active"><i class="fas fa-home"></i> Quản lý tài khoản </a>
-            <a asp-controller="Taikhoan" asp-action="btnDoimatkhau_Click" style="color:#003493"><i class="fas fa-pencil i-mt-khu2"></i>Đổi mật khẩu </a>
-            <a asp-controller="Taikhoan" asp-action="btnDangxuat" style="color:#003493"><i class="fas fa-location-arrow ng-xut2"></i> Đăng xuất</a>
-        </div>
-        </div>
-    }
-    else
-    {
-        <header style="background:#003493">
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm text-white border-bottom box-shadow mb-3">
-                <div class="container-fluid">
-                    <img style="margin-right: 15px;" class="logo" src="~/images/logo.jpg" />
-                    <a style="margin-bottom: 1.1%;" class="navbar-brand text-white text-bar " asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">VIỆC LÀM</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <div class="navbar-nav flex-grow-1">
-                            <a style="margin-bottom: 1.5%;" class="navbar-brand text-white text-bar" asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachDN">DOANH NGHIỆP</a>
-                        </div>
-                        <a style="margin-bottom: 1.5%;" class="navbar-brand text-white text-bar" asp-controller="Taikhoan" asp-action="Login">ĐĂNG NHẬP</a>
-                        <a style="margin-bottom: 1.5%;" class="navbar-brand text-white text-bar" asp-controller="Taikhoan" asp-action="Resgiter">ĐĂNG KÝ</a>
-                    </div>
+        <div class="flex flex-col justify-center items-center px-16 py-5 w-full bg-white max-md:px-5 max-md:max-w-full">
+            <div class="flex flex-wrap gap-5 justify-between w-full max-w-[1322px] max-md:max-w-full">
+                <div class="flex flex-wrap gap-8 text-base text-gray-400">
+                    <img loading="lazy"
+                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/47e8dcde21ea38af29fab7a7393bbea713dddd79f49d17096d025290941d1c5a?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                         class="object-contain shrink-0 my-auto max-w-full aspect-[2.76] w-[116px]" alt="Company logo" />
+                    <form class="flex flex-wrap flex-auto gap-3 px-7 py-3.5 rounded-md border border-solid bg-zinc-300 bg-opacity-0 border-zinc-200 max-md:px-5">
+                        <label for="search-input" class="sr-only">Tìm kiếm theo tên việc làm, doanh nghiệp</label>
+                        <img loading="lazy"
+                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/d3f1205c4e3952ff56cc646c0c3e09e7d246151e6042269c524301150e8c594c?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                             class="object-contain shrink-0 w-6 aspect-square" alt="Search icon" />
+                        <input type="text" id="search-input" class="flex-auto max-md:max-w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none"
+                               placeholder="Tìm kiếm theo tên việc làm, doanh nghiệp" />
+                    </form>
                 </div>
-            </nav>
-        </header>
-    }
-    <div class="container">
-        <main role="main" class="pb-3" style=" background-color:#F5FAFF">
+                <div class="flex gap-6 self-start">
+                   
+                   
+                     @if (fkSMaQuyen != 1)
+                    {
+                        <nav class="flex gap-3 text-base font-semibold capitalize" aria-label="Login navigation">
+                            <a href="/employer" class="px-6 py-3 text-blue-700 rounded-md border border-indigo-200 border-solid bg-zinc-300 bg-opacity-0 hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-blue-500" role="button">
+                            Nhà tuyển dụng
+                        </a>
+                        <a href="/dangNhap" class="px-6 py-3 text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500" role="button">
+                            Đăng nhập
+                        </a>
+                        </nav>
+                    }
+                    else
+                    {
+                        <img loading="lazy"
+                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/7f8deff7186c6f03216c1dd95c7442f7e1a766441c082c7c930a0cb808ec3d4f?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                             class="object-contain shrink-0 my-auto aspect-square w-[25px]" alt="Notification icon" />
+                        <img loading="lazy"
+                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/f048df5fa8c3d8ee8f695136dfc007d1cb71f9f3bc460a6ede1c953810f4c543?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                             class="object-contain shrink-0 w-12 aspect-square" alt="User profile" />
+                    }
+                </div>
+            </div>
+        </div>
+    </header>
+        <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
-
-    <footer class="footer" style="background-color: #002147; bottom: 0; width: 100%; ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="contact-info">
-                        <a asp-area="" asp-controller="UngVien" asp-action="btnHienthidanhsachVL">
-                            <img src="~/images/login/logowhite.png" alt="">
-                        </a>
-                        
-                        <p>Liên hệ <strong>+84 33456789</strong></p>
-                        <p>96 Định Công</p>
+    <footer class="flex flex-col justify-center items-center px-16 py-24 mt-24 w-full bg-sky-950 max-md:px-5 max-md:mt-10 max-md:max-w-full">
+        <div class="w-full max-w-[1322px] max-md:max-w-full">
+            <div class="flex gap-5 max-md:flex-col">
+                <div class="flex flex-col w-3/12 max-md:ml-0 max-md:w-full">
+                    <div class="flex flex-col max-md:mt-10">
+                        <img loading="lazy"
+                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/9e8088abbc346b3a00c7eadecda8bbef17030f71182fe127248a0eaa96d041c0?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                             class="object-contain max-w-full aspect-[2.85] w-[114px]" alt="Company logo" />
+                        <div class="flex flex-col mt-6 w-full">
+                            <div class="flex items-start self-start text-lg leading-loose">
+                                <span class="text-gray-400">Liên hệ</span>
+                                <a href="tel:+84 33456789" class="font-medium text-white">+84 33456789</a>
+                            </div>
+                            <address class="mt-3 text-sm leading-5 text-slate-500 not-italic">
+                                6391 Elgin St. Celina, Delaware 10299, New York, United States of America
+                            </address>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <h5>Về Itseek</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Trở lại</a></li>
-                        <li><a href="#">→ Liên hệ</a></li>
-                        <li><a href="#">Đánh giá</a></li>
-                        <li><a href="#">Tin tức</a></li>
-                    </ul>
+                <div class="flex flex-col ml-5 w-9/12 max-md:ml-0 max-md:w-full">
+                    <div class="grow max-md:mt-10 max-md:max-w-full">
+                        <div class="flex gap-5 max-md:flex-col">
+                            <nav class="flex flex-col w-3/12 max-md:ml-0 max-md:w-full" aria-label="About Itseek">
+                                <div class="flex flex-col grow max-md:mt-10">
+                                    <h2 class="text-xl font-medium leading-relaxed text-white">
+                                        Về Itseek
+                                    </h2>
+                                    <ul class="flex flex-col items-start self-start mt-4 text-base text-center text-gray-400">
+                                        <li class="gap-1 self-stretch py-1.5"><a href="#">Trở lại</a></li>
+                                        <li class="flex gap-1.5 items-center self-stretch py-1.5 mt-1 font-medium text-white">
+                                            <img loading="lazy"
+                                                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/7300c226a67d6150c1222ddcf94e48ddc7c17b2d23cb6babd8d2f8ac95555488?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                                 class="object-contain shrink-0 self-stretch my-auto w-5 aspect-square"
+                                                 alt="Contact icon" />
+                                            <a href="#">Liên hệ</a>
+                                        </li>
+                                        <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Đánh giá</a></li>
+                                        <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Tin tức</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <nav class="flex flex-col ml-5 w-3/12 max-md:ml-0 max-md:w-full"
+                                 aria-label="For Candidates">
+                                <div class="flex flex-col grow max-md:mt-10">
+                                    <h2 class="text-xl font-medium leading-relaxed text-white">
+                                        Ứng viên
+                                    </h2>
+                                    <ul class="flex flex-col items-start self-start mt-4 text-base text-center text-gray-400">
+                                        <li class="gap-1 self-stretch py-1.5"><a href="#">Công việc</a></li>
+                                        <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Nhà tuyển dụng</a></li>
+                                        <li class="gap-1 self-stretch py-1.5 mt-1">
+                                            <a href="#">Tổng quan ứng viên</a>
+                                        </li>
+                                        <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Việc làm đã lưu</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <nav class="flex flex-col ml-5 w-3/12 max-md:ml-0 max-md:w-full" aria-label="For Employers">
+                                <div class="flex flex-col grow max-md:mt-10">
+                                    <h2 class="text-xl font-medium leading-relaxed text-white">
+                                        Nhà tuyển dụng
+                                    </h2>
+                                    <ul class="flex flex-col self-start mt-4 text-base text-center text-gray-400">
+                                        <li class="gap-1 self-start py-1.5"><a href="#">Đăng việc làm</a></li>
+                                        <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Duyệt công việc</a></li>
+                                        <li class="gap-1 self-stretch py-1.5 mt-1"><a href="#">Bảng điều khiển</a></li>
+                                        <li class="gap-1 self-start py-1.5 mt-1"><a href="#">Ứng dụng</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <nav class="flex flex-col ml-5 w-3/12 max-md:ml-0 max-md:w-full" aria-label="Support">
+                                <div class="flex flex-col max-md:mt-10">
+                                    <h2 class="text-xl font-medium leading-relaxed text-white">
+                                        Hỗ trợ
+                                    </h2>
+                                    <ul class="flex flex-col items-start self-start mt-4 text-base text-center text-gray-400">
+                                        <li class="gap-1 self-stretch py-1.5"><a href="#">Câu hỏi thường gặp</a></li>
+                                        <li class="gap-1 self-stretch py-1.5 mt-1">
+                                            <a href="#">Chính sách bảo mật</a>
+                                        </li>
+                                        <li class="gap-1 self-stretch py-1.5 mt-1">
+                                            <a href="#">
+                                                Điều khoản và điều
+                                                kiện
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
-            <div class="col-md-2">
-                <h5>Ứng viên</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">Công việc</a></li>
-                    <li><a href="#">Nhà tuyển dụng</a></li>
-                    <li><a href="#">Tổng quan ứng viên</a></li>
-                    <li><a href="#">Việc làm đã lưu</a></li>
-                </ul>
-            </div>
-            <div class="col-md-2">
-                <h5>Nhà tuyển dụng</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">Đăng việc làm</a></li>
-                    <li><a href="#">Duyệt công việc</a></li>
-                    <li><a href="#">Bảng điều khiển</a></li>
-                    <li><a href="#">Ứng dụng</a></li>
-                </ul>
-            </div>
-            <div class="col-md-2">
-                <h5>Hỗ trợ</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">Câu hỏi thường gặp</a></li>
-                    <li><a href="#">Chính sách bảo mật</a></li>
-                    <li><a href="#">Điều khoản và điều kiện</a></li>
-                </ul>
-            </div>
-            <div class="footer-bottom d-flex justify-content-between">
-            <p>© 2024 Itseek - Thực hiện bởi Chu Đình Thế Tài</p>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-            </div>
-            </div> 
             </div>
         </div>
     </footer>
+    <div class="flex flex-wrap gap-10 justify-between items-center px-72 py-6 w-full border-t bg-sky-950 border-zinc-500 max-md:px-5 max-md:max-w-full">
+        <p class="self-stretch my-auto text-sm leading-none text-gray-500">
+            2024 Itseek - Thực hiện bởi Nguyễn Hồng Phong
+        </p>
+        <div class="flex gap-5 items-start self-stretch my-auto">
+            <a href="#" aria-label="Facebook">
+                <img loading="lazy"
+                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/d82db8891ea87d774b36c66d426cda30421077f7065ad493251b1105d8eabf89?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                     class="object-contain shrink-0 w-2.5 aspect-[0.5]" alt="Facebook icon" />
+            </a>
+            <a href="#" aria-label="Twitter">
+                <img loading="lazy"
+                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/d5b6d5296bcda9b509d85edd8b268839b4e279bee3b5725be20dbc74f8a88657?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                     class="object-contain shrink-0 w-5 aspect-square" alt="Twitter icon" />
+            </a>
+            <a href="#" aria-label="Instagram">
+                <img loading="lazy"
+                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/4c4a429f6009c5ad9e2e331f0bbac9574f14b4f495da03c521a4119998914096?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                     class="object-contain shrink-0 w-5 aspect-square" alt="Instagram icon" />
+            </a>
+            <a href="#" aria-label="LinkedIn">
+                <img loading="lazy"
+                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/173fd96516dfc752e74f6f0f2ebb8f4fe82948ecc2f3c1693097f2c52238e5c7?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                     class="object-contain shrink-0 w-5 aspect-square" alt="LinkedIn icon" />
+            </a>
+        </div>
+    </div>
     
     <script>
         function hienthimenu() { 
