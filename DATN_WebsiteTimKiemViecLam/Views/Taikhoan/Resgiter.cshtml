@@ -39,6 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="~/css/style.css" rel="stylesheet" />
     <link href="~/css/font-awesome.css" rel="stylesheet" />
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
         .display_pass {
             position: relative;
@@ -52,8 +53,50 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 cursor: pointer;
             }
     </style>
+    <script>
+        // function validateForm() {
+        //     var email = document.querySelector('input[name="Email"]').value;
+        //     var pass = document.querySelector('input[name="Matkhau"]').value;
+        //     var passretype = document.querySelector('input[name="Matkhaunhaplai"]').value;
+        //     var errorMessage = document.getElementById("errorMessage");
+        //     var errorMessage1 = document.getElementById("errorMessage1");
+
+        //     // Kiểm tra xem có nhập đủ thông tin không
+        //     if (email === "" || pass === "" || passretype === "") {
+        //         errorMessage.innerText = "Bạn chưa nhập đầy đủ thông tin";
+        //         return false; // Ngăn form được submit
+        //     }
+
+        //     // Kiểm tra xem mật khẩu và nhập lại mật khẩu có khớp không
+        //     if (pass !== passretype) {
+        //         errorMessage1.innerText = "Mật khẩu nhập lại không khớp";
+        //         return false; // Ngăn form được submit
+        //     }
+
+        //     // Nếu mọi thứ hợp lệ, gửi yêu cầu AJAX để kiểm tra email đã tồn tại hay chưa
+        //     $.ajax({
+        //         url: "/Taikhoan/CheckExisitTaikhoanDK",
+        //         type: "GET",
+        //         data: { PKsEmail: email },
+        //         success: function (response) {
+        //             if (response === "true") {
+        //                 errorMessage.innerText = "Email đã tồn tại";
+        //             } else {
+        //                 // Nếu email chưa tồn tại, cho phép submit form
+        //                 document.querySelector('.login-container').submit();
+        //             }
+        //         },
+        //         error: function (xhr, status, error) {
+        //             console.error("AJAX request failed: " + status + ", " + error);
+        //         }
+        //     });
+
+        //     // Ngăn form được submit ngay lập tức
+        //     return true;
+        // }
+    </script>
 </head>
-<body style="    background: url(../Images/background-xanh-duong-dep.jpg) no-repeat 0px 0px;">
+<body style="background: url(../Images/background-xanh-duong-dep.jpg) no-repeat 0px 0px;">
     <div class="container">
 
     </div>
@@ -63,20 +106,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="login w3_login">
             <div class="w3l_grid">
-                <form class="login-container" action="Resgiter" method="post">
-                    <input name="quyendki" type="checkbox" value="1" />Ứng viên
-                    <input name="quyendki" type="checkbox" value="2" />Doanh nghiệp
-                    <input type="email" placeholder="Email..." Name="Email" required="">
+                <form onsubmit="return validateForm()" class="login-container" asp-controller="Taikhoan" asp-action="Resgiter1" method="post">
+                    <input type="checkbox" name="quyendki" value="1" />Ứng viên
+                    <input type="checkbox" name="quyendki" value="2" />Doanh nghiệp
+                    <input type="email" placeholder="Email..." name="Email" required>
+                    <span style="font-size: 10px; color: red;" id="errorMessage" class="error-message"></span>
                     <div class="display_pass">
-                        <input id="password" type="password" placeholder="Mật khẩu..." Name="Matkhau" required="">
-                        <input id="password" type="password" placeholder="Nhập lại Mật khẩu..." Name="Mật khẩu Nhập lại: " required="">
+                        <input id="password" type="password" placeholder="Mật khẩu..." name="Matkhau" required>
+                        <input id="passwordconfirm" type="password" placeholder="Nhập lại Mật khẩu..." name="Matkhaunhaplai" required>
                         <img style="width:20px;" id="dispass" onclick="togglePassword()" src="~/images/iconhienmatkhau.png" />
-                        @* <img style="width:20px;display:none" id="hidepass" src="~/images/hidepass.png" /> *@
                     </div>
+                    <div style="font-size: 10px; color: red;" id="errorMessage1" class="error-message"></div>
                     <input type="submit" value="Đăng ký">
                 </form>
+
                 <div class="bottom-text w3_bottom_text">
-                    <p>Bạn đã có tài khoản chưa?<a href="#">Đăng nhập </a></p>
+                    <p>Bạn đã có tài khoản chưa?<a href="@Url.Action("Login","Taikhoan")">Đăng nhập </a></p>
                 </div>
             </div>
         </div>
