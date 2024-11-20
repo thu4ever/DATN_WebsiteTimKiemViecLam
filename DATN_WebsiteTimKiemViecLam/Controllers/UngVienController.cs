@@ -27,7 +27,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
 
             var danhSachBaiTuyenDung = _context.TblBaituyendungs
               .Include(baiTuyenDung => baiTuyenDung.FkSMaDnNavigation) // Nạp dữ liệu từ bảng TblDoanhnghiep
-              .Where(p=>p.ITrangthai==1)
+              .Where(p=>p.ITrangthai==2)
               .Select(baiTuyenDung => new vDanhsachvieclam
               {
                   PkSMaBai = baiTuyenDung.PkSMaBai,
@@ -45,7 +45,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
             ViewBag.CurrentPage = pageNumber;
             List<TblDoanhnghiep> model1Data = _context.TblDoanhnghieps.ToList();
             ViewBag.model1Data = model1Data;
-            return View("vDanhsachvieclam", danhSachBaiTuyenDung.ToPagedList(pageNumber, pageSize));
+            return View("trangchu", danhSachBaiTuyenDung.ToPagedList(pageNumber, pageSize));
         }
         public IActionResult btnHienthidanhsachDN()
         {
@@ -76,9 +76,12 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                  FNamKinhNghiem = baiTuyenDung.FNamKinhNghiem,
                  FMucluongtoida = baiTuyenDung.FMucluongtoida,
                  DTgDangBai = baiTuyenDung.DTgDangBai
-             })
-             .FirstOrDefault();
-            return View("vChitietvieclam", result);
+             }).FirstOrDefault();
+
+            TblDoanhnghiep thongtindoanhnghieptheobaidang = _context.TblDoanhnghieps.Where(p => p.PkSMaDn == result.FkSMaDn).FirstOrDefault();
+            ViewBag.thongtindoanhnghieptheobaidang = thongtindoanhnghieptheobaidang;
+
+            return View("chitietvieclam", result);
         }
         public IActionResult btnHienthichitietDN(long FkSMaDn)
         {
@@ -93,11 +96,11 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
                    SLogo = baiTuyenDung.FkSMaDnNavigation.SLogo,
                    sTendoanhnghiep = baiTuyenDung.FkSMaDnNavigation.STenDn,
                    sDiachi = baiTuyenDung.SDiachicuthe,
-                   FMucLuong = baiTuyenDung.FMucLuongtoithieu
+                   FMucLuong = baiTuyenDung.FMucLuongtoithieu,
                })
                .ToList();
             ViewBag.tblBaituyendung = danhSachBaiTuyenDung;
-            return View("vChitietdoanhnghiep", tblDoanhnghiep);
+            return View("chitietdoanhnghiep", tblDoanhnghiep);
         }
         public bool CheckValidTimkiemVieclam(String dThoigiandangtuyen, String txtkinhnghiem, String txtDiachi, String txtMucluong, String txtTencongviec)
         {
@@ -117,7 +120,34 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         }
         public IActionResult btnTimkiemViecLam()
         {
-            return View("vDanhsachtatcavieclam");
+            return View("dsDoanhNghiep");
+        }
+        public IActionResult btnXemAllDsViecLam(int? page)
+        {
+            int pageSize = 12; // Số lượng mục trên mỗi trang
+            int pageNumber = (page ?? 1);
+
+            var danhSachBaiTuyenDung = _context.TblBaituyendungs
+              .Include(baiTuyenDung => baiTuyenDung.FkSMaDnNavigation) // Nạp dữ liệu từ bảng TblDoanhnghiep
+              .Where(p => p.ITrangthai == 2)
+              .Select(baiTuyenDung => new vDanhsachvieclam
+              {
+                  PkSMaBai = baiTuyenDung.PkSMaBai,
+                  STenBai = baiTuyenDung.STenBai,
+                  SLogo = baiTuyenDung.FkSMaDnNavigation.SLogo,
+                  sTendoanhnghiep = baiTuyenDung.FkSMaDnNavigation.STenDn,
+                  sDiachi = baiTuyenDung.SDiachicuthe,
+                  FMucLuong = baiTuyenDung.FMucLuongtoithieu,
+                  FMucLuongTD = baiTuyenDung.FMucluongtoida,
+                  FkSMaDn = baiTuyenDung.FkSMaDn,
+                  ITrangthai = baiTuyenDung.ITrangthai
+              })
+              .ToList();
+            ViewBag.TotalPages = Math.Ceiling((double)danhSachBaiTuyenDung.Count / pageSize);
+            ViewBag.CurrentPage = pageNumber;
+            List<TblDoanhnghiep> model1Data = _context.TblDoanhnghieps.ToList();
+            ViewBag.model1Data = model1Data;
+            return View("dsViecLam", danhSachBaiTuyenDung.ToPagedList(pageNumber, pageSize));
         }
 
         //Kiem tr unit cho Button Tim Kiem

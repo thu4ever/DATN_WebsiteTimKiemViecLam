@@ -11,7 +11,7 @@ namespace DATN_WebsiteTimKiemViecLam.Models
     {
         public String OnPostAsync(IFormFile file, string txtGioithieu)
         {
-            string credentialsPath = "C:\\Users\\admin\\Desktop\\Thực Tập\\DATN_WebsiteTimKiemViecLam\\DATN_WebsiteTimKiemViecLam\\smiling-stock-419405-5e97ff207bf9.json";
+            string credentialsPath = "C:\\FITHOU\\DO AN TOT NGHIEP\\DATN_WebsiteTimKiemViecLam\\DATN_WebsiteTimKiemViecLam\\smiling-stock-419405-5e97ff207bf9.json";
 
             using (var stream = new MemoryStream())
             {

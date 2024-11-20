@@ -27,7 +27,7 @@ nav.vertical ul li{	display:block;}/* vertical menu */
 nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
 img {
   max-width: 15%;
-  border-radius: 50%;
+  //border-radius: 50%;
 }
 /*end reset*/
 html, body {
