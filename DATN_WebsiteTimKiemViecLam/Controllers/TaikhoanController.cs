@@ -155,7 +155,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         public ActionResult Login()
         {
            // return RedirectToAction("HomePage", "BaiUngTuyen");
-            return View("Login");
+            return View("dangNhap");
         }
         public long Dangnhap_Click(String Email, String Matkhau)
         {
@@ -248,7 +248,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         }
         public ActionResult Resgiter()
         {
-            return View("Resgiter");
+            return View("danhNhap");
         }
             [HttpPost]
         public ActionResult Resgiter( long quyendki,String Email, String Matkhau)
@@ -445,7 +445,7 @@ namespace DATN_WebsiteTimKiemViecLam.Controllers
         public ActionResult btnDangxuat() 
         {
             HttpContext.Session.Clear();
-            return View("Login"); 
+            return View("dangNhap"); 
         }
 
     }

@@ -1,0 +1,128 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang đăng ký doanh nghiệp 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <section class="flex overflow-hidden flex-col bg-white">
+        <div class="flex flex-col justify-center items-center px-16 py-7 w-full bg-white max-md:px-5 max-md:max-w-full">
+            <div class="flex flex-wrap gap-5 justify-between w-full max-w-[1320px] max-md:max-w-full">
+                <img loading="lazy"
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/47e8dcde21ea38af29fab7a7393bbea713dddd79f49d17096d025290941d1c5a?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                    alt="Company logo" class="object-contain shrink-0 max-w-full aspect-[2.76] w-[116px]" />
+                <div class="flex flex-col self-start">
+                    <div class="flex gap-10 justify-between items-center max-w-full text-sm leading-none w-[312px]">
+                        <p class="self-stretch my-auto text-gray-500">Đăng ký tài khoản</p>
+                        <p class="self-stretch my-auto font-medium text-blue-700">66% Thành công</p>
+                    </div>
+                    <div class="flex flex-col mt-3 max-w-full w-[312px]">
+                        <div class="flex flex-col items-start bg-sky-100 rounded-[100px] max-md:pr-5">
+                            <div class="flex shrink-0 h-2 bg-blue-700 rounded-[100px_0px_0px_100px] w-[234px]"
+                                role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <main class="flex flex-col justify-center self-center pt-12 pb-24 max-w-full w-[984px]">
+            <nav
+                class="flex pr-20 w-full text-sm font-medium leading-none max-w-[984px] text-neutral-600 max-md:pr-5 max-md:max-w-full">
+                <div
+                    class="flex-auto self-end mt-12 mr-0 h-px border border-solid bg-zinc-200 border-zinc-200 max-md:mt-10 max-md:max-w-full">
+                </div>
+                <ul
+                    class="flex flex-wrap flex-auto gap-2 justify-center items-center max-md:max-w-full list-none p-0 m-0">
+                    <li class="flex gap-2 justify-center items-center self-stretch px-5 py-3 my-auto">
+                        <img loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/d3cb2f73d220723ead464e717b5d0c9da766915cd694dcb96809ad835ed57dfa?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                            alt="" class="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" />
+                        <span class="self-stretch my-auto">Thông tin công ty</span>
+                    </li>
+                    <li class="flex gap-2 justify-center items-center self-stretch px-5 py-3 my-auto">
+                        <img loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/f14816bbcd8fe96b3e684328da98b652fadf0dee9b8bd316f24603f0035be3cc?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                            alt="" class="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" />
+                        <span class="self-stretch my-auto">Trang liên kết</span>
+                    </li>
+                    <li
+                        class="flex gap-2 items-center self-stretch px-5 py-3 my-auto font-semibold text-blue-700 bg-white shadow-sm">
+                        <img loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/7ade060c052a677294609ec0ded9ad89cfdfffda406ccd96e3bbdd97eeb83fd2?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                            alt="" class="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" />
+                        <span class="self-stretch my-auto">Liên kết</span>
+                    </li>
+                </ul>
+            </nav>
+            <form class="flex flex-col mt-8 w-full">
+                <div class="flex flex-col w-full text-sm leading-none text-zinc-900">
+                    <label for="company-address">Địa chỉ công ty</label>
+                    <input type="text" id="company-address"
+                        class="flex mt-2 w-full bg-white rounded-md border border-solid border-zinc-200 min-h-[48px] max-md:max-w-full" />
+                </div>
+                <div class="flex flex-col mt-5 w-full max-md:max-w-full">
+                    <label for="phone-number">Số điện thoại</label>
+                    <div
+                        class="flex flex-col justify-center items-start px-6 py-2.5 mt-2 w-full bg-white rounded-md border border-solid border-zinc-200 max-md:px-5 max-md:max-w-full">
+                        <div class="flex gap-5 justify-center items-center w-full">
+                            <div
+                                class="flex gap-3 justify-center items-center self-stretch my-auto text-sm font-medium leading-none whitespace-nowrap text-zinc-900">
+                                <img loading="lazy"
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/ce927f552bd46abf470eca13663783f72e9ebc75ce9b871dcb10d036631d7c57?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                    alt="Vietnam flag"
+                                    class="object-contain shrink-0 self-stretch my-auto w-6 aspect-[1.5]" />
+                                <span class="self-stretch my-auto">+84</span>
+                                <img loading="lazy"
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/2eee3c27ec31e6003dd7b2e9a38767e8046029473e0886b1190b7b94d25d66b3?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                                    alt="" class="object-contain shrink-0 self-stretch my-auto w-4 aspect-square" />
+                            </div>
+                            <div
+                                class="shrink-0 self-stretch my-auto w-0 h-8 border border-solid bg-zinc-200 border-zinc-200">
+                            </div>
+                            <input type="tel" id="phone-number" placeholder="Số điện thoại..."
+                                class="flex-grow text-base text-gray-400 bg-transparent border-none outline-none" />
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col mt-5 w-full max-md:max-w-full">
+                    <label for="email">Email</label>
+                    <div
+                        class="flex flex-wrap gap-3 px-5 py-3 mt-2 w-full text-base text-gray-400 bg-white rounded-md border border-solid border-zinc-200 max-md:max-w-full">
+                        <img loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/1c95f0270f957237dd4fd848427e601e34f2978e517384cd9f0a9484f94bab0b?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                            alt="" class="object-contain shrink-0 w-6 aspect-square" />
+                        <input type="email" id="email" placeholder="Email address"
+                            class="flex-auto w-[907px] max-md:max-w-full bg-transparent border-none outline-none" />
+                    </div>
+                </div>
+                <div class="flex gap-3 items-start self-start mt-8 text-base font-semibold capitalize">
+                    <button type="button"
+                        class="gap-3 self-stretch px-8 py-4 bg-gray-100 rounded text-zinc-900 max-md:px-5">Quay
+                        lại</button>
+                    <button type="submit"
+                        class="flex gap-3 justify-center items-center px-8 py-4 text-white bg-blue-700 rounded max-md:px-5">
+                        <span class="self-stretch my-auto">Hoàn thành</span>
+                        <img loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/72c910bdc0ab047ea5955f38a3ad60282ede593a9cd52829af6c667f07736419?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                            alt="" class="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" />
+                    </button>
+                </div>
+            </form>
+        </main>
+        <footer
+            class="self-stretch px-72 py-6 mt-80 text-sm leading-none text-center text-gray-500 bg-white shadow-sm w-[1320px] max-md:px-5 max-md:mt-10 max-md:max-w-full">
+            @ 2024 Itseek - Thực hiện bởi Nguyễn Hồng Phong
+        </footer>
+    </section>
+</body>
+
+</html>
