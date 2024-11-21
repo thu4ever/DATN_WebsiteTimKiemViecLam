@@ -21,6 +21,8 @@ namespace DATN_WebsiteTimKiemViecLam.Models
                 stream.Position = 0;
 
                 string mimeType = file.ContentType;
+
+
                 DriveServiceHelper serviceHelper = new DriveServiceHelper(credentialsPath);
                 string fileLink = serviceHelper.UploadStream(stream, file.FileName, mimeType, "1RsB5i8g0jjKWPe7eSQHhgAmixiwj2fmF");
               
