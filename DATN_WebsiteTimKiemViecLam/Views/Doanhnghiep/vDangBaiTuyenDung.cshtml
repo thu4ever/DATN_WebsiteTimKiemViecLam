@@ -1,0 +1,239 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@* <link href="~/css/style.css" rel="stylesheet" /> *@
+@{
+    // Perform the formatting here
+    string formattedDate = Model.DTgDangBai.ToString("yyyy/mm/dd");
+}
+@{
+    @if (ViewBag.MS_039 != null)
+    {
+        <script>
+            // Gọi hàm JavaScript để hiển thị thông báo
+            alert('@ViewBag.MS_039');
+        </script>
+    }
+}
+<script>
+    function confirmDelete(PkSMaBai) {
+        if (confirm("Bạn có chắc chắn muốn xóa bài đăng không?")) {
+            MS_041 = "Xóa bài đăng thành công";
+            MS_042 = "Xóa bài đăng không thành công";
+            // Nếu người dùng chọn OK
+            $.ajax({
+                url: '/DoanhNghiep/btnXoabaidang?PkSMaBai=' + PkSMaBai, // Đường dẫn đến hàm Xoa trong controller
+                type: 'DELETE', // Sử dụng phương thức DELETE
+                success: function (result) {
+                    alert(MS_041); // Hiển thị thông báo khi xóa thành công
+                    window.location.href = '/DoanhNghiep/hienthidanhsachbaidang';
+                },
+                error: function (xhr, status, error) {
+                    alert(MS_042 + error); // Hiển thị thông báo khi xóa không thành công
+                }
+            });
+        } else {
+            // Nếu người dùng chọn Cancel
+            alert("Đã hủy bỏ xóa!");
+        }
+    }
+    function CanclePost(PkSMaBai) {
+        if (confirm("Bạn có chắc chắn muốn kết thúc bài đăng không?")) {
+            MS_045 = "Kết thúc bài đăng thành công  ";
+            MS_046 = "Kết thúc bài đăng không thành công ";
+            // Nếu người dùng chọn OK
+            $.ajax({
+                url: '/DoanhNghiep/btnKetthucBaiDang?PkSMaBai=' + PkSMaBai, // Đường dẫn đến hàm Xoa trong controller
+                type: 'POST', // Sử dụng phương thức DELETE
+                success: function (result) {
+                    alert(MS_045); // Hiển thị thông báo khi xóa thành công
+                    window.location.href = '/DoanhNghiep/hienthidanhsachbaidang';
+                },
+                error: function (xhr, status, error) {
+                    alert(MS_046 + error); // Hiển thị thông báo khi xóa không thành công
+                }
+            });
+        } else {
+            // Nếu người dùng chọn Cancel
+            alert("Đã hủy bỏ kết thúc!");
+        }
+    }
+</script>
+
+@model DATN_WebsiteTimKiemViecLam.Models.TblBaituyendung
+
+<section class="flex flex-col ml-5 w-[77%] max-md:ml-0 max-md:w-full">
+    <article class="flex flex-col self-stretch my-auto w-full max-md:mt-10 max-md:max-w-full">
+        <nav aria-label="Breadcrumb"
+             class="flex gap-2 items-start self-start text-sm leading-none text-gray-500">
+            <span>Quản lý bài đăng</span>
+            <span>/</span>
+            <span class="font-medium text-blue-700">Xem thông tin bài đăng</span>
+        </nav>
+
+        <form class="flex flex-col w-full max-md:max-w-full" action="@Url.Action("btnThembaidang", "Doanhnghiep")" method="post">
+            <h1 class="text-2xl font-medium leading-none text-zinc-900 max-md:max-w-full">
+                Thông Tin Bài Đăng
+            </h1>
+
+            <div class="flex flex-col mt-8 max-w-full w-[984px]">
+                <div class="flex flex-col w-full">
+                    <label for="jobTitle" class="text-sm leading-none text-zinc-900">
+                        Tên công
+                        việc
+                    </label>
+                    @Html.TextBoxFor(model => model.STenBai)
+                    @* <input name="model=>model.STenBai" type="text" id="jobTitle" placeholder="Điền tên công việc cần tuyển..."
+                           class="px-5 py-3 mt-2 w-full text-base text-gray-400 bg-white rounded-md border border-solid border-zinc-200 max-md:pr-5 max-md:max-w-full" /> *@
+                </div>
+            </div>
+
+            <div class="flex flex-col mt-8 max-md:max-w-full">
+                <div class="flex flex-wrap gap-5 items-start max-md:max-w-full">
+                    <div class="flex flex-col min-w-[240px] w-[316px]">
+                        <label for="minSalary" class="text-sm leading-none text-zinc-900">
+                            Lương tối
+                            thiểu
+                        </label>
+                        <div class="flex overflow-hidden gap-10 justify-end pl-5 mt-2 w-full text-base bg-white rounded-md border border-solid border-zinc-200">
+                            @* <input type="number" id="minSalary" placeholder="Mức lương tối thiểu..."
+                                   class="w-full bg-transparent border-none" />
+                            <span class="gap-2.5 py-3 pr-4 pl-4 text-right text-gray-500 whitespace-nowrap bg-gray-100 bg-opacity-70">VND</span> *@
+                            @Html.TextBoxFor(model => model.FMucLuongtoithieu, new { @class = "sMucluongtoithieu" })
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col min-w-[240px] w-[316px]">
+                        <label for="maxSalary" class="text-sm leading-none text-zinc-900">
+                            Lương tối
+                            đa
+                        </label>
+                        <div class="flex overflow-hidden gap-10 justify-end pl-5 mt-2 w-full text-base bg-white rounded-md border border-solid border-zinc-200">
+                            @* <input type="number" id="maxSalary" placeholder="Mức lương tối đa..."
+                                   class="w-full bg-transparent border-none" />
+                            <span class="gap-2.5 py-3 pr-4 pl-4 text-right text-gray-500 whitespace-nowrap bg-gray-100 bg-opacity-70">VND</span> *@
+                            @Html.TextBoxFor(model => model.FMucluongtoida, new { @class = "sMucluongtoida" })
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col min-w-[240px] w-[316px]">
+                        <label for="jobType" class="text-sm leading-none text-zinc-900">
+                            Số lượng
+                        </label>
+                        @Html.TextBoxFor(model => model.ISoLuong, Model.ISoLuong.ToString(), new { @class = "soluong" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col mt-8 max-md:max-w-full">
+                <div class="flex flex-wrap gap-5 items-start max-md:max-w-full">
+                    <div class="flex flex-col min-w-[240px] w-[316px]">
+                        <label for="experience" class="text-sm leading-none text-zinc-900">
+                            Kinh
+                            nghiệm
+                        </label>
+                        @* <select id="experience"
+                                class="flex gap-10 justify-center px-4 py-3 mt-2 w-full text-base text-gray-500 whitespace-nowrap bg-white rounded-md border border-solid border-zinc-200">
+                            <option value="">Năm...</option>
+                        </select> *@
+                        @Html.TextBoxFor(model => model.FNamKinhNghiem, new { @class = "FNamKinhNghiem" })
+                    </div>
+
+                    <div class="flex flex-col min-w-[240px] w-[316px]">
+                        <label for="startDate" class="text-sm leading-none text-zinc-900">
+                            Ngày bắt
+                            đầu
+                        </label>
+                       @*  <input type="date" id="startDate" placeholder="DD/MM/YYYY"
+                               class="px-5 py-3 mt-2 w-full text-base text-gray-400 whitespace-nowrap bg-white rounded-md border border-solid border-zinc-200 max-md:pr-5" /> *@
+                        @Html.TextBoxFor(model => model.DTgDangBai, new { @type = "datetime" })
+                    </div>
+
+                    <div class="flex flex-col min-w-[240px] w-[316px]">
+                        <label for="endDate" class="text-sm leading-none text-zinc-900">
+                            Ngày kết
+                            thúc
+                        </label>
+                       @*  <input type="date" id="endDate" placeholder="DD/MM/YYYY"
+                               class="px-5 py-3 mt-2 w-full text-base text-gray-400 whitespace-nowrap bg-white rounded-md border border-solid border-zinc-200 max-md:pr-5" /> *@
+                        @Html.TextBoxFor(model => model.DTgTuyenDung, new { @type = "datetime" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col mt-8 max-w-full w-[984px]">
+                <div class="flex flex-col w-full">
+                    <label for="jobDescription" class="text-sm leading-none text-zinc-900">
+                        Mô tả công
+                        việc
+                    </label>
+                   @*  <textarea name="model=>model.SMoTa" id="jobDescription" placeholder="Mô tả nhiệm vụ công việc của công ty..."
+                              class="flex flex-col items-start py-2.5 pr-20 pl-2.5 mt-2 w-full bg-white rounded-md border border-solid border-zinc-200 max-w-[984px] max-md:pr-5 max-md:max-w-full min-h-[150px]"></textarea>
+ *@
+                    @Html.TextAreaFor(model => model.SMoTa)
+
+                </div>
+
+                <div class="flex flex-col mt-5 w-full">
+                    <label for="benefits" class="text-sm leading-none text-zinc-900">Quyền lợi</label>
+                    @* <textarea id="benefits" placeholder="Mô tả quyền lợi của công ty..."
+                              class="flex flex-col items-start py-2.5 pr-20 pl-2.5 mt-2 w-full bg-white rounded-md border border-solid border-zinc-200 max-w-[984px] max-md:pr-5 max-md:max-w-full min-h-[150px]"></textarea> *@
+                    @Html.TextAreaFor(model => model.SQuyenLoi)
+                </div>
+            </div>
+
+            <button type="submit" value="LƯU"
+                    class="flex gap-3 justify-center items-center self-start px-8 py-4 mt-8 text-base font-semibold text-white capitalize bg-blue-700 rounded max-md:px-5"
+                    tabindex="0">
+                <span class="self-stretch my-auto">Đăng tuyển</span>
+                <img loading="lazy"
+                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/72c910bdc0ab047ea5955f38a3ad60282ede593a9cd52829af6c667f07736419?placeholderIfAbsent=true&apiKey=62a981c296dc4151acd2798ece477ddd"
+                     alt="" class="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" />
+            </button>
+        </form>
+    </article>
+</section>
+@if (Model.ISoLuong != 0)
+{
+    <div id="btn_container">
+        <div class="mb-3">
+            <a href="@Url.Action("btnTimkiemCVtheobaidang", "Doanhnghiep", new { PkSMaBai = Model.PkSMaBai })" type="button" class="btn btn-primary p-3 text-white">Xem CV đã ứng tuyển</a>
+        </div>
+        <div class="mb-3">
+            <a onclick="confirmDelete(@Model.PkSMaBai)" class="btn btn-primary p-3 text-white">Xóa</a>
+        </div>
+        @if (Model.ITrangthai == 2)
+        {
+            <div class="mb-3">
+                <a type="button" href="@Url.Action("btnDanglaibaidang", "Doanhnghiep", new { PkSMaBai = Model.PkSMaBai })" class="btn btn-primary p-3 text-white">Đăng tải lại</a>
+            </div>
+        }
+        @if (Model.ITrangthai == 1)
+        {
+            <div class="mb-3">
+                <a onclick="CanclePost(@Model.PkSMaBai)" class="btn btn-primary p-3 text-white">Kết thúc</a>
+            </div>
+        }
+    </div>
+}
+</div>
+<script>
+    function Tang(massger) {
+        var countElement = document.getElementsByClassName(massger)[0]; // Lấy phần tử đầu tiên với lớp là "soluong"
+        var number = parseInt(countElement.value); // Lấy giá trị từ phần tử và chuyển đổi thành số nguyên
+        number++;
+        countElement.value = number;
+    }
+
+    function Giam(massger) {
+        var countElement = document.getElementsByClassName(massger)[0]; // Lấy phần tử đầu tiên với lớp là "soluong"
+        var number = parseInt(countElement.value); // Lấy giá trị từ phần tử và chuyển đổi thành số nguyên
+        number--;
+        countElement.value = number;// Gán giá trị mới vào phần tử
+    }
+</script>
